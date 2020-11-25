@@ -1,0 +1,37 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:s="clr-namespace:System;assembly=System.Runtime">
+	<!--应用程序-->
+	<s:String x:Key="Application_Title">RCT3 Lanucher</s:String>
+
+	<!--通用字符串-->
+	<s:String x:Key="RCT3_Complete_Edition_Name">RollerCoaster Tycoon® 3: Complete Edition</s:String>
+	<s:String x:Key="RCT3_Platinum_Name">RollerCoaster Tycoon® 3: Platinum</s:String>
+	<s:String x:Key="RCT3_Complete_Edition_Short_Name">Complete Edition</s:String>
+	<s:String x:Key="RCT3_Platinum_Short_Name">Platinum</s:String>
+	<s:String x:Key="Text_OK">OK</s:String>
+	<s:String x:Key="Text_Apply">Apply</s:String>
+	<s:String x:Key="Text_Cancel">Cancel</s:String>
+
+	<!--MainWindow-->
+	<s:String x:Key="Launcher_MenuItem">Start Game</s:String>
+	<s:String x:Key="Mod_Manager_MenuItem">Mod Manager</s:String>
+	<s:String x:Key="Save_Manager_MenuItem">Save Manager</s:String>
+	<s:String x:Key="Music_Manager_MenuItem">Music Manager</s:String>
+	<s:String x:Key="Game_Settings_MenuItem">Game Settings</s:String>
+	<s:String x:Key="Launcher_Settings_MenuItem">Launcher Settings</s:String>
+
+	<!--LauncherPage-->
+	<s:String x:Key="LauncherPage_Game_Address_State_Right">The game path has been set</s:String>
+	<s:String x:Key="LauncherPage_Game_Address_State_Wrong">The game path has not been set</s:String>
+	<s:String x:Key="Start_Game_Button">Start Game</s:String>
+
+	<!--GuidePage-->
+	<s:String x:Key="GuidePage_Title">Welcome to RCT3 Launcher</s:String>
+	<s:String x:Key="GuidePage_Language_Setting_Title">Languages</s:String>
+	<s:String x:Key="GuidePage_Game_Path_Setting_Title">Game Path</s:String>
+	<s:String x:Key="GuidePage_Game_Path_Placeholder">Name</s:String>
+	<s:String x:Key="GuidePage_Choose_Game_Path">Choose Game Path</s:String>
+	<s:String x:Key="GuidePage_Add_New_Path_Button">Add New Path</s:String>
+	<s:String x:Key="GuidePage_Terms_Of_Use_Description">I have agreed and accepted the terms of use.</s:String>
+</ResourceDictionary>
