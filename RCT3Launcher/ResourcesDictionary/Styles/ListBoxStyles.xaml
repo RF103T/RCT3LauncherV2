@@ -1,7 +1,165 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-	<Style x:Key="Transparent_ListBox_Style" TargetType="ListBox">
+	<Style x:Key="Transparent_ListBox_Style" TargetType="{x:Type ListBox}">
 		<Setter Property="Background" Value="Transparent"/>
 		<Setter Property="BorderBrush" Value="{x:Null}"/>
+	</Style>
+	<Style x:Key="Grid_ListBox_Style" TargetType="{x:Type ListBox}">
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="BorderBrush" Value="{x:Null}"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type ListBox}">
+					<ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+						<WrapPanel Orientation="Horizontal" IsItemsHost="True" ScrollViewer.CanContentScroll="True"/>
+					</ScrollViewer>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+		<Setter Property="ItemTemplate">
+			<Setter.Value>
+				<DataTemplate>
+					<Grid Height="120" Width="120" Margin="5">
+						<Border x:Name="mask" CornerRadius="6"
+								Background="{StaticResource Theme.Primary.Light.Background.SolidColorBrush}"/>
+						<Grid>
+							<Grid.OpacityMask>
+								<VisualBrush Visual="{Binding ElementName=mask}"/>
+							</Grid.OpacityMask>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="*"/>
+								<RowDefinition Height="Auto"/>
+							</Grid.RowDefinitions>
+							<Image Grid.Row="0" Stretch="UniformToFill" Source="\Resources\Image\Background_1920_1080.jpg"/>
+							<Grid Grid.Row="1">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="*"/>
+									<ColumnDefinition Width="Auto"/>
+								</Grid.ColumnDefinitions>
+								<Label Grid.Column="0" Margin="2,4"
+									   Foreground="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}}" FontSize="14" FontWeight="Bold"
+									   HorizontalAlignment="Left"
+									   Content="{Binding Name}"/>
+								<Button Grid.Column="1" Margin="2,4"
+										HorizontalAlignment="Right" HorizontalContentAlignment="Stretch"
+										Style="{DynamicResource Transparent_Button_Style}">
+									<Image Height="20" Source="{StaticResource Dark_Ashbin}" />
+								</Button>
+							</Grid>
+						</Grid>
+					</Grid>
+				</DataTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	<Style x:Key="List_ListBox_Style" TargetType="{x:Type ListBox}">
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="BorderBrush" Value="{x:Null}"/>
+		<Setter Property="ItemTemplate">
+			<Setter.Value>
+				<DataTemplate>
+					<Grid Height="45" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="Auto"/>
+							<ColumnDefinition Width="Auto"/>
+							<ColumnDefinition Width="*"/>
+							<ColumnDefinition Width="Auto"/>
+						</Grid.ColumnDefinitions>
+						<Label Grid.Column="0" Margin="8,0"
+							   Foreground="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}}" FontSize="14" FontWeight="Bold"
+							   HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+							   Content="{Binding ID}"/>
+						<Image Grid.Column="1"
+							   Source="\Resources\Image\Background_1920_1080.jpg"/>
+						<Label Grid.Column="2" Margin="8,0,0,0"
+							   Foreground="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}}" FontSize="14" FontWeight="Bold"
+							   HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
+							   Content="{Binding Name}"/>
+						<Button Grid.Column="3" Margin="8,0"
+								HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
+								Style="{DynamicResource Transparent_Button_Style}">
+							<Image Height="20" Source="{StaticResource Dark_Ashbin}" />
+						</Button>
+					</Grid>
+				</DataTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	<Style x:Key="Grid_Multiple_ListBox_Style" TargetType="{x:Type ListBox}">
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="BorderBrush" Value="{x:Null}"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type ListBox}">
+					<ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+						<WrapPanel Orientation="Horizontal" IsItemsHost="True" ScrollViewer.CanContentScroll="True"/>
+					</ScrollViewer>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+		<Setter Property="ItemTemplate">
+			<Setter.Value>
+				<DataTemplate>
+					<Grid Height="120" Width="120" Margin="5">
+						<Border x:Name="mask" CornerRadius="6"
+								Background="{StaticResource Theme.Primary.Light.Background.SolidColorBrush}"/>
+						<Grid>
+							<Grid.OpacityMask>
+								<VisualBrush Visual="{Binding ElementName=mask}"/>
+							</Grid.OpacityMask>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="*"/>
+								<RowDefinition Height="Auto"/>
+							</Grid.RowDefinitions>
+							<Image Grid.Row="0" Stretch="UniformToFill" Source="\Resources\Image\Background_1920_1080.jpg"/>
+							<Grid Grid.Row="1">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="*"/>
+									<ColumnDefinition Width="Auto"/>
+								</Grid.ColumnDefinitions>
+								<Label Grid.Column="0" Margin="2,4"
+									   Foreground="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}}" FontSize="14" FontWeight="Bold"
+									   HorizontalAlignment="Left"
+									   Content="{Binding Name}"/>
+								<CheckBox Grid.Column="1" Margin="2,4" BorderBrush="{StaticResource Theme.Secondary.Normal.SolidColorBrush}"
+										  HorizontalAlignment="Right" VerticalAlignment="Center" Style="{DynamicResource Normal_NotNull_Circle_CheckBox_Style}"
+										  IsChecked="{Binding IsSelected,RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}}"/>
+							</Grid>
+						</Grid>
+					</Grid>
+				</DataTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	<Style x:Key="List_Multiple_ListBox_Style" TargetType="{x:Type ListBox}">
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="BorderBrush" Value="{x:Null}"/>
+		<Setter Property="ItemTemplate">
+			<Setter.Value>
+				<DataTemplate>
+					<Grid Height="45" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="Auto"/>
+							<ColumnDefinition Width="Auto"/>
+							<ColumnDefinition Width="*"/>
+							<ColumnDefinition Width="Auto"/>
+						</Grid.ColumnDefinitions>
+						<Label Grid.Column="0" Margin="8,0"
+							   Foreground="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}}" FontSize="14" FontWeight="Bold"
+							   HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+							   Content="{Binding ID}"/>
+						<Image Grid.Column="1"
+							   Source="\Resources\Image\Background_1920_1080.jpg"/>
+						<Label Grid.Column="2" Margin="8,0,0,0"
+							   Foreground="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}}" FontSize="14" FontWeight="Bold"
+							   HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
+							   Content="{Binding Name}"/>
+						<CheckBox Grid.Column="3" Margin="8,0" BorderBrush="{StaticResource Theme.Secondary.Normal.SolidColorBrush}"
+								  VerticalAlignment="Center" Style="{DynamicResource Normal_NotNull_Circle_CheckBox_Style}"
+								  IsChecked="{Binding IsSelected,RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}}"/>
+					</Grid>
+				</DataTemplate>
+			</Setter.Value>
+		</Setter>
 	</Style>
 </ResourceDictionary>

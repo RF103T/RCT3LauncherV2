@@ -1,6 +1,8 @@
-﻿using RCT3Launcher.Option.LauncherOptions;
+﻿using RCT3Launcher.Models;
+using RCT3Launcher.Option.LauncherOptions;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Reflection;
 using System.Text;
@@ -11,9 +13,26 @@ namespace RCT3Launcher.Option
 {
 	public class OptionsManager
 	{
+		/// <summary>
+		/// 指示设置是否已经初始化。
+		/// </summary>
+		public static bool IsOptionsInitialized
+		{
+			private set
+			{
+				if (isOptionsInitialized != value)
+					isOptionsInitialized = value;
+			}
+			get
+			{
+				return isOptionsInitialized;
+			}
+		}
+		private static bool isOptionsInitialized;
+
 		public enum OptionType
 		{
-			GamePath, Language
+			GameInstallation, Language
 		}
 
 		private static readonly string optionsXmlFilePath = "options.xml";
@@ -21,9 +40,21 @@ namespace RCT3Launcher.Option
 
 		private static readonly string optionsXmlXPathRoot = "/Options/";
 
-		public static Dictionary<OptionType, IOption> optionMap = new Dictionary<OptionType, IOption>()
+		public static readonly Dictionary<OptionType, IOption> optionMap = new Dictionary<OptionType, IOption>()
 		{
-			{OptionType.Language,new LanguageOption(LanguageOption.LanguageParameter.zh_CN)}
+			{OptionType.Language,new LanguageOption(LanguageOption.LanguageParameter.zh_CN)},
+			{OptionType.GameInstallation,new GameInstallationsOption(
+				new ObservableCollection<GameInstallation>
+				{
+					new GameInstallation()
+					{
+						ID = 1,
+						Name = "配置1",
+						FullNamePath = "",
+						IconIndex = 0
+					}
+				})
+			}
 		};
 
 		static OptionsManager()
@@ -37,18 +68,23 @@ namespace RCT3Launcher.Option
 
 		public static void SaveOptionFile()
 		{
+			foreach (OptionType type in optionMap.Keys)
+				WriteOptionValueToFile(type);
 			optionsXmlDocument.Save(optionsXmlFilePath);
 		}
 
 		/// <summary>
-		/// 获取指定设置项的值。
+		/// 获取指定设置项。
 		/// </summary>
-		/// <typeparam name="TValue">设置项的值类型。</typeparam>
+		/// <typeparam name="TOption">设置项的类型。</typeparam>
 		/// <param name="optionType">指定的设置项。</param>
 		/// <returns>指定设置项的值。</returns>
-		public static TValue GetOptionValue<TValue>(OptionType optionType)
+		public static TOption GetOptionObject<TOption>(OptionType optionType)
 		{
-			return (optionMap[optionType] as OptionBase<TValue>).Value;
+			IOption option = optionMap[optionType];
+			if (option is TOption)
+				return (TOption)option;
+			throw new InvalidCastException();
 		}
 
 		/// <summary>
@@ -63,43 +99,45 @@ namespace RCT3Launcher.Option
 		}
 
 		/// <summary>
-		/// 将指定的设置项加入设置文件。
+		/// 将指定的设置项加入Xml文档。
 		/// </summary>
 		/// <param name="optionType">指定的设置项。</param>
-		public static void AddOptionToFile(OptionType optionType)
+		public static void AddOptionToDocument(OptionType optionType)
 		{
 			IOption option = optionMap[optionType];
 			XmlElement rootNode = optionsXmlDocument.DocumentElement;
-			XmlElement subNote = optionsXmlDocument.CreateElement(option.OptionName);
-			PropertyInfo propertyInfo = option.GetType().GetProperty("Value");
-			subNote.InnerText = propertyInfo.GetValue(option).ToString();
-			rootNode.AppendChild(subNote);
+			XmlElement optionNote = option.OptionValueToXmlElement(optionsXmlDocument);
+			rootNode.AppendChild(optionNote);
 		}
 
 		/// <summary>
-		/// 从文件中读取指定设置项的值。
+		/// 从Xml文档中读取指定设置项的值。
 		/// </summary>
 		/// <param name="optionType">指定的设置项。</param>
-		/// <returns>指定设置项的值。</returns>
-		public static string ReadOptionValueFromFile(OptionType optionType)
+		/// <returns>指示指定设置项是否存在。</returns>
+		public static bool ReadOptionValueFromFile(OptionType optionType)
 		{
 			IOption option = optionMap[optionType];
 			XmlElement rootNode = optionsXmlDocument.DocumentElement;
-			XmlNode optionNode = rootNode.SelectSingleNode(optionsXmlXPathRoot + option.OptionName);
-			return optionNode.InnerText;
+			XmlElement optionNode = rootNode.SelectSingleNode(optionsXmlXPathRoot + option.OptionName) as XmlElement;
+			if (optionNode != null)
+			{
+				option.XmlElementToOptionValue(optionNode);
+				return true;
+			}
+			return false;
 		}
 
 		/// <summary>
-		/// 把指定设置项的值写入文件。
+		/// 把指定设置项的值写入Xml文档。
 		/// </summary>
 		/// <param name="optionType">指定的设置项。</param>
 		public static void WriteOptionValueToFile(OptionType optionType)
 		{
 			IOption option = optionMap[optionType];
 			XmlElement rootNode = optionsXmlDocument.DocumentElement;
-			XmlNode optionNode = rootNode.SelectSingleNode(optionsXmlXPathRoot + option.OptionName);
-			PropertyInfo propertyInfo = option.GetType().GetProperty("Value");
-			optionNode.InnerText = propertyInfo.GetValue(option).ToString();
+			XmlElement optionNode = rootNode.SelectSingleNode(optionsXmlXPathRoot + option.OptionName) as XmlElement;
+			option.UpdateOptionValueInXmlElement(ref optionNode);
 		}
 
 		private static void InitializationOptionsXmlFile()
@@ -108,27 +146,21 @@ namespace RCT3Launcher.Option
 			optionsXmlDocument.AppendChild(rootNode);
 
 			foreach (KeyValuePair<OptionType, IOption> pair in optionMap)
-				AddOptionToFile(pair.Key);
+				AddOptionToDocument(pair.Key);
 
 			optionsXmlDocument.Save(optionsXmlFilePath);
 		}
 
 		private static void InitializationOptions()
 		{
+			IsOptionsInitialized = true;
+
 			optionsXmlDocument.Load(optionsXmlFilePath);
 
-			XmlElement rootNode = optionsXmlDocument.DocumentElement;
 			foreach (KeyValuePair<OptionType, IOption> pair in optionMap)
 			{
-				XmlNode optionNode = rootNode.SelectSingleNode(optionsXmlXPathRoot + pair.Value.OptionName);
-				if (optionNode != null)
-				{
-					IOption option = pair.Value;
-					option.IsInitialization = true;
-					option.SetRawValue(optionNode.InnerText);
-				}
-				else
-					AddOptionToFile(pair.Key);
+				if (!ReadOptionValueFromFile(pair.Key))
+					AddOptionToDocument(pair.Key);
 			}
 		}
 	}

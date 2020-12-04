@@ -18,29 +18,20 @@ namespace RCT3Launcher.ViewModels
 	{
 		public GuidePageViewModel()
 		{
-			GamePathItems = new ObservableCollection<GamePathItem>()
-			{
-				new GamePathItem()
-				{
-					ID = 1
-				}
-			};
+
 		}
 
-		private ObservableCollection<GamePathItem> _gamePathItems;
-		public ObservableCollection<GamePathItem> GamePathItems
+		public ObservableCollection<GameInstallation> GameInstallationItems
 		{
 			get
 			{
-				return _gamePathItems;
+				SettingsViewModel settings = Application.Current.Resources["settingsViewModel"] as SettingsViewModel;
+				return settings.GameInstallationItems;
 			}
 			set
 			{
-				if (_gamePathItems != value)
-				{
-					_gamePathItems = value;
-					RaisePropertyChanged("GamePathItems");
-				}
+				SettingsViewModel settings = Application.Current.Resources["settingsViewModel"] as SettingsViewModel;
+				settings.GameInstallationItems = value;
 			}
 		}
 
@@ -55,7 +46,7 @@ namespace RCT3Launcher.ViewModels
 						new Action<SwitchComboBox>(
 							self =>
 							{
-								LanguageOption setting = OptionsManager.optionMap[OptionsManager.OptionType.Language] as LanguageOption;
+								LanguageOption setting = OptionsManager.GetOptionObject<LanguageOption>(OptionsManager.OptionType.Language);
 								switch (self.SelectedIndex)
 								{
 									case 0:
@@ -86,10 +77,13 @@ namespace RCT3Launcher.ViewModels
 				{
 					addNewGamePathCommand = new CommandBase<RoutedEventArgs>(
 						new Action<RoutedEventArgs>(
-							args => GamePathItems.Add(
-								new GamePathItem()
+							args => GameInstallationItems.Add(
+								new GameInstallation()
 								{
-									ID = GamePathItems.Count + 1
+									Name = "配置" + (GameInstallationItems.Count + 1),
+									IconIndex = 0,
+									FullNamePath = "",
+									ID = GameInstallationItems.Count + 1
 								}
 							)
 						)
@@ -99,21 +93,21 @@ namespace RCT3Launcher.ViewModels
 			}
 		}
 
-		private CommandBase<GamePathItem> deleteGamePathCommand;
-		public CommandBase<GamePathItem> DeleteGamePathCommand
+		private CommandBase<GameInstallation> deleteGamePathCommand;
+		public CommandBase<GameInstallation> DeleteGamePathCommand
 		{
 			get
 			{
 				if (deleteGamePathCommand == null)
 				{
-					deleteGamePathCommand = new CommandBase<GamePathItem>(
-						new Action<GamePathItem>(
+					deleteGamePathCommand = new CommandBase<GameInstallation>(
+						new Action<GameInstallation>(
 							item =>
 							{
 								int id = item.ID;
-								for (int i = id; i < GamePathItems.Count; i++)
-									GamePathItems[i].ID--;
-								GamePathItems.Remove(item);
+								for (int i = id; i < GameInstallationItems.Count; i++)
+									GameInstallationItems[i].ID--;
+								GameInstallationItems.Remove(item);
 							}
 						)
 					);

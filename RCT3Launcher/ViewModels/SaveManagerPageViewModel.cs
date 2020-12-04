@@ -18,7 +18,7 @@ namespace RCT3Launcher.ViewModels
 				new GameSave()
 				{
 					ID = 1,
-					Name = "存档1"
+					Name = "存档1124245278278272872727827"
 				},
 				new GameSave()
 				{

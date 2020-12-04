@@ -6,6 +6,7 @@ using System.Windows.Media;
 
 namespace RCT3Launcher.Models
 {
+	[Serializable]
 	class MainMenuItem : INotifyPropertyChanged
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -72,7 +73,6 @@ namespace RCT3Launcher.Models
 			}
 		}
 		private string navigationPage;
-
 
 		public MainMenuItem()
 		{

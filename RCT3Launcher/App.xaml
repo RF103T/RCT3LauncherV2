@@ -3,16 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:RCT3Launcher"
+			 xmlns:ViewModels="clr-namespace:RCT3Launcher.ViewModels"
              StartupUri="Views/MainWindow.xaml">
 	<Application.Resources>
         <ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
 				<ResourceDictionary Source="/ResourcesDictionary/Languages/zh_CN.xaml"/>
-                <ResourceDictionary Source="/ResourcesDictionary/ColorDictionary.xaml"/>
+				<ResourceDictionary Source="/ResourcesDictionary/BrushDictionary.xaml"/>
                 <ResourceDictionary Source="/ResourcesDictionary/DrawingImageDictionary.xaml"/>
 				<ResourceDictionary Source="/ResourcesDictionary/StoryboardDictionary.xaml"/>
 				<ResourceDictionary Source="/ResourcesDictionary/StyleDictionary.xaml"/>
 			</ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
+			<ViewModels:SettingsViewModel x:Key="settingsViewModel"/>
+		</ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -29,9 +29,11 @@
 	<!--GuidePage-->
 	<s:String x:Key="GuidePage_Title">Welcome to RCT3 Launcher</s:String>
 	<s:String x:Key="GuidePage_Language_Setting_Title">Languages</s:String>
-	<s:String x:Key="GuidePage_Game_Path_Setting_Title">Game Path</s:String>
-	<s:String x:Key="GuidePage_Game_Path_Placeholder">Name</s:String>
-	<s:String x:Key="GuidePage_Choose_Game_Path">Choose Game Path</s:String>
-	<s:String x:Key="GuidePage_Add_New_Path_Button">Add New Path</s:String>
-	<s:String x:Key="GuidePage_Terms_Of_Use_Description">I have agreed and accepted the terms of use.</s:String>
+	<s:String x:Key="GuidePage_Game_Installations_Setting_Title">Game Installations</s:String>
+	<s:String x:Key="GuidePage_Game_Installations_Name">Name</s:String>
+	<s:String x:Key="GuidePage_Game_Installations_Path">Path</s:String>
+	<s:String x:Key="GuidePage_Add_New_Path_Button">Add New Installations</s:String>
+	<s:String x:Key="GuidePage_Terms_Of_Use_Description_Text">I have agreed and accepted</s:String>
+	<s:String x:Key="GuidePage_Terms_Of_Use_Description_Link_Text">The Terms of Use</s:String>
+	<s:String x:Key="GuidePage_Terms_Of_Use_Description_Link">https://www.bilibili.com/</s:String>
 </ResourceDictionary>

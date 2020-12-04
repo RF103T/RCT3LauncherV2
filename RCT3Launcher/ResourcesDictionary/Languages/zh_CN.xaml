@@ -29,9 +29,11 @@
 	<!--GuidePage-->
 	<s:String x:Key="GuidePage_Title">欢迎使用RCT3启动器</s:String>
 	<s:String x:Key="GuidePage_Language_Setting_Title">想要使用的显示语言</s:String>
-	<s:String x:Key="GuidePage_Game_Path_Setting_Title">游戏路径</s:String>
-	<s:String x:Key="GuidePage_Game_Path_Placeholder">名称</s:String>
-	<s:String x:Key="GuidePage_Choose_Game_Path">选择游戏路径</s:String>
-	<s:String x:Key="GuidePage_Add_New_Path_Button">添加新的路径</s:String>
-	<s:String x:Key="GuidePage_Terms_Of_Use_Description">我已同意并接受使用条款</s:String>
+	<s:String x:Key="GuidePage_Game_Installations_Setting_Title">游戏配置</s:String>
+	<s:String x:Key="GuidePage_Game_Installations_Name">名称</s:String>
+	<s:String x:Key="GuidePage_Game_Installations_Path">路径</s:String>
+	<s:String x:Key="GuidePage_Add_New_Path_Button">添加新的配置</s:String>
+	<s:String x:Key="GuidePage_Terms_Of_Use_Description_Text">我已同意并接受</s:String>
+	<s:String x:Key="GuidePage_Terms_Of_Use_Description_Link_Text">使用条款</s:String>
+	<s:String x:Key="GuidePage_Terms_Of_Use_Description_Link">https://rf103t.club/</s:String>
 </ResourceDictionary>

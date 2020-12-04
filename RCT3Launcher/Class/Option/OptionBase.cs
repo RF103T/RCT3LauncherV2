@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml;
 
 namespace RCT3Launcher.Option
 {
@@ -23,7 +24,7 @@ namespace RCT3Launcher.Option
 		/// </summary>
 		public string OptionName { get; set; }
 
-		protected TValue _value;
+		protected TValue value;
 		/// <summary>
 		/// 设置项的值。
 		/// </summary>
@@ -31,16 +32,16 @@ namespace RCT3Launcher.Option
 		{
 			get
 			{
-				if (!IsInitialization)
-					return DefaultValue;
-				return _value;
+				//if (!IsInitialization)
+				//	return DefaultValue;
+				return value;
 			}
 			set
 			{
-				if (!_value.Equals(value))
+				if (!this.value.Equals(value))
 				{
-					ValueChanged?.Invoke(this, new RCT3Launcher.Option.EventArgs.ValueChangedEventArgs<TValue>(Value, value));
-					_value = value;
+					this.value = value;
+					valueChanged?.Invoke(this, new RCT3Launcher.Option.EventArgs.ValueChangedEventArgs<TValue>(Value, value));
 				}
 			}
 		}
@@ -52,7 +53,19 @@ namespace RCT3Launcher.Option
 		/// <summary>
 		/// 设置项的值被改变时引发。
 		/// </summary>
-		public event EventHandler<RCT3Launcher.Option.EventArgs.ValueChangedEventArgs<TValue>> ValueChanged;
+		public event EventHandler<RCT3Launcher.Option.EventArgs.ValueChangedEventArgs<TValue>> ValueChanged
+		{
+			add
+			{
+				valueChanged += value;
+				Notify();
+			}
+			remove
+			{
+				valueChanged -= value;
+			}
+		}
+		private EventHandler<RCT3Launcher.Option.EventArgs.ValueChangedEventArgs<TValue>> valueChanged;
 
 		#endregion
 
@@ -65,11 +78,23 @@ namespace RCT3Launcher.Option
 		/// <param name="defaultValue">设置项的默认值。</param>
 		public OptionBase(string optionName, TValue defaultValue)
 		{
-			DefaultValue = defaultValue;
+			//DefaultValue = defaultValue;
+			value = defaultValue;
 			OptionName = optionName;
 
 			ValueChanged += OnValueChanged;
 		}
+
+		public virtual XmlElement OptionValueToXmlElement(XmlDocument document)
+		{
+			XmlElement optionElement = document.CreateElement(this.OptionName);
+			return optionElement;
+		}
+
+		public abstract void XmlElementToOptionValue(XmlElement optionElement);
+
+		public abstract void UpdateOptionValueInXmlElement(ref XmlElement optionElement);
+
 
 		public void SetRawValue(object value)
 		{
@@ -78,16 +103,15 @@ namespace RCT3Launcher.Option
 
 		public virtual void SetRawValue(string value)
 		{
-			
+
 		}
 
 		/// <summary>
 		/// 通知设置项的值更新。
 		/// </summary>
-		/// <param name="newValue"></param>
-		public void Notify(TValue newValue)
+		public void Notify()
 		{
-			ValueChanged?.Invoke(this, new RCT3Launcher.Option.EventArgs.ValueChangedEventArgs<TValue>(Value, newValue));
+			valueChanged?.Invoke(this, new RCT3Launcher.Option.EventArgs.ValueChangedEventArgs<TValue>(Value, Value));
 		}
 
 		/// <summary>

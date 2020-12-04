@@ -25,7 +25,7 @@ namespace RCT3Launcher.ViewModels
 				if(_password != value)
 				{
 					_password = value;
-					RaisePropertyChanged("Password");
+					RaisePropertyChanged(nameof(Password));
 				}
 			}
 		}

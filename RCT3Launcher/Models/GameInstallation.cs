@@ -6,9 +6,15 @@ using System.Windows.Media;
 
 namespace RCT3Launcher.Models
 {
-	class GamePathItem : INotifyPropertyChanged
+	[Serializable]
+	public class GameInstallation : INotifyPropertyChanged
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
+
+		public GameInstallation()
+		{
+
+		}
 
 		/// <summary>
 		/// 配置索引
@@ -24,7 +30,7 @@ namespace RCT3Launcher.Models
 				if (id != value)
 				{
 					id = value;
-					PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ID"));
+					PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ID)));
 				}
 			}
 		}
@@ -55,7 +61,7 @@ namespace RCT3Launcher.Models
 				if (name != value)
 				{
 					name = value;
-					PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Name"));
+					PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Name)));
 				}
 			}
 		}
@@ -75,7 +81,7 @@ namespace RCT3Launcher.Models
 				if (fullNamePath != value)
 				{
 					fullNamePath = value;
-					PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("FullNamePath"));
+					PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(FullNamePath)));
 				}
 			}
 		}
@@ -95,7 +101,7 @@ namespace RCT3Launcher.Models
 				if (iconIndex != value)
 				{
 					iconIndex = value;
-					PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Icon"));
+					PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IconIndex)));
 				}
 			}
 		}

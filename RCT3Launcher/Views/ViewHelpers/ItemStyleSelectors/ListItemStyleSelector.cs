@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace RCT3Launcher.Views.ListBoxItem.ItemStyleSelector
+namespace RCT3Launcher.Views.ViewHelpers.ItemStyleSelectors
 {
 	class ListItemStyleSelector : StyleSelector
 	{
@@ -17,11 +17,15 @@ namespace RCT3Launcher.Views.ListBoxItem.ItemStyleSelector
 		public override Style SelectStyle(object item, DependencyObject container)
 		{
 			ListBox listBox = ItemsControl.ItemsControlFromItemContainer(container) as ListBox;
-			int index = listBox.ItemContainerGenerator.IndexFromContainer(container);
-			if ((index & 1) == 1)
-				return OddItemStyle;
-			else
-				return EvenItemStyle;
+			if (listBox.Tag.ToString() == "List")
+			{
+				int index = listBox.ItemContainerGenerator.IndexFromContainer(container);
+				if ((index & 1) == 1)
+					return OddItemStyle;
+				else
+					return EvenItemStyle;
+			}
+			return container.GetValue(ListBoxItem.StyleProperty) as Style;
 		}
 	}
 }

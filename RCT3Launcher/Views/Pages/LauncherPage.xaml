@@ -21,10 +21,10 @@
 			</Grid.ColumnDefinitions>
 			<Viewbox Grid.Column="0" Margin="30,0,0,0" Stretch="Uniform">
 				<StackPanel>
-					<TextBlock Text="{DynamicResource RCT3_Complete_Edition_Name}" FontWeight="Bold" Foreground="White"/>
+					<TextBlock Text="{DynamicResource RCT3_Complete_Edition_Name}" FontWeight="Bold" Foreground="{StaticResource Theme.Primary.Text}"/>
 					<StackPanel Height="20" Orientation="Horizontal">
 						<Image Width="10" Height="10" Source="{StaticResource State_OK}" Stretch="UniformToFill"/>
-						<Label Content="{DynamicResource LauncherPage_Game_Address_State_Right}" FontSize="7" Foreground="#FF7CB342" VerticalContentAlignment="Center"/>
+						<Label Content="{DynamicResource LauncherPage_Game_Address_State_Right}" FontSize="7" Foreground="{StaticResource Theme.Primary.Normal.SolidColorBrush}" VerticalContentAlignment="Center"/>
 					</StackPanel>
 				</StackPanel>
 			</Viewbox>
@@ -69,7 +69,7 @@
 								</BeginStoryboard>
 							</EventTrigger>
 						</Grid.Triggers>
-						<Rectangle Fill="#FFAED581" RadiusX="2" RadiusY="2"/>
+						<Rectangle Fill="{StaticResource Theme.Primary.Light.SolidColorBrush}" RadiusX="2" RadiusY="2"/>
 						<Grid>
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="5"/>
@@ -80,13 +80,13 @@
 							<Image Grid.ColumnSpan="3" Width="5" Height="5" Margin="1.5,0,0,0" Source="{StaticResource Light_Arrow}" HorizontalAlignment="Left"/>
 						</Grid>
 					</Grid>
-					<Button Height="18" Width="55" Style="{StaticResource Animate_Button_Style}">
+					<Button Height="18" Width="55" Style="{StaticResource Animation_RadiusButton_Style}">
 						<Button.Effect>
 							<DropShadowEffect ShadowDepth="0.5" BlurRadius="3" Direction="315" Color="#FF333333"/>
 						</Button.Effect>
 						<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-							<Image Height="8" Width="8" Margin="5,0,0,0" Source="{StaticResource Light_Steam_Logo}"/>
-							<Label Content="{DynamicResource Start_Game_Button}" Foreground="White" FontSize="6" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+							<Image Height="10" Width="10" Margin="5,0,0,0" Source="{StaticResource Light_Steam_Logo}"/>
+							<Label Content="{DynamicResource Start_Game_Button}" Foreground="{StaticResource Theme.Primary.Text}" FontSize="6" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 						</StackPanel>
 					</Button>
 				</Grid>

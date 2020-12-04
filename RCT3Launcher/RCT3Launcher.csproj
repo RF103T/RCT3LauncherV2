@@ -16,6 +16,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ResourcesDictionary\DrawingImageDictionary.xaml~RFc115bf.TMP" />
     <None Remove="Resources\ApplicationIcon_128px.ico" />
     <None Remove="Resources\Image\Background_1920_1080.jpg" />
     <None Remove="ViewModels\GuidePageViewModel.cs~RF135dd51.TMP" />
@@ -23,6 +24,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.19" />
+    <PackageReference Include="WindowsAPICodePack-Shell" Version="1.1.1" />
   </ItemGroup>
 
   <ItemGroup>

@@ -4,7 +4,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace RCT3Launcher.Views.ListBoxItem.ItemStyleSelector
+namespace RCT3Launcher.Views.ViewHelpers.ItemStyleSelectors
 {
 	class MainMenuItemStyleSelector : StyleSelector
 	{

@@ -26,11 +26,35 @@ namespace RCT3Launcher.Views.Pages
 		private void multipleModeCheckBox_Checked(object sender, RoutedEventArgs e)
 		{
 			listBox.SelectionMode = SelectionMode.Multiple;
+			UpdateListBoxStyle();
 		}
 
 		private void multipleModeCheckBox_Unchecked(object sender, RoutedEventArgs e)
 		{
 			listBox.SelectionMode = SelectionMode.Single;
+			UpdateListBoxStyle();
+		}
+
+		private void dataShowStyleSwitchBox_Checked(object sender, RoutedEventArgs e)
+		{
+			listBox.Tag = "Grid";
+			UpdateListBoxStyle();
+		}
+
+		private void dataShowStyleSwitchBox_Unchecked(object sender, RoutedEventArgs e)
+		{
+			listBox.Tag = "List";
+			UpdateListBoxStyle();
+		}
+
+		private void UpdateListBoxStyle()
+		{
+			StringBuilder builder = new StringBuilder(listBox.Tag.ToString());
+			if (listBox.SelectionMode == SelectionMode.Single)
+				builder.Append("_ListBox_Style");
+			else
+				builder.Append("_Multiple_ListBox_Style");
+			listBox.SetValue(ListBox.StyleProperty, Application.Current.Resources[builder.ToString()]);
 		}
 	}
 }

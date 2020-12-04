@@ -6,6 +6,7 @@ using System.Windows.Media.Imaging;
 
 namespace RCT3Launcher.Models
 {
+	[Serializable]
 	class GameSave : INotifyPropertyChanged
 	{
 		public event PropertyChangedEventHandler PropertyChanged;

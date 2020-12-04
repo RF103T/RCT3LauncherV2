@@ -9,29 +9,29 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type TextBox}">
-					<Border Name="Border" CornerRadius="2" Padding="2" BorderThickness="1" BorderBrush="#00A0A0A0">
+					<Border Name="Border" CornerRadius="2" Padding="2" BorderThickness="1" BorderBrush="{StaticResource Theme.Primary.Dark.Background.SolidColorBrush.Transparent}">
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
 								<VisualState x:Name="Normal">
 									<Storyboard Storyboard.TargetName="Border">
-										<ColorAnimation To="#00A0A0A0" Duration="0:0:0.2" Storyboard.TargetProperty="BorderBrush.(SolidColorBrush.Color)"/>
+										<ColorAnimation To="{StaticResource Theme.Primary.Dark.Background.Color.Transparent}" Duration="0:0:0.2" Storyboard.TargetProperty="BorderBrush.(SolidColorBrush.Color)"/>
 									</Storyboard>
 								</VisualState>
 								<VisualState x:Name="MouseOver">
 									<Storyboard Storyboard.TargetName="Border">
-										<ColorAnimation To="#FFA0A0A0" Duration="0:0:0.2" Storyboard.TargetProperty="BorderBrush.(SolidColorBrush.Color)"/>
+										<ColorAnimation To="{StaticResource Theme.Primary.Dark.Background.Color}" Duration="0:0:0.2" Storyboard.TargetProperty="BorderBrush.(SolidColorBrush.Color)"/>
 									</Storyboard>
 								</VisualState>
 								<VisualState x:Name="Focused">
 									<Storyboard Storyboard.TargetName="Border">
-										<ColorAnimation To="#FFA0A0A0" Duration="0:0:0.2" Storyboard.TargetProperty="BorderBrush.(SolidColorBrush.Color)"/>
+										<ColorAnimation To="{StaticResource Theme.Primary.Dark.Background.Color}" Duration="0:0:0.2" Storyboard.TargetProperty="BorderBrush.(SolidColorBrush.Color)"/>
 									</Storyboard>
 								</VisualState>
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 						<Grid Background="Transparent">
-							<ScrollViewer x:Name="PART_ContentHost" Margin="0" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
-							<TextBlock x:Name="placeholder" Height="{Binding ActualHeight,ElementName=PART_ContentHost}" Text="{Binding (ControlExtensions:TextBoxExtensions.PlaceholderText),RelativeSource={RelativeSource Mode=TemplatedParent}}" Opacity="0" Foreground="#FFD9D9D9" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+							<ScrollViewer x:Name="PART_ContentHost" Margin="0" HorizontalAlignment="Left" HorizontalContentAlignment="Center"/>
+							<TextBlock x:Name="placeholder" Height="{Binding ActualHeight,ElementName=PART_ContentHost}" Text="{Binding (ControlExtensions:TextBoxExtensions.PlaceholderText),RelativeSource={RelativeSource Mode=TemplatedParent}}" Opacity="0" Foreground="{StaticResource Theme.Primary.Dark.Background.SolidColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 						</Grid>
 					</Border>
 					<ControlTemplate.Triggers>

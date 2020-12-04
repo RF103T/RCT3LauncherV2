@@ -43,9 +43,13 @@ namespace RCT3Launcher.ViewModels
 					NavigationPage = "Pages/LauncherSettingsPage.xaml"
 				}
 			};
-			NavigationPageSource = "Pages/GuidePage.xaml";
 
-			(OptionsManager.optionMap[OptionsManager.OptionType.Language] as LanguageOption).ValueChanged += OnLanguageChanged;
+			if (!OptionsManager.IsOptionsInitialized)
+				NavigationPageSource = "Pages/GuidePage.xaml";
+			else
+				NavigationPageSource = MainMenuItems[0].NavigationPage;
+
+			OptionsManager.GetOptionObject<LanguageOption>(OptionsManager.OptionType.Language).ValueChanged += OnLanguageChanged;
 		}
 
 		#region 菜单

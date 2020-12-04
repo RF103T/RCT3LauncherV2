@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
+using System.Xml;
 
 namespace RCT3Launcher.Option.LauncherOptions
 {
@@ -29,6 +30,23 @@ namespace RCT3Launcher.Option.LauncherOptions
 
 		}
 
+		public override XmlElement OptionValueToXmlElement(XmlDocument document)
+		{
+			XmlElement optionRootElement = base.OptionValueToXmlElement(document);
+			optionRootElement.InnerText = Value.ToString();
+			return optionRootElement;
+		}
+
+		public override void XmlElementToOptionValue(XmlElement optionElement)
+		{
+			SetRawValue(optionElement.InnerText);
+		}
+
+		public override void UpdateOptionValueInXmlElement(ref XmlElement optionElement)
+		{
+			optionElement.InnerText = Value.ToString();
+		}
+
 		public override void SetRawValue(string value)
 		{
 			Value = (LanguageParameter)Enum.Parse(typeof(LanguageParameter), value);
@@ -37,7 +55,6 @@ namespace RCT3Launcher.Option.LauncherOptions
 		protected override void OnValueChanged(object sender, ValueChangedEventArgs<LanguageParameter> e)
 		{
 			base.OnValueChanged(sender, e);
-			OptionsManager.WriteOptionValueToFile(OptionsManager.OptionType.Language);
 			ResourceDictionary dict = new ResourceDictionary();
 			switch (e.NewValue)
 			{
