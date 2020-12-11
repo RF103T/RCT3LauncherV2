@@ -8,14 +8,14 @@ namespace RCT3Launcher.Option
 	public interface IOption
 	{
 		/// <summary>
-		/// 指示设置项是否被设置过。
-		/// </summary>
-		public bool IsInitialization { get; set; }
-
-		/// <summary>
 		/// 设置项的名称。
 		/// </summary>
 		public string OptionName { get; set; }
+
+		/// <summary>
+		/// 初始化选项
+		/// </summary>
+		public void InitializeOption();
 
 		/// <summary>
 		/// 将设置项的值转换为Xml元素。

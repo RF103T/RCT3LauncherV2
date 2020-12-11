@@ -177,8 +177,8 @@
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 						<Grid>
-							<Rectangle x:Name="Button_Background" Fill="{TemplateBinding Background}" RadiusX="2" RadiusY="2"/>
-							<Rectangle x:Name="Button_Background_Unenable" Fill="{StaticResource Unenable}" Opacity="0" RadiusX="2" RadiusY="2"/>
+							<Rectangle x:Name="Button_Background" Fill="{TemplateBinding Background}" RadiusX="6" RadiusY="6"/>
+							<Rectangle x:Name="Button_Background_Unenable" Fill="{StaticResource Unenable}" Opacity="0" RadiusX="6" RadiusY="6"/>
 							<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
 						</Grid>
 					</Border>

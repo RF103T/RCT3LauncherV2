@@ -12,6 +12,11 @@
 	<s:String x:Key="Text_OK">确定</s:String>
 	<s:String x:Key="Text_Apply">应用</s:String>
 	<s:String x:Key="Text_Cancel">取消</s:String>
+	
+	<!--表单验证-->
+	<s:String x:Key="ValidationRule_ValueNullError">值不能为空</s:String>
+	<s:String x:Key="ValidationRule_FilePathError">无效的路径格式</s:String>
+	<s:String x:Key="ValidationRule_GameFileError">找不到游戏文件</s:String>
 
 	<!--MainWindow-->
 	<s:String x:Key="Launcher_MenuItem">启动游戏</s:String>
@@ -24,7 +29,8 @@
 	<!--LauncherPage-->
 	<s:String x:Key="LauncherPage_Game_Address_State_Right">游戏路径已设定</s:String>
 	<s:String x:Key="LauncherPage_Game_Address_State_Wrong">游戏路径未设定</s:String>
-	<s:String x:Key="Start_Game_Button">开始游戏</s:String>
+	<s:String x:Key="LauncherPage_Start_Game_Button">开始游戏</s:String>
+	<s:String x:Key="LauncherPage_Running_State_Icon_ToolTip">正在运行的游戏实例</s:String>
 	
 	<!--GuidePage-->
 	<s:String x:Key="GuidePage_Title">欢迎使用RCT3启动器</s:String>

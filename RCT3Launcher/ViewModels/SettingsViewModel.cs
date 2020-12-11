@@ -9,6 +9,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace RCT3Launcher.ViewModels
 {
@@ -27,7 +29,7 @@ namespace RCT3Launcher.ViewModels
 		{
 			get
 			{
-				if(gameInstallationsOption == null)
+				if (gameInstallationsOption == null)
 					gameInstallationsOption = OptionsManager.GetOptionObject<GameInstallationsOption>(OptionsManager.OptionType.GameInstallation);
 				return gameInstallationsOption.Value;
 			}
@@ -43,23 +45,54 @@ namespace RCT3Launcher.ViewModels
 			}
 		}
 
-		private CommandBase<GameInstallation> chooseGamePathCommand;
-		public CommandBase<GameInstallation> ChooseGamePathCommand
+		public List<DrawingImage> GameInstallationItemIcons
+		{
+			get
+			{
+				return GameInstallationIconHelper.DarkIconDrawingImages;
+			}
+		}
+
+		private CommandBase<GameInstallation> deleteGamePathCommand;
+		public CommandBase<GameInstallation> DeleteGamePathCommand
+		{
+			get
+			{
+				if (deleteGamePathCommand == null)
+				{
+					deleteGamePathCommand = new CommandBase<GameInstallation>(
+						new Action<GameInstallation>(
+							item =>
+							{
+								int id = item.ID;
+								for (int i = id; i < GameInstallationItems.Count; i++)
+									GameInstallationItems[i].ID--;
+								GameInstallationItems.Remove(item);
+							}
+						)
+					);
+				}
+				return deleteGamePathCommand;
+			}
+		}
+
+		private CommandBase<TextBox> chooseGamePathCommand;
+		public CommandBase<TextBox> ChooseGamePathCommand
 		{
 			get
 			{
 				if (chooseGamePathCommand == null)
 				{
-					chooseGamePathCommand = new CommandBase<GameInstallation>(
-						new Action<GameInstallation>(
-							installation =>
+					chooseGamePathCommand = new CommandBase<TextBox>(
+						new Action<TextBox>(
+							textBox =>
 							{
 								CommonOpenFileDialog dialog = new CommonOpenFileDialog()
 								{
 									IsFolderPicker = true
 								};
-								if(dialog.ShowDialog() == CommonFileDialogResult.Ok)
-									installation.FullNamePath = dialog.FileName;
+								if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+									textBox.SetValue(TextBox.TextProperty, dialog.FileName);
 							}
 						)
 					);

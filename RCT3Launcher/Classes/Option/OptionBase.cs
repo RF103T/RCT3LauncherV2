@@ -1,23 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 using System.Xml;
 
 namespace RCT3Launcher.Option
 {
-	public abstract class OptionBase<TValue> : IOption
+	public abstract class OptionBase<TValue> : IOption where TValue : new()
 	{
+		private static readonly Expression<Func<TValue>> ctorExpression = () => new TValue();
+
 		#region 参数
 
 		/// <summary>
 		/// 设置项的默认值。
 		/// </summary>
 		public TValue DefaultValue { get; set; }
-
-		/// <summary>
-		/// 指示设置项是否被设置过。
-		/// </summary>
-		public bool IsInitialization { get; set; }
 
 		/// <summary>
 		/// 设置项的名称。
@@ -32,8 +30,8 @@ namespace RCT3Launcher.Option
 		{
 			get
 			{
-				//if (!IsInitialization)
-				//	return DefaultValue;
+				if (value == null)
+					value = ctorExpression.Compile().Invoke();
 				return value;
 			}
 			set
@@ -78,11 +76,15 @@ namespace RCT3Launcher.Option
 		/// <param name="defaultValue">设置项的默认值。</param>
 		public OptionBase(string optionName, TValue defaultValue)
 		{
-			//DefaultValue = defaultValue;
-			value = defaultValue;
+			DefaultValue = defaultValue;
 			OptionName = optionName;
 
 			ValueChanged += OnValueChanged;
+		}
+
+		public void InitializeOption()
+		{
+			value = DefaultValue;
 		}
 
 		public virtual XmlElement OptionValueToXmlElement(XmlDocument document)
@@ -121,7 +123,7 @@ namespace RCT3Launcher.Option
 		/// <param name="e"></param>
 		protected virtual void OnValueChanged(object sender, RCT3Launcher.Option.EventArgs.ValueChangedEventArgs<TValue> e)
 		{
-			
+
 		}
 
 		#endregion

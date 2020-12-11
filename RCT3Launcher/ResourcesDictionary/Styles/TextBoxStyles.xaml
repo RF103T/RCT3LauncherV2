@@ -2,37 +2,48 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:ControlExtensions="clr-namespace:RCT3Launcher.ControlExtensions">
 	<Style x:Key="Single_Line_TextBox_Style" TargetType="{x:Type TextBox}">
+		<Style.Triggers>
+			<Trigger Property="Validation.HasError" Value="true">
+				<Setter Property="ToolTip"
+						Value="{Binding RelativeSource={x:Static RelativeSource.Self},Path=(Validation.Errors)/ErrorContent}"/>
+			</Trigger>
+		</Style.Triggers>
 		<Setter Property="MaxLines" Value="1"/>
 		<Setter Property="MinLines" Value="1"/>
-		<Setter Property="BorderBrush" Value="{x:Null}"/>
+		<Setter Property="BorderBrush" Value="{StaticResource Theme.Primary.Dark.Background.SolidColorBrush.Transparent}"/>
 		<Setter Property="VerticalContentAlignment" Value="Center"/>
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type TextBox}">
-					<Border Name="Border" CornerRadius="2" Padding="2" BorderThickness="1" BorderBrush="{StaticResource Theme.Primary.Dark.Background.SolidColorBrush.Transparent}">
+					<Border Name="border"
+							CornerRadius="2" BorderThickness="1" BorderBrush="{StaticResource Theme.Primary.Dark.Background.SolidColorBrush.Transparent}">
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
 								<VisualState x:Name="Normal">
-									<Storyboard Storyboard.TargetName="Border">
+									<Storyboard Storyboard.TargetName="border">
 										<ColorAnimation To="{StaticResource Theme.Primary.Dark.Background.Color.Transparent}" Duration="0:0:0.2" Storyboard.TargetProperty="BorderBrush.(SolidColorBrush.Color)"/>
 									</Storyboard>
 								</VisualState>
 								<VisualState x:Name="MouseOver">
-									<Storyboard Storyboard.TargetName="Border">
+									<Storyboard Storyboard.TargetName="border">
 										<ColorAnimation To="{StaticResource Theme.Primary.Dark.Background.Color}" Duration="0:0:0.2" Storyboard.TargetProperty="BorderBrush.(SolidColorBrush.Color)"/>
 									</Storyboard>
 								</VisualState>
 								<VisualState x:Name="Focused">
-									<Storyboard Storyboard.TargetName="Border">
+									<Storyboard Storyboard.TargetName="border">
 										<ColorAnimation To="{StaticResource Theme.Primary.Dark.Background.Color}" Duration="0:0:0.2" Storyboard.TargetProperty="BorderBrush.(SolidColorBrush.Color)"/>
 									</Storyboard>
 								</VisualState>
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
-						<Grid Background="Transparent">
-							<ScrollViewer x:Name="PART_ContentHost" Margin="0" HorizontalAlignment="Left" HorizontalContentAlignment="Center"/>
-							<TextBlock x:Name="placeholder" Height="{Binding ActualHeight,ElementName=PART_ContentHost}" Text="{Binding (ControlExtensions:TextBoxExtensions.PlaceholderText),RelativeSource={RelativeSource Mode=TemplatedParent}}" Opacity="0" Foreground="{StaticResource Theme.Primary.Dark.Background.SolidColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-						</Grid>
+						<Border x:Name="errorBorder"
+								CornerRadius="2" BorderThickness="1" BorderBrush="Transparent"
+								HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+							<Grid Margin="2" Background="Transparent">
+								<ScrollViewer x:Name="PART_ContentHost" Margin="0" HorizontalAlignment="Left" HorizontalContentAlignment="Center"/>
+								<TextBlock x:Name="placeholder" Height="{Binding ActualHeight,ElementName=PART_ContentHost}" Text="{Binding (ControlExtensions:TextBoxExtensions.PlaceholderText),RelativeSource={RelativeSource Mode=TemplatedParent}}" Opacity="0" Foreground="{StaticResource Theme.Primary.Dark.Background.SolidColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+							</Grid>
+						</Border>
 					</Border>
 					<ControlTemplate.Triggers>
 						<Trigger Property="Text" Value="{x:Null}">
@@ -41,7 +52,17 @@
 						<Trigger Property="Text" Value="">
 							<Setter TargetName="placeholder" Property="Opacity" Value="1"/>
 						</Trigger>
+						<Trigger Property="Validation.HasError" Value="True">
+							<Setter Property="BorderBrush" TargetName="errorBorder" Value="{StaticResource Warning.SolidColorBrush}"/>
+						</Trigger>
 					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+		<Setter Property="Validation.ErrorTemplate">
+			<Setter.Value>
+				<ControlTemplate>
+
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>

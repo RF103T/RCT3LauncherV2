@@ -18,9 +18,24 @@ namespace RCT3Launcher.Views.Pages
 	/// </summary>
 	public partial class LauncherSettingsPage : Page
 	{
+		private HashSet<object> errorSet = new HashSet<object>();
+
 		public LauncherSettingsPage()
 		{
 			InitializeComponent();
+		}
+
+		private void SettingsValidationError(object sender, ValidationErrorEventArgs e)
+		{
+			if (e.Action == ValidationErrorEventAction.Added)
+				errorSet.Add((e.OriginalSource as FrameworkElement).DataContext);
+			else
+				errorSet.Remove((e.OriginalSource as FrameworkElement).DataContext);
+		}
+
+		private void Button_Click(object sender, RoutedEventArgs e)
+		{
+			errorSet.Remove((sender as FrameworkElement).DataContext);
 		}
 	}
 }

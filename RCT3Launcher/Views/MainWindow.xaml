@@ -8,7 +8,6 @@
 		xmlns:StyleSelector="clr-namespace:RCT3Launcher.Views.ViewHelpers.ItemStyleSelectors"
 		xmlns:Behaviors="http://schemas.microsoft.com/xaml/behaviors"
 		mc:Ignorable="d"
-        Language="zh-CN"
         Title="{DynamicResource Application_Title}"
         MaxHeight="660"
         MinHeight="500"
@@ -62,7 +61,7 @@
 			<StackPanel.Background>
 				<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
 					<GradientStop Color="#0037474F" Offset="0.3"/>
-					<GradientStop Color="#FF37474F" Offset="0.85"/>
+					<GradientStop Color="#FF37474F" Offset="0.76"/>
 				</LinearGradientBrush>
 			</StackPanel.Background>
 		</StackPanel>
@@ -115,5 +114,13 @@
 				</Behaviors:Interaction.Triggers>
 			</Button>
 		</Grid>
+		<!--<Grid Grid.ColumnSpan="2" Grid.RowSpan="2"
+			  Background="#90000000">
+			<Border Width="350" Height="200"
+					CornerRadius="10" Background="{StaticResource Theme.Secondary.Normal.SolidColorBrush}"
+					HorizontalAlignment="Center" VerticalAlignment="Center">
+				
+			</Border>
+		</Grid>-->
 	</Grid>
 </Window>

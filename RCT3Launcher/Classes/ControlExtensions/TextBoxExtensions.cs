@@ -6,7 +6,7 @@ using System.Windows.Controls;
 
 namespace RCT3Launcher.ControlExtensions
 {
-	class TextBoxExtensions
+	public class TextBoxExtensions
 	{
 		public static readonly DependencyProperty PlaceholderTextProperty = DependencyProperty.RegisterAttached("PlaceholderText",
 			typeof(string), typeof(TextBoxExtensions),

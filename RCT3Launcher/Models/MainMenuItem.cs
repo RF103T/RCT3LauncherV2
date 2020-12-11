@@ -7,7 +7,7 @@ using System.Windows.Media;
 namespace RCT3Launcher.Models
 {
 	[Serializable]
-	class MainMenuItem : INotifyPropertyChanged
+	public class MainMenuItem : INotifyPropertyChanged
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
 

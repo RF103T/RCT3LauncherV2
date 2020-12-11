@@ -8,13 +8,14 @@
 	<Application.Resources>
         <ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
-				<ResourceDictionary Source="/ResourcesDictionary/Languages/zh_CN.xaml"/>
-				<ResourceDictionary Source="/ResourcesDictionary/BrushDictionary.xaml"/>
-                <ResourceDictionary Source="/ResourcesDictionary/DrawingImageDictionary.xaml"/>
-				<ResourceDictionary Source="/ResourcesDictionary/StoryboardDictionary.xaml"/>
-				<ResourceDictionary Source="/ResourcesDictionary/StyleDictionary.xaml"/>
+				<ResourceDictionary Source="pack://application:,,,/ResourcesDictionary/Languages/zh_CN.xaml"/>
+				<ResourceDictionary Source="pack://application:,,,/ResourcesDictionary/BrushDictionary.xaml"/>
+				<ResourceDictionary Source="pack://application:,,,/ResourcesDictionary/DrawingImageDictionary.xaml"/>
+				<ResourceDictionary Source="pack://application:,,,/ResourcesDictionary/StoryboardDictionary.xaml"/>
+				<ResourceDictionary Source="pack://application:,,,/ResourcesDictionary/StyleDictionary.xaml"/>
 			</ResourceDictionary.MergedDictionaries>
 			<ViewModels:SettingsViewModel x:Key="settingsViewModel"/>
+			<ViewModels:LauncherPageViewModel x:Key="launcherPageViewModel"/>
 		</ResourceDictionary>
     </Application.Resources>
 </Application>

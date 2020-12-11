@@ -4,15 +4,12 @@ using RCT3Launcher.Option.EventArgs;
 using RCT3Launcher.Option.LauncherOptions;
 using RCT3Launcher.ViewModels.BaseClass;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace RCT3Launcher.ViewModels
 {
-	class MainWindowViewModel : ViewModelBase
+	public class MainWindowViewModel : ViewModelBase
 	{
 		public MainWindowViewModel()
 		{
@@ -44,10 +41,10 @@ namespace RCT3Launcher.ViewModels
 				}
 			};
 
-			if (!OptionsManager.IsOptionsInitialized)
+			//if (!OptionsManager.IsOptionsInitialized)
 				NavigationPageSource = "Pages/GuidePage.xaml";
-			else
-				NavigationPageSource = MainMenuItems[0].NavigationPage;
+			//else
+			//	NavigationPageSource = MainMenuItems[0].NavigationPage;
 
 			OptionsManager.GetOptionObject<LanguageOption>(OptionsManager.OptionType.Language).ValueChanged += OnLanguageChanged;
 		}
@@ -66,7 +63,7 @@ namespace RCT3Launcher.ViewModels
 				if (_mainMenuItems != value)
 				{
 					_mainMenuItems = value;
-					RaisePropertyChanged("MainMenuItems");
+					RaisePropertyChanged(nameof(MainMenuItems));
 				}
 			}
 		}
@@ -102,7 +99,7 @@ namespace RCT3Launcher.ViewModels
 					_selectedValue = value;
 					if (_selectedValue != null)
 						SelectedIndex = _mainMenuItems.IndexOf(_selectedValue as MainMenuItem);
-					RaisePropertyChanged("SelectedValue");
+					RaisePropertyChanged(nameof(SelectedValue));
 				}
 			}
 		}
@@ -128,7 +125,7 @@ namespace RCT3Launcher.ViewModels
 				if (_navigationPageSource != value)
 				{
 					_navigationPageSource = value;
-					RaisePropertyChanged("NavigationPageSource");
+					RaisePropertyChanged(nameof(NavigationPageSource));
 				}
 			}
 		}

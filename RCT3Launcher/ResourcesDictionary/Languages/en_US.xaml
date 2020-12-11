@@ -13,6 +13,11 @@
 	<s:String x:Key="Text_Apply">Apply</s:String>
 	<s:String x:Key="Text_Cancel">Cancel</s:String>
 
+	<!--表单验证-->
+	<s:String x:Key="ValidationRule_ValueNullError">Value can't be null</s:String>
+	<s:String x:Key="ValidationRule_FilePathError">Invalid path format</s:String>
+	<s:String x:Key="ValidationRule_GameFileError">Can't find game files</s:String>
+
 	<!--MainWindow-->
 	<s:String x:Key="Launcher_MenuItem">Start Game</s:String>
 	<s:String x:Key="Mod_Manager_MenuItem">Mod Manager</s:String>
@@ -24,7 +29,8 @@
 	<!--LauncherPage-->
 	<s:String x:Key="LauncherPage_Game_Address_State_Right">The game path has been set</s:String>
 	<s:String x:Key="LauncherPage_Game_Address_State_Wrong">The game path has not been set</s:String>
-	<s:String x:Key="Start_Game_Button">Start Game</s:String>
+	<s:String x:Key="LauncherPage_Start_Game_Button">Start Game</s:String>
+	<s:String x:Key="LauncherPage_Running_State_Icon_ToolTip">Running game installation</s:String>
 
 	<!--GuidePage-->
 	<s:String x:Key="GuidePage_Title">Welcome to RCT3 Launcher</s:String>

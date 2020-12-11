@@ -35,8 +35,8 @@
 							<Rectangle x:Name="Button_Background_Front" Fill="{StaticResource Theme.Primary.Light.SolidColorBrush}" Opacity="0"/>
 							<Rectangle x:Name="Button_Background_Unenable" Fill="{StaticResource Unenable}" Opacity="0"/>
 							<Image x:Name="arrow"
-							   Width="14" Height="14"
-							   HorizontalAlignment="Center" VerticalAlignment="Center"
+							   Width="14" Height="14" Margin="5"
+							   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
 							   Source="{StaticResource Dark_Arrow}"
 							   RenderTransformOrigin="0.5,0.5">
 								<Image.RenderTransform>
@@ -78,7 +78,90 @@
 			</Setter.Value>
 		</Setter>
 	</Style>
-	
+	<Style x:Key="Reverse_Arrow_ToggleButton_Style" TargetType="{x:Type ToggleButton}">
+		<Setter Property="ClickMode" Value="Press"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type ToggleButton}">
+					<Border x:Name="templateRoot" Background="{TemplateBinding Background}" BorderThickness="0" BorderBrush="{x:Null}">
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal">
+									<Storyboard>
+										<DoubleAnimation To="0" Duration="0:0:0.2" Storyboard.TargetName="Button_Background_Unenable" Storyboard.TargetProperty="Opacity"/>
+										<DoubleAnimation To="0" Duration="0:0:0.2" Storyboard.TargetName="gridTranslateTransform" Storyboard.TargetProperty="Y">
+											<DoubleAnimation.EasingFunction>
+												<ExponentialEase Exponent="7" EasingMode="EaseOut" />
+											</DoubleAnimation.EasingFunction>
+										</DoubleAnimation>
+									</Storyboard>
+								</VisualState>
+								<VisualState x:Name="MouseOver">
+									<Storyboard Storyboard.TargetName="gridTranslateTransform">
+										<DoubleAnimation To="-3" Duration="0:0:0.2" Storyboard.TargetProperty="Y">
+											<DoubleAnimation.EasingFunction>
+												<ExponentialEase Exponent="7" EasingMode="EaseOut" />
+											</DoubleAnimation.EasingFunction>
+										</DoubleAnimation>
+									</Storyboard>
+								</VisualState>
+								<VisualState x:Name="Disabled">
+									<Storyboard Storyboard.TargetName="Button_Background_Unenable">
+										<DoubleAnimation To="1" Duration="0:0:0.2" Storyboard.TargetProperty="Opacity"/>
+									</Storyboard>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+						<Grid>
+							<Grid.RenderTransform>
+								<TranslateTransform x:Name="gridTranslateTransform" Y="0"/>
+							</Grid.RenderTransform>
+							<Rectangle x:Name="Button_Background_Unenable" Fill="{StaticResource Unenable}" Opacity="0"/>
+							<Image x:Name="arrow"
+								   Width="14" Height="14" Margin="5"
+								   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+							       Source="{StaticResource Dark_Arrow}"
+							       RenderTransformOrigin="0.5,0.5">
+								<Image.RenderTransform>
+									<TransformGroup>
+										<ScaleTransform ScaleX="1" ScaleY="0.8"/>
+										<RotateTransform x:Name="arrowRotateTransform" Angle="90"/>
+									</TransformGroup>
+								</Image.RenderTransform>
+							</Image>
+						</Grid>
+					</Border>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsChecked" Value="True">
+							<Trigger.EnterActions>
+								<BeginStoryboard>
+									<Storyboard Storyboard.TargetName="arrowRotateTransform">
+										<DoubleAnimation To="-90" Duration="0:0:0.4" Storyboard.TargetProperty="Angle">
+											<DoubleAnimation.EasingFunction>
+												<ExponentialEase Exponent="7" EasingMode="EaseOut" />
+											</DoubleAnimation.EasingFunction>
+										</DoubleAnimation>
+									</Storyboard>
+								</BeginStoryboard>
+							</Trigger.EnterActions>
+							<Trigger.ExitActions>
+								<BeginStoryboard>
+									<Storyboard Storyboard.TargetName="arrowRotateTransform">
+										<DoubleAnimation To="90" Duration="0:0:0.4" Storyboard.TargetProperty="Angle">
+											<DoubleAnimation.EasingFunction>
+												<ExponentialEase Exponent="7" EasingMode="EaseOut" />
+											</DoubleAnimation.EasingFunction>
+										</DoubleAnimation>
+									</Storyboard>
+								</BeginStoryboard>
+							</Trigger.ExitActions>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
 	<Style x:Key="ComboBox_ToggleButton_Style" TargetType="{x:Type ToggleButton}">
 		<Setter Property="OverridesDefaultStyle" Value="true"/>
 		<Setter Property="IsTabStop" Value="false"/>

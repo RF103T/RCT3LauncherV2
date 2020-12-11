@@ -1,20 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace RCT3Launcher.ControlExtensions
 {
-	class ComboBoxExtensions
+	public class ButtonExtensions
 	{
 		public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.RegisterAttached("CornerRadius",
-			typeof(CornerRadius), typeof(ComboBoxExtensions),
+			typeof(CornerRadius), typeof(ButtonExtensions),
 			new PropertyMetadata(new CornerRadius(0), (obj, e) =>
 			{
-				if (obj is ComboBox combo)
+				if (obj is Button button)
 				{
-					if (combo.OpacityMask == null)
+					if (button.OpacityMask == null)
 					{
 						Border border = new Border
 						{
@@ -24,14 +22,14 @@ namespace RCT3Launcher.ControlExtensions
 						{
 							Visual = border
 						};
-						combo.OpacityMask = brush;
-						combo.SizeChanged += delegate
+						button.OpacityMask = brush;
+						button.SizeChanged += delegate
 						{
-							border.Width = combo.ActualWidth;
-							border.Height = combo.ActualHeight;
+							border.Width = button.ActualWidth;
+							border.Height = button.ActualHeight;
 						};
 					}
-					if (combo.OpacityMask is VisualBrush vb)
+					if (button.OpacityMask is VisualBrush vb)
 						if (vb.Visual is Border bd)
 							bd.CornerRadius = (CornerRadius)e.NewValue;
 				}

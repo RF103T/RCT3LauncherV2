@@ -11,10 +11,11 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace RCT3Launcher.ViewModels
 {
-	class GuidePageViewModel : ViewModelBase
+	public class GuidePageViewModel : ViewModelBase
 	{
 		public GuidePageViewModel()
 		{
@@ -82,7 +83,7 @@ namespace RCT3Launcher.ViewModels
 								{
 									Name = "配置" + (GameInstallationItems.Count + 1),
 									IconIndex = 0,
-									FullNamePath = "",
+									GameDirectory = "",
 									ID = GameInstallationItems.Count + 1
 								}
 							)
@@ -90,29 +91,6 @@ namespace RCT3Launcher.ViewModels
 					);
 				}
 				return addNewGamePathCommand;
-			}
-		}
-
-		private CommandBase<GameInstallation> deleteGamePathCommand;
-		public CommandBase<GameInstallation> DeleteGamePathCommand
-		{
-			get
-			{
-				if (deleteGamePathCommand == null)
-				{
-					deleteGamePathCommand = new CommandBase<GameInstallation>(
-						new Action<GameInstallation>(
-							item =>
-							{
-								int id = item.ID;
-								for (int i = id; i < GameInstallationItems.Count; i++)
-									GameInstallationItems[i].ID--;
-								GameInstallationItems.Remove(item);
-							}
-						)
-					);
-				}
-				return deleteGamePathCommand;
 			}
 		}
 

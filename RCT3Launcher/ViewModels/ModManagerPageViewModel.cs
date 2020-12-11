@@ -1,4 +1,5 @@
-﻿using RCT3Launcher.Validation;
+﻿using RCT3Launcher.Models;
+using RCT3Launcher.Validation;
 using RCT3Launcher.ViewModels.BaseClass;
 using System;
 using System.Collections.Generic;
@@ -10,21 +11,21 @@ namespace RCT3Launcher.ViewModels
 {
 	public class ModManagerPageViewModel : ValidatableViewModelBase
 	{
-		private string _password;
-		[Required]
-		[StringLength(10)]
-		[CustomValidation(typeof(ModManagerPageViewModel), "PasswordValidate")]
+		private GameInstallation _password = new GameInstallation();
+		//[Required]
+		//[StringLength(10)]
+		//[CustomValidation(typeof(ModManagerPageViewModel), "PasswordValidate")]
 		public string Password
 		{
 			get
 			{
-				return _password;
+				return _password.Name;
 			}
 			set
 			{
-				if(_password != value)
+				if(_password.Name != value)
 				{
-					_password = value;
+					_password.Name = value;
 					RaisePropertyChanged(nameof(Password));
 				}
 			}

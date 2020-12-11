@@ -5,7 +5,7 @@ using System.Windows.Input;
 
 namespace RCT3Launcher.ViewModels.BaseClass
 {
-	class CommandBase<T> : ICommand
+	public class CommandBase<T> : ICommand
 	{
 		private Action<T> _execute;
 

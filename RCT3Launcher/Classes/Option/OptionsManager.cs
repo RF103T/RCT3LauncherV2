@@ -50,7 +50,7 @@ namespace RCT3Launcher.Option
 					{
 						ID = 1,
 						Name = "配置1",
-						FullNamePath = "",
+						GameDirectory = "",
 						IconIndex = 0
 					}
 				})
@@ -61,9 +61,9 @@ namespace RCT3Launcher.Option
 		{
 			optionsXmlDocument = new XmlDocument();
 			if (!File.Exists(optionsXmlFilePath))
-				InitializationOptionsXmlFile();
+				InitializeOptionsXmlFile();
 			else
-				InitializationOptions();
+				InitializeOptions();
 		}
 
 		public static void SaveOptionFile()
@@ -93,7 +93,7 @@ namespace RCT3Launcher.Option
 		/// <typeparam name="TValue">设置项的值类型。</typeparam>
 		/// <param name="optionType">指定的设置项。</param>
 		/// <param name="value">要设置的值。</param>
-		public static void SetOptionValue<TValue>(OptionType optionType, TValue value)
+		public static void SetOptionValue<TValue>(OptionType optionType, TValue value) where TValue : new()
 		{
 			(optionMap[optionType] as OptionBase<TValue>).Value = value;
 		}
@@ -140,18 +140,21 @@ namespace RCT3Launcher.Option
 			option.UpdateOptionValueInXmlElement(ref optionNode);
 		}
 
-		private static void InitializationOptionsXmlFile()
+		private static void InitializeOptionsXmlFile()
 		{
 			XmlElement rootNode = optionsXmlDocument.CreateElement("Options");
 			optionsXmlDocument.AppendChild(rootNode);
 
 			foreach (KeyValuePair<OptionType, IOption> pair in optionMap)
+			{
+				pair.Value.InitializeOption();
 				AddOptionToDocument(pair.Key);
+			}
 
 			optionsXmlDocument.Save(optionsXmlFilePath);
 		}
 
-		private static void InitializationOptions()
+		private static void InitializeOptions()
 		{
 			IsOptionsInitialized = true;
 
