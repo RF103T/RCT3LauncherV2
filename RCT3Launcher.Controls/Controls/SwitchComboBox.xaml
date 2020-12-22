@@ -23,7 +23,7 @@
 					</TransformGroup>
 				</Rectangle.RenderTransform>
 			</Rectangle>
-			<ListBox x:Name="listBox" HorizontalAlignment="Stretch" SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}" ItemsSource="{Binding Items, Mode=TwoWay}" SelectionChanged="listBox_SelectionChanged" VerticalAlignment="Center" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Center">
+			<ListBox x:Name="listBox" HorizontalAlignment="Stretch" SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}" ItemsSource="{Binding Items, Mode=OneWay}" SelectionChanged="listBox_SelectionChanged" VerticalAlignment="Center" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Center">
 				<ListBox.ItemContainerStyle>
 					<Style TargetType="{x:Type ListBoxItem}">
 						<EventSetter Event="UIElement.MouseEnter" Handler="ListBoxItemMouseEnter"/>

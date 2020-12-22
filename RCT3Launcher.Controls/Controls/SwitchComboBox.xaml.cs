@@ -48,21 +48,23 @@ namespace RCT3Launcher.Controls
 
 		#region Items
 
+		private ObservableCollection<SwitchComboBoxItemModel> items = new ObservableCollection<SwitchComboBoxItemModel>();
+
 		public ObservableCollection<SwitchComboBoxItemModel> Items
 		{
-			get { return (ObservableCollection<SwitchComboBoxItemModel>)GetValue(ItemsProperty); }
-			set { SetValue(ItemsProperty, value); }
-		}
-		public static readonly DependencyProperty ItemsProperty =
-			DependencyProperty.Register("Items", typeof(ObservableCollection<SwitchComboBoxItemModel>), typeof(SwitchComboBox), new PropertyMetadata(new ObservableCollection<SwitchComboBoxItemModel>(), new PropertyChangedCallback(OnItemsChanged)));
-
-		private static void OnItemsChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-		{
-			SwitchComboBox self = d as SwitchComboBox;
-			if (e.OldValue is INotifyCollectionChanged oldEvent)
-				oldEvent.CollectionChanged -= self.OnItemsContentChanged;
-			if (e.NewValue is INotifyCollectionChanged newEvent)
-				newEvent.CollectionChanged += self.OnItemsContentChanged;
+			get
+			{
+				return items;
+			}
+			set
+			{
+				if (items != value)
+				{
+					items.CollectionChanged -= OnItemsContentChanged;
+					items = value;
+					items.CollectionChanged += OnItemsContentChanged;
+				}
+			}
 		}
 
 		private void OnItemsContentChanged(object sender, NotifyCollectionChangedEventArgs e)
