@@ -64,7 +64,7 @@ namespace RCT3Launcher.Option.LauncherOptions
 			{
 				using StringReader textReader = new StringReader(node.OuterXml);
 				if (xmlSerializer.Deserialize(textReader) is GameInstallation installation)
-					value.Add(installation);
+					Value.Add(installation);
 			}
 		}
 	}

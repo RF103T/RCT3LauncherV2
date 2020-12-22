@@ -6,15 +6,13 @@
         xmlns:local="clr-namespace:RCT3Launcher"
 		xmlns:ViewModels="clr-namespace:RCT3Launcher.ViewModels"
 		xmlns:StyleSelector="clr-namespace:RCT3Launcher.Views.ViewHelpers.ItemStyleSelectors"
+		xmlns:ControlExtensions="clr-namespace:RCT3Launcher.ControlExtensions"
 		xmlns:Behaviors="http://schemas.microsoft.com/xaml/behaviors"
 		mc:Ignorable="d"
         Title="{DynamicResource Application_Title}"
-        MaxHeight="660"
-        MinHeight="500"
-        MaxWidth="1200"
-        MinWidth="900"
-        Height="500"
-        Width="900"
+        MaxHeight="660" MinHeight="500"
+        MaxWidth="1200" MinWidth="900"
+        Height="500" Width="900"
         ResizeMode="CanResize"
         FontFamily="Microsoft YaHei UI">
 	<Window.DataContext>
@@ -48,6 +46,32 @@
 			</Setter>
 		</Style>
 	</Window.Style>
+	<Window.Resources>
+		<Storyboard x:Key="MessageBox_Open">
+			<DoubleAnimation From="0" To="1" Duration="0:0:0.4" Storyboard.TargetName="messageBoxScaleTransform" Storyboard.TargetProperty="ScaleX">
+				<DoubleAnimation.EasingFunction>
+					<ExponentialEase Exponent="6" EasingMode="EaseOut" />
+				</DoubleAnimation.EasingFunction>
+			</DoubleAnimation>
+			<DoubleAnimation From="0" To="1" Duration="0:0:0.4" Storyboard.TargetName="messageBoxScaleTransform" Storyboard.TargetProperty="ScaleY">
+				<DoubleAnimation.EasingFunction>
+					<ExponentialEase Exponent="6" EasingMode="EaseOut" />
+				</DoubleAnimation.EasingFunction>
+			</DoubleAnimation>
+		</Storyboard>
+		<Storyboard x:Key="MessageBox_Close">
+			<DoubleAnimation From="1" To="0" Duration="0:0:0.2" Storyboard.TargetName="messageBoxScaleTransform" Storyboard.TargetProperty="ScaleX">
+				<DoubleAnimation.EasingFunction>
+					<ExponentialEase Exponent="5" EasingMode="EaseOut" />
+				</DoubleAnimation.EasingFunction>
+			</DoubleAnimation>
+			<DoubleAnimation From="1" To="0" Duration="0:0:0.2" Storyboard.TargetName="messageBoxScaleTransform" Storyboard.TargetProperty="ScaleY">
+				<DoubleAnimation.EasingFunction>
+					<ExponentialEase Exponent="5" EasingMode="EaseOut" />
+				</DoubleAnimation.EasingFunction>
+			</DoubleAnimation>
+		</Storyboard>
+	</Window.Resources>
 	<Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*" MaxWidth="300"/>
@@ -65,7 +89,8 @@
 				</LinearGradientBrush>
 			</StackPanel.Background>
 		</StackPanel>
-		<Frame Grid.Column="1" Grid.RowSpan="2" Source="{Binding NavigationPageSource,Mode=OneWay}" NavigationUIVisibility="Hidden" Focusable="False"/>
+		<Frame Grid.Column="1" Grid.RowSpan="2" NavigationUIVisibility="Hidden" Focusable="False"
+			   Source="{Binding NavigationPageSource,Mode=OneWay}"/>
 		<Grid Grid.Column="0" Grid.RowSpan="2" Background="{StaticResource Theme.Secondary.Dark.SolidColorBrush}">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="0.06*"/>
@@ -90,6 +115,64 @@
 				</ListBox.ItemTemplate>
 			</ListBox>
 		</Grid>
+		<Grid x:Name="messageBoxOverlay"
+			  Grid.ColumnSpan="2" Grid.RowSpan="2"
+			  Background="#90000000" Visibility="Collapsed">
+			<Border x:Name="messageBox" MinWidth="260" MaxWidth="600" MinHeight="180" MaxHeight="300"
+					CornerRadius="10" Background="{StaticResource Theme.Secondary.Normal.SolidColorBrush}"
+					HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+				<Border.RenderTransform>
+					<ScaleTransform x:Name="messageBoxScaleTransform" ScaleX="1" ScaleY="1"/>
+				</Border.RenderTransform>
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="35"/>
+						<RowDefinition Height="*"/>
+						<RowDefinition Height="40"/>
+					</Grid.RowDefinitions>
+					<Grid Grid.Row="0">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*"/>
+							<ColumnDefinition Width="40"/>
+						</Grid.ColumnDefinitions>
+						<TextBlock x:Name="messageBoxTitle" Grid.Column="0" Margin="10,0,0,0" Text="" Foreground="{StaticResource Theme.Primary.Text}"
+								   FontSize="15" FontWeight="Bold" VerticalAlignment="Center"/>
+						<Button x:Name="messageBoxCloseButton" Grid.Column="1" Height="29"
+								Style="{StaticResource Window_Title_Button_Style}" Tag="OK" Click="MessageBoxButton_Click"
+								Background="#A0999999" Content="✕" ControlExtensions:ButtonExtensions.CornerRadius="0,10,0,0">
+						</Button>
+					</Grid>
+					<Frame x:Name="messageBoxContent" NavigationUIVisibility="Hidden" Focusable="False"
+						   Grid.Row="1" Margin="20,10" Source=""/>
+					<StackPanel Grid.Row="2" Margin="0,0,0,10" Orientation="Horizontal" HorizontalAlignment="Center">
+						<Button x:Name="messageBoxOKButton" Style="{StaticResource Transparent_Button_Style}" Width="60" Margin="20,0" FontWeight="Bold"
+								Background="{StaticResource Theme.Primary.Light.Background.SolidColorBrush}" ControlExtensions:ButtonExtensions.CornerRadius="4"
+								Click="MessageBoxButton_Click" Tag="OK">
+							<Label Content="{DynamicResource Text_OK}" Foreground="{StaticResource Theme.Primary.Text}"
+								   HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+						</Button>
+						<Button x:Name="messageBoxYesButton" Style="{StaticResource Transparent_Button_Style}" Width="60" Margin="20,0" FontWeight="Bold"
+								Background="{StaticResource Theme.Primary.Light.Background.SolidColorBrush}" ControlExtensions:ButtonExtensions.CornerRadius="4"
+								Click="MessageBoxButton_Click" Tag="Yes">
+							<Label Content="{DynamicResource Text_Yes}" Foreground="{StaticResource Theme.Primary.Text}"
+								   HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+						</Button>
+						<Button x:Name="messageBoxNoButton" Style="{StaticResource Transparent_Button_Style}" Width="60" Margin="20,0" FontWeight="Bold"
+								Background="{StaticResource Theme.Primary.Light.Background.SolidColorBrush}" ControlExtensions:ButtonExtensions.CornerRadius="4"
+								Click="MessageBoxButton_Click" Tag="No">
+							<Label Content="{DynamicResource Text_No}" Foreground="{StaticResource Theme.Primary.Text}"
+								   HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+						</Button>
+						<Button x:Name="messageBoxCancelButton" Style="{StaticResource Transparent_Button_Style}" Width="60" Margin="20,0" FontWeight="Bold"
+								Background="{StaticResource Theme.Primary.Light.Background.SolidColorBrush}" ControlExtensions:ButtonExtensions.CornerRadius="4"
+								Click="MessageBoxButton_Click" Tag="Cancel">
+							<Label Content="{DynamicResource Text_Cancel}" Foreground="{StaticResource Theme.Primary.Text}"
+								   HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+						</Button>
+					</StackPanel>
+				</Grid>
+			</Border>
+		</Grid>
 		<Grid Grid.ColumnSpan="3" Grid.Row="0">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*"/>
@@ -99,14 +182,14 @@
 			<Grid.RowDefinitions>
 				<RowDefinition/>
 			</Grid.RowDefinitions>
-			<Button x:Name="MinimizeWindowButton" Grid.Column="1" Height="29" Margin="0,1,1,0" Style="{StaticResource Window_Title_Button_Style}" Background="#A0999999" Content="—" WindowChrome.IsHitTestVisibleInChrome="True">
+			<Button Grid.Column="1" Height="29" Style="{StaticResource Window_Title_Button_Style}" Background="#A0999999" Content="—" WindowChrome.IsHitTestVisibleInChrome="True">
 				<Behaviors:Interaction.Triggers>
 					<Behaviors:EventTrigger EventName="Click">
 						<Behaviors:InvokeCommandAction Command="{Binding MinimizeWindowButtonClickCommand}"/>
 					</Behaviors:EventTrigger>
 				</Behaviors:Interaction.Triggers>
 			</Button>
-			<Button x:Name="CloseWindowButton" Grid.Column="2" Height="29" Margin="0,1,1,0" Style="{StaticResource Window_Title_Button_Style}" Background="#FFE81123" Content="✕" WindowChrome.IsHitTestVisibleInChrome="True">
+			<Button Grid.Column="2" Height="29" Style="{StaticResource Window_Title_Button_Style}" Background="#FFE81123" Content="✕" WindowChrome.IsHitTestVisibleInChrome="True">
 				<Behaviors:Interaction.Triggers>
 					<Behaviors:EventTrigger EventName="Click">
 						<Behaviors:InvokeCommandAction Command="{Binding CloseWindowButtonClickCommand}"/>
@@ -114,13 +197,5 @@
 				</Behaviors:Interaction.Triggers>
 			</Button>
 		</Grid>
-		<!--<Grid Grid.ColumnSpan="2" Grid.RowSpan="2"
-			  Background="#90000000">
-			<Border Width="350" Height="200"
-					CornerRadius="10" Background="{StaticResource Theme.Secondary.Normal.SolidColorBrush}"
-					HorizontalAlignment="Center" VerticalAlignment="Center">
-				
-			</Border>
-		</Grid>-->
 	</Grid>
 </Window>

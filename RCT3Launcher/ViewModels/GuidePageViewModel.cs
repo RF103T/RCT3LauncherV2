@@ -1,4 +1,5 @@
 ﻿using RCT3Launcher.Controls;
+using RCT3Launcher.EventSystem;
 using RCT3Launcher.Models;
 using RCT3Launcher.Option;
 using RCT3Launcher.Option.EventArgs;
@@ -47,7 +48,7 @@ namespace RCT3Launcher.ViewModels
 						new Action<SwitchComboBox>(
 							self =>
 							{
-								LanguageOption setting = OptionsManager.GetOptionObject<LanguageOption>(OptionsManager.OptionType.Language);
+								LanguageOption setting = OptionsManager.Instance.GetOptionObject<LanguageOption>(OptionType.Language);
 								switch (self.SelectedIndex)
 								{
 									case 0:
@@ -94,18 +95,18 @@ namespace RCT3Launcher.ViewModels
 			}
 		}
 
-		private CommandBase<Page> applyCommand;
-		public CommandBase<Page> ApplyCommand
+		private CommandBase<object> applyCommand;
+		public CommandBase<object> ApplyCommand
 		{
 			get
 			{
 				if (applyCommand == null)
 				{
-					applyCommand = new CommandBase<Page>(
-						new Action<Page>(
-							page =>
+					applyCommand = new CommandBase<object>(
+						new Action<object>(
+							obj =>
 							{
-								page.NavigationService.Navigate(new LauncherPage());
+								EventCenter.Boardcast<string>(EventType.PageNavigate, nameof(LauncherPage));
 							}
 						)
 					);

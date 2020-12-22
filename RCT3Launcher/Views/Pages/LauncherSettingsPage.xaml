@@ -14,10 +14,8 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="LauncherSettingsPage"
+	  DataContext="{StaticResource launcherSettingsPageViewModel}"
 	  Background="{StaticResource Theme.Secondary.Normal.SolidColorBrush}">
-	<Page.DataContext>
-		<ViewModels:LauncherSettingsPageViewModel/>
-	</Page.DataContext>
 	<Page.Resources>
 		<Converters:DoubleNormalizationConverter x:Key="doubleNormalizationConverter"/>
 	</Page.Resources>

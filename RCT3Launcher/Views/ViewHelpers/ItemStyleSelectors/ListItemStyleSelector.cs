@@ -25,7 +25,7 @@ namespace RCT3Launcher.Views.ViewHelpers.ItemStyleSelectors
 				else
 					return EvenItemStyle;
 			}
-			return container.GetValue(ListBoxItem.StyleProperty) as Style;
+			return Application.Current.Resources["List_ImageItem2_Style"] as Style;
 		}
 	}
 }

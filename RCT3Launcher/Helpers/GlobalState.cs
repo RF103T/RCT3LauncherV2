@@ -15,7 +15,7 @@ namespace RCT3Launcher
 		{
 			get
 			{
-				IEnumerable<GameInstallation> gameInstallationItems = OptionsManager.GetOptionObject<GameInstallationsOption>(OptionsManager.OptionType.GameInstallation).Value;
+				IEnumerable<GameInstallation> gameInstallationItems = OptionsManager.Instance.GetOptionObject<GameInstallationsOption>(OptionType.GameInstallation).Value;
 				foreach (GameInstallation installation in gameInstallationItems)
 					if (!installation.IsGameProcessExited)
 						return true;

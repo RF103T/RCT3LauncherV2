@@ -20,7 +20,7 @@ namespace RCT3Launcher.ViewModels
 		{
 			get
 			{
-				return (int)OptionsManager.GetOptionObject<LanguageOption>(OptionsManager.OptionType.Language).Value;
+				return (int)OptionsManager.Instance.GetOptionObject<LanguageOption>(OptionType.Language).Value;
 			}
 		}
 
@@ -30,13 +30,13 @@ namespace RCT3Launcher.ViewModels
 			get
 			{
 				if (gameInstallationsOption == null)
-					gameInstallationsOption = OptionsManager.GetOptionObject<GameInstallationsOption>(OptionsManager.OptionType.GameInstallation);
+					gameInstallationsOption = OptionsManager.Instance.GetOptionObject<GameInstallationsOption>(OptionType.GameInstallation);
 				return gameInstallationsOption.Value;
 			}
 			set
 			{
 				if (gameInstallationsOption == null)
-					gameInstallationsOption = OptionsManager.GetOptionObject<GameInstallationsOption>(OptionsManager.OptionType.GameInstallation);
+					gameInstallationsOption = OptionsManager.Instance.GetOptionObject<GameInstallationsOption>(OptionType.GameInstallation);
 				if (!gameInstallationsOption.Value.Equals(value))
 				{
 					gameInstallationsOption.Value = value;

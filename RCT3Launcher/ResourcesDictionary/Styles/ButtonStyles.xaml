@@ -213,7 +213,7 @@
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 						<Grid>
-							<Rectangle x:Name="Button_Background" Fill="{TemplateBinding Background}" Opacity="0"/>
+							<Rectangle x:Name="Button_Background" Fill="{TemplateBinding Background}" Opacity="0" RadiusX="3" RadiusY="3"/>
 							<ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
 						</Grid>
 					</Border>

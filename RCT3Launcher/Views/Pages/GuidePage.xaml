@@ -4,7 +4,6 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:RCT3Launcher.Views.Pages"
-	  xmlns:s="clr-namespace:System;assembly=System.Runtime"
 	  xmlns:ViewModels="clr-namespace:RCT3Launcher.ViewModels"
 	  xmlns:ControlExtensions="clr-namespace:RCT3Launcher.ControlExtensions"
 	  xmlns:Converters="clr-namespace:RCT3Launcher.Views.ViewHelpers.Converters"
@@ -21,6 +20,7 @@
 	</Page.DataContext>
 	<Page.Resources>
 		<Converters:DoubleNormalizationConverter x:Key="doubleNormalizationConverter"/>
+		<Converters:BooleanToVisibilityMultiValueConverter x:Key="booleanToVisibilityMultiValueConverter"/>
 	</Page.Resources>
 	<Grid>
 		<Grid.RowDefinitions>
@@ -77,6 +77,7 @@
 									<Grid.ColumnDefinitions>
 										<ColumnDefinition Width="Auto"/>
 										<ColumnDefinition Width="*"/>
+										<ColumnDefinition Width="Auto"/>
 										<ColumnDefinition Width="40"/>
 										<ColumnDefinition Width="30"/>
 									</Grid.ColumnDefinitions>
@@ -93,9 +94,20 @@
 											   Foreground="{StaticResource Theme.Secondary.Text}" FontSize="14" FontWeight="Bold"
 										       HorizontalAlignment="Left" VerticalAlignment="Center"
 										       Text="{Binding GameDirectory}"/>
-									<Image Grid.Column="2" Margin="9,0" VerticalAlignment="Stretch" Stretch="Uniform"
+									<Image Grid.Column="2" Width="20" Margin="4,0" VerticalAlignment="Stretch" Stretch="Uniform"
+										   Source="{StaticResource State_Error}" ToolTip="{DynamicResource State_Error_ToolTip}">
+										<Image.Visibility>
+											<MultiBinding Converter="{StaticResource booleanToVisibilityMultiValueConverter}" Mode="OneWay">
+												<MultiBinding.Bindings>
+													<Binding Path="(Validation.HasError)" ElementName="gamePathTextBox"/>
+													<Binding Path="(Validation.HasError)" ElementName="gameInstallationNameTextBox"/>
+												</MultiBinding.Bindings>
+											</MultiBinding>
+										</Image.Visibility>
+									</Image>
+									<Image Grid.Column="3" Margin="9,0" VerticalAlignment="Stretch" Stretch="Uniform"
 										   Source="{Binding DarkIcon}"/>
-									<ToggleButton Grid.Column="3" Background="{StaticResource Theme.Primary.Dark.Background.SolidColorBrush}"
+									<ToggleButton Grid.Column="4" Background="{StaticResource Theme.Primary.Dark.Background.SolidColorBrush}"
 												  HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
 												  Style="{StaticResource Arrow_ToggleButton_Style}">
 										<ToggleButton.Triggers>
@@ -151,7 +163,7 @@
 												<DropShadowEffect Direction="290" ShadowDepth="2" BlurRadius="6" Opacity="0.16" Color="Black" RenderingBias="Performance"/>
 											</Rectangle.Effect>
 										</Rectangle>
-										<TextBox Margin="3" Background="Transparent" BorderBrush="{x:Null}"
+										<TextBox x:Name="gameInstallationNameTextBox" Margin="3" Background="Transparent" BorderBrush="{x:Null}"
 												 VerticalAlignment="Center" HorizontalAlignment="Stretch"
 												 VerticalContentAlignment="Center" HorizontalContentAlignment="Left"
 												 Foreground="{StaticResource Theme.Secondary.Text}" FontSize="14" FontWeight="Bold"
@@ -233,7 +245,8 @@
 								</Button.RenderTransform>
 								<Behaviors:Interaction.Triggers>
 									<Behaviors:EventTrigger EventName="Click">
-										<Behaviors:InvokeCommandAction Command="{Binding DeleteGamePathCommand, Source={StaticResource settingsViewModel}}" CommandParameter="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}"/>
+										<Behaviors:InvokeCommandAction Command="{Binding DeleteGamePathCommand, Source={StaticResource settingsViewModel}}"
+																	   CommandParameter="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}"/>
 									</Behaviors:EventTrigger>
 								</Behaviors:Interaction.Triggers>
 								<Image Width="20" Height="20" Margin="3,0,3,0" Source="{StaticResource Dark_Ashbin}" Stretch="Uniform" HorizontalAlignment="Center"/>
@@ -292,7 +305,7 @@
 					Content="{DynamicResource Text_OK}" IsEnabled="{Binding IsChecked,ElementName=userAgreementCheckBox}">
 				<Behaviors:Interaction.Triggers>
 					<Behaviors:EventTrigger EventName="Click">
-						<Behaviors:InvokeCommandAction Command="{Binding ApplyCommand}" CommandParameter="{Binding ElementName=page, Mode=OneWay}"/>
+						<Behaviors:InvokeCommandAction Command="{Binding ApplyCommand}"/>
 					</Behaviors:EventTrigger>
 				</Behaviors:Interaction.Triggers>
 			</Button>

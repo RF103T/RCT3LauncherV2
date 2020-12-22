@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using RCT3Launcher.FileSystemWatchers;
 
 namespace RCT3Launcher
 {
@@ -17,8 +18,11 @@ namespace RCT3Launcher
 	/// </summary>
 	public partial class App : Application
 	{
+		public SaveFileWatcher saveFileWather;
+
 		protected override void OnStartup(StartupEventArgs e)
 		{
+			saveFileWather = new SaveFileWatcher();
 		}
 	}
 }

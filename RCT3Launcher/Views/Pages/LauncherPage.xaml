@@ -13,7 +13,7 @@
 		<StaticResource ResourceKey="launcherPageViewModel"/>
 	</Page.DataContext>
 	<Page.Resources>
-		<Converters:BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter"/>
+		<Converters:BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter" IsReverse="False"/>
 	</Page.Resources>
 	<Grid>
 		<Grid.RowDefinitions>
@@ -45,8 +45,8 @@
 						<RowDefinition Height="50"/>
 					</Grid.RowDefinitions>
 					<ListBox x:Name="gameInstallationListBox"
-							 Grid.Row="0" SelectedIndex="0"
-							 Background="Transparent" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+							 Grid.Row="0" SelectedIndex="0" Background="Transparent" BorderBrush="{x:Null}"
+							 ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemContainerStyle="{StaticResource List_NormalItem_Style}"
 							 DataContext="{StaticResource settingsViewModel}" ItemsSource="{Binding GameInstallationItems}">
 						<ListBox.ItemTemplate>
 							<DataTemplate>
@@ -61,16 +61,27 @@
 												<ColumnDefinition Width="*"/>
 												<ColumnDefinition Width="14"/>
 											</Grid.ColumnDefinitions>
-											<TextBlock Grid.Column="0" Foreground="{StaticResource Theme.Secondary.Text}" FontSize="16" FontWeight="Bold"
+											<TextBlock x:Name="installationName"
+													   Grid.Column="0" Foreground="{StaticResource Theme.Secondary.Text}" FontSize="16" FontWeight="Bold"
 													   Text="{Binding Name}" ToolTip="{Binding Name}"/>
-											<Image Grid.Column="1" Stretch="Uniform" Source="{StaticResource Dark_Play}" ToolTip="{StaticResource LauncherPage_Running_State_Icon_ToolTip}"
+											<Image x:Name="installationRunningStateImage"
+												   Grid.Column="1" Stretch="Uniform" Source="{StaticResource Dark_Play}" ToolTip="{StaticResource LauncherPage_Running_State_Icon_ToolTip}"
 												   Visibility="{Binding IsGameProcessExited, Converter={StaticResource booleanToVisibilityConverter}, Mode=OneWay}"/>
 										</Grid>
-										<TextBlock Foreground="{StaticResource Theme.Secondary.Text}" FontSize="10"
-												   Text="{Binding GameFileFullName}" ToolTip="{Binding GameFileFullName}"/>
+										<TextBlock x:Name="installationDirectoryTextBlock"
+												   Foreground="{StaticResource Theme.Secondary.Text}" FontSize="10"
+												   Text="{Binding GameDirectory}" ToolTip="{Binding GameDirectory}"/>
 									</StackPanel>
-									<Image Grid.Column="1" Width="30" Height="30" Stretch="Uniform" Source="{Binding DarkIcon}"/>
+									<Image x:Name="installationIconImage" Grid.Column="1" Width="30" Height="30" Stretch="Uniform" Source="{Binding DarkIcon}"/>
 								</Grid>
+								<DataTemplate.Triggers>
+									<DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}}" Value="True">
+										<Setter TargetName="installationIconImage" Property="Source" Value="{Binding LightIcon}"/>
+										<Setter TargetName="installationRunningStateImage" Property="Source" Value="{StaticResource Light_Play}"/>
+										<Setter TargetName="installationName" Property="Foreground" Value="{StaticResource Theme.Primary.Text}"/>
+										<Setter TargetName="installationDirectoryTextBlock" Property="Foreground" Value="{StaticResource Theme.Primary.Text}"/>
+									</DataTrigger>
+								</DataTemplate.Triggers>
 							</DataTemplate>
 						</ListBox.ItemTemplate>
 					</ListBox>

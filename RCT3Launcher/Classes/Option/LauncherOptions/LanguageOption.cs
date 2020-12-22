@@ -60,12 +60,12 @@ namespace RCT3Launcher.Option.LauncherOptions
 			{
 				case LanguageParameter.zh_CN:
 				{
-					dict.Source = new Uri(@"/ResourcesDictionary/Languages/zh_CN.xaml", UriKind.Relative);
+					dict.Source = new Uri(@"pack://application:,,,/ResourcesDictionary/Languages/zh_CN.xaml", UriKind.Absolute);
 					break;
 				}
 				case LanguageParameter.en_US:
 				{
-					dict.Source = new Uri(@"/ResourcesDictionary/Languages/en_US.xaml", UriKind.Relative);
+					dict.Source = new Uri(@"pack://application:,,,/ResourcesDictionary/Languages/en_US.xaml", UriKind.Absolute);
 					break;
 				}
 			}

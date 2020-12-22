@@ -12,6 +12,12 @@
 	<s:String x:Key="Text_OK">确定</s:String>
 	<s:String x:Key="Text_Apply">应用</s:String>
 	<s:String x:Key="Text_Cancel">取消</s:String>
+	<s:String x:Key="Text_Yes">是</s:String>
+	<s:String x:Key="Text_No">否</s:String>
+	<s:String x:Key="Text_Information">信息</s:String>
+	<s:String x:Key="Text_Warning">警告</s:String>
+	<s:String x:Key="Text_Error">错误</s:String>
+	<s:String x:Key="State_Error_ToolTip">出现了一些错误</s:String>
 	
 	<!--表单验证-->
 	<s:String x:Key="ValidationRule_ValueNullError">值不能为空</s:String>
@@ -27,11 +33,12 @@
 	<s:String x:Key="Launcher_Settings_MenuItem">启动器设置</s:String>
 
 	<!--LauncherPage-->
-	<s:String x:Key="LauncherPage_Game_Address_State_Right">游戏路径已设定</s:String>
-	<s:String x:Key="LauncherPage_Game_Address_State_Wrong">游戏路径未设定</s:String>
+	<s:String x:Key="LauncherPage_Game_Path_State_Right">游戏路径已设定</s:String>
+	<s:String x:Key="LauncherPage_Game_Path_State_Wrong">游戏路径未设定</s:String>
 	<s:String x:Key="LauncherPage_Start_Game_Button">开始游戏</s:String>
 	<s:String x:Key="LauncherPage_Running_State_Icon_ToolTip">正在运行的游戏实例</s:String>
-	
+	<s:String x:Key="LauncherPage_Repeat_Run_Warning_MessageBoxText">已经有一个正在运行的游戏了，要继续吗？</s:String>
+
 	<!--GuidePage-->
 	<s:String x:Key="GuidePage_Title">欢迎使用RCT3启动器</s:String>
 	<s:String x:Key="GuidePage_Language_Setting_Title">想要使用的显示语言</s:String>
@@ -42,4 +49,14 @@
 	<s:String x:Key="GuidePage_Terms_Of_Use_Description_Text">我已同意并接受</s:String>
 	<s:String x:Key="GuidePage_Terms_Of_Use_Description_Link_Text">使用条款</s:String>
 	<s:String x:Key="GuidePage_Terms_Of_Use_Description_Link">https://rf103t.club/</s:String>
+	
+	<!--SaveManagerPage-->
+	<s:String x:Key="SaveManagerPage_Multiple_Mode">多选</s:String>
+	<s:String x:Key="SaveManagerPage_Import_Saves">导入存档</s:String>
+	<s:String x:Key="SaveManagerPage_Export_Saves">导出存档</s:String>
+	<s:String x:Key="SaveManagerPage_Delete_Saves">删除存档</s:String>
+	<s:String x:Key="SaveManagerPage_Single_Select_Delete_Warning_MessageBoxText">你确定要删除这个存档吗？“{0}”将会永久失去！（真的很久！）</s:String>
+	<s:String x:Key="SaveManagerPage_Multi_Select_Delete_Warning_MessageBoxText">你确定要删除这{0}个存档吗？它们将会永久失去！（真的很久！）</s:String>
+	<s:String x:Key="SaveManagerPage_Import_FileDialog_Title">选择导入文件</s:String>
+	<s:String x:Key="SaveManagerPage_Import_FileDialog_Filter">存档文件|*.dat|存档备份文件|*.bak|导出的压缩文件|*.zip</s:String>
 </ResourceDictionary>

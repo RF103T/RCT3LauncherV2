@@ -11,12 +11,36 @@ using System.Xml;
 
 namespace RCT3Launcher.Option
 {
+	public enum OptionType
+	{
+		GameInstallation, Language
+	}
+
 	public class OptionsManager
 	{
+		private static readonly string optionsXmlFilePath = "options.xml";
+		private static readonly string optionsXmlXPathRoot = "/Options/";
+
+		/// <summary>
+		/// 获取设置管理器的单例。
+		/// </summary>
+		public static OptionsManager Instance
+		{
+			get
+			{
+				return instance;
+			}
+		}
+		public static readonly OptionsManager instance = new OptionsManager();
+
+		static OptionsManager()
+		{
+		}
+
 		/// <summary>
 		/// 指示设置是否已经初始化。
 		/// </summary>
-		public static bool IsOptionsInitialized
+		public bool IsOptionsInitialized
 		{
 			private set
 			{
@@ -28,19 +52,10 @@ namespace RCT3Launcher.Option
 				return isOptionsInitialized;
 			}
 		}
-		private static bool isOptionsInitialized;
+		private bool isOptionsInitialized;
 
-		public enum OptionType
-		{
-			GameInstallation, Language
-		}
-
-		private static readonly string optionsXmlFilePath = "options.xml";
-		private static readonly XmlDocument optionsXmlDocument;
-
-		private static readonly string optionsXmlXPathRoot = "/Options/";
-
-		public static readonly Dictionary<OptionType, IOption> optionMap = new Dictionary<OptionType, IOption>()
+		private readonly XmlDocument optionsXmlDocument;
+		private readonly Dictionary<OptionType, IOption> optionMap = new Dictionary<OptionType, IOption>()
 		{
 			{OptionType.Language,new LanguageOption(LanguageOption.LanguageParameter.zh_CN)},
 			{OptionType.GameInstallation,new GameInstallationsOption(
@@ -57,7 +72,7 @@ namespace RCT3Launcher.Option
 			}
 		};
 
-		static OptionsManager()
+		private OptionsManager()
 		{
 			optionsXmlDocument = new XmlDocument();
 			if (!File.Exists(optionsXmlFilePath))
@@ -66,7 +81,10 @@ namespace RCT3Launcher.Option
 				InitializeOptions();
 		}
 
-		public static void SaveOptionFile()
+		/// <summary>
+		/// 保存设置到文件。
+		/// </summary>
+		public void SaveOptionFile()
 		{
 			foreach (OptionType type in optionMap.Keys)
 				WriteOptionValueToFile(type);
@@ -79,7 +97,7 @@ namespace RCT3Launcher.Option
 		/// <typeparam name="TOption">设置项的类型。</typeparam>
 		/// <param name="optionType">指定的设置项。</param>
 		/// <returns>指定设置项的值。</returns>
-		public static TOption GetOptionObject<TOption>(OptionType optionType)
+		public TOption GetOptionObject<TOption>(OptionType optionType)
 		{
 			IOption option = optionMap[optionType];
 			if (option is TOption)
@@ -88,21 +106,10 @@ namespace RCT3Launcher.Option
 		}
 
 		/// <summary>
-		/// 设置指定设置项的值。
-		/// </summary>
-		/// <typeparam name="TValue">设置项的值类型。</typeparam>
-		/// <param name="optionType">指定的设置项。</param>
-		/// <param name="value">要设置的值。</param>
-		public static void SetOptionValue<TValue>(OptionType optionType, TValue value) where TValue : new()
-		{
-			(optionMap[optionType] as OptionBase<TValue>).Value = value;
-		}
-
-		/// <summary>
 		/// 将指定的设置项加入Xml文档。
 		/// </summary>
 		/// <param name="optionType">指定的设置项。</param>
-		public static void AddOptionToDocument(OptionType optionType)
+		public void AddOptionToDocument(OptionType optionType)
 		{
 			IOption option = optionMap[optionType];
 			XmlElement rootNode = optionsXmlDocument.DocumentElement;
@@ -115,7 +122,7 @@ namespace RCT3Launcher.Option
 		/// </summary>
 		/// <param name="optionType">指定的设置项。</param>
 		/// <returns>指示指定设置项是否存在。</returns>
-		public static bool ReadOptionValueFromFile(OptionType optionType)
+		public bool ReadOptionValueFromFile(OptionType optionType)
 		{
 			IOption option = optionMap[optionType];
 			XmlElement rootNode = optionsXmlDocument.DocumentElement;
@@ -132,7 +139,7 @@ namespace RCT3Launcher.Option
 		/// 把指定设置项的值写入Xml文档。
 		/// </summary>
 		/// <param name="optionType">指定的设置项。</param>
-		public static void WriteOptionValueToFile(OptionType optionType)
+		public void WriteOptionValueToFile(OptionType optionType)
 		{
 			IOption option = optionMap[optionType];
 			XmlElement rootNode = optionsXmlDocument.DocumentElement;
@@ -140,7 +147,7 @@ namespace RCT3Launcher.Option
 			option.UpdateOptionValueInXmlElement(ref optionNode);
 		}
 
-		private static void InitializeOptionsXmlFile()
+		private void InitializeOptionsXmlFile()
 		{
 			XmlElement rootNode = optionsXmlDocument.CreateElement("Options");
 			optionsXmlDocument.AppendChild(rootNode);
@@ -154,7 +161,7 @@ namespace RCT3Launcher.Option
 			optionsXmlDocument.Save(optionsXmlFilePath);
 		}
 
-		private static void InitializeOptions()
+		private void InitializeOptions()
 		{
 			IsOptionsInitialized = true;
 

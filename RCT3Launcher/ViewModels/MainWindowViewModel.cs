@@ -1,11 +1,14 @@
-﻿using RCT3Launcher.Models;
+﻿using RCT3Launcher.EventSystem;
+using RCT3Launcher.Models;
 using RCT3Launcher.Option;
 using RCT3Launcher.Option.EventArgs;
 using RCT3Launcher.Option.LauncherOptions;
 using RCT3Launcher.ViewModels.BaseClass;
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace RCT3Launcher.ViewModels
 {
@@ -13,6 +16,9 @@ namespace RCT3Launcher.ViewModels
 	{
 		public MainWindowViewModel()
 		{
+			OptionsManager.Instance.GetOptionObject<LanguageOption>(OptionType.Language).ValueChanged += OnLanguageChanged;
+			EventCenter.AddListener<string>(EventType.PageNavigate, OnPageNavigate);
+
 			MainMenuItems = new ObservableCollection<MainMenuItem>
 			{
 				new MainMenuItem("Launcher_Page_Icon","Launcher_MenuItem")
@@ -20,7 +26,7 @@ namespace RCT3Launcher.ViewModels
 					NavigationPage = "Pages/LauncherPage.xaml"
 				},
 				new MainMenuItem("Mod_Manager_Page_Icon","Mod_Manager_MenuItem")
-				{   
+				{
 					NavigationPage = "Pages/ModManagerPage.xaml"
 				},
 				new MainMenuItem("Save_Manager_Page_Icon","Save_Manager_MenuItem")
@@ -41,12 +47,10 @@ namespace RCT3Launcher.ViewModels
 				}
 			};
 
-			//if (!OptionsManager.IsOptionsInitialized)
-				NavigationPageSource = "Pages/GuidePage.xaml";
+			//if (!OptionsManager.Instance.IsOptionsInitialized)
+			NavigationPageSource = "Pages/GuidePage.xaml";
 			//else
 			//	NavigationPageSource = MainMenuItems[0].NavigationPage;
-
-			OptionsManager.GetOptionObject<LanguageOption>(OptionsManager.OptionType.Language).ValueChanged += OnLanguageChanged;
 		}
 
 		#region 菜单
@@ -104,12 +108,6 @@ namespace RCT3Launcher.ViewModels
 			}
 		}
 
-		public void OnLanguageChanged(object sender, ValueChangedEventArgs<LanguageOption.LanguageParameter> e)
-		{
-			foreach (MainMenuItem item in MainMenuItems)
-				item.UpdateResource();
-		}
-
 		#endregion
 
 		#region 页
@@ -132,43 +130,62 @@ namespace RCT3Launcher.ViewModels
 		#endregion
 
 		#region 按钮
-		private CommandBase<RoutedEventArgs> _closeWindowButtonClickCommand;
-		public CommandBase<RoutedEventArgs> CloseWindowButtonClickCommand
+		private CommandBase closeWindowButtonClickCommand;
+		public CommandBase CloseWindowButtonClickCommand
 		{
 			get
 			{
-				if (_closeWindowButtonClickCommand == null)
+				if (closeWindowButtonClickCommand == null)
 				{
-					_closeWindowButtonClickCommand = new CommandBase<RoutedEventArgs>(
-						new Action<RoutedEventArgs>(
-							args =>
+					closeWindowButtonClickCommand = new CommandBase(
+						new Action(() =>
 							{
-								OptionsManager.SaveOptionFile();
+								OptionsManager.Instance.SaveOptionFile();
 								Application.Current.Shutdown();
 							}
 							)
 						);
 				}
-				return _closeWindowButtonClickCommand;
+				return closeWindowButtonClickCommand;
 			}
 		}
 
-		private CommandBase<RoutedEventArgs> _minimizeWindowButtonClickCommand;
-		public CommandBase<RoutedEventArgs> MinimizeWindowButtonClickCommand
+		private CommandBase minimizeWindowButtonClickCommand;
+		public CommandBase MinimizeWindowButtonClickCommand
 		{
 			get
 			{
-				if (_minimizeWindowButtonClickCommand == null)
+				if (minimizeWindowButtonClickCommand == null)
 				{
-					_minimizeWindowButtonClickCommand = new CommandBase<RoutedEventArgs>(
-						new Action<RoutedEventArgs>(
-							args => App.Current.MainWindow.WindowState = WindowState.Minimized
+					minimizeWindowButtonClickCommand = new CommandBase(
+						new Action(
+							() => Application.Current.MainWindow.WindowState = WindowState.Minimized
 							)
 						);
 				}
-				return _minimizeWindowButtonClickCommand;
+				return minimizeWindowButtonClickCommand;
 			}
 		}
 		#endregion
+
+		public void OnLanguageChanged(object sender, ValueChangedEventArgs<LanguageOption.LanguageParameter> e)
+		{
+			foreach (MainMenuItem item in MainMenuItems)
+				item.UpdateResource();
+		}
+
+		private void OnPageNavigate(string pageName)
+		{
+			string navigationUrl = string.Format("Pages/{0}.xaml", pageName);
+			foreach (MainMenuItem item in MainMenuItems)
+			{
+				if (item.NavigationPage == navigationUrl)
+				{
+					SelectedValue = item;
+					return;
+				}
+			}
+			NavigationPageSource = navigationUrl;
+		}
 	}
 }

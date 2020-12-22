@@ -162,6 +162,11 @@ namespace RCT3Launcher.Controls
 			Items.CollectionChanged += OnItemsContentChanged;
 		}
 
+		~SwitchComboBox()
+		{
+			Items.CollectionChanged -= OnItemsContentChanged;
+		}
+
 		public void ListBoxItemMouseEnter(object sender, MouseEventArgs e)
 		{
 			ListBoxItem item = sender as ListBoxItem;

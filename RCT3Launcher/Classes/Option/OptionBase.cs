@@ -56,7 +56,6 @@ namespace RCT3Launcher.Option
 			add
 			{
 				valueChanged += value;
-				Notify();
 			}
 			remove
 			{
@@ -72,7 +71,7 @@ namespace RCT3Launcher.Option
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="name">设置项的名称。</param>
+		/// <param name="optionName">设置项的名称。</param>
 		/// <param name="defaultValue">设置项的默认值。</param>
 		public OptionBase(string optionName, TValue defaultValue)
 		{

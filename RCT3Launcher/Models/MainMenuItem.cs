@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using System.Windows;
 using System.Windows.Media;
 
 namespace RCT3Launcher.Models
@@ -92,8 +93,8 @@ namespace RCT3Launcher.Models
 		/// <returns>如果更新成功，返回true；否则返回false。</returns>
 		public bool UpdateResource()
 		{
-			DrawingImage tempIcon = App.Current.TryFindResource(iconResourceKey) as DrawingImage;
-			string tempName = App.Current.TryFindResource(nameResourceKey) as string;
+			DrawingImage tempIcon = Application.Current.TryFindResource(iconResourceKey) as DrawingImage;
+			string tempName = Application.Current.TryFindResource(nameResourceKey) as string;
 			if (tempIcon == null || tempName == null)
 				return false;
 			Icon = tempIcon;

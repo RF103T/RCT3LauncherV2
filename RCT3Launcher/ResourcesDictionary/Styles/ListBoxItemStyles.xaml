@@ -191,4 +191,52 @@
 			</Setter.Value>
 		</Setter>
 	</Style>
+	<Style x:Key="List_ImageItem2_Style" TargetType="{x:Type ListBoxItem}">
+		<Setter Property="Margin" Value="1"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="ListBoxItem">
+					<Border x:Name="Bd" Background="Transparent" BorderThickness="0" CornerRadius="8" Padding="4" SnapsToDevicePixels="true">
+						<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+					</Border>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsSelected" Value="True">
+							<Setter TargetName="Bd" Property="Background" Value="{StaticResource Theme.Primary.Normal.LinearGradientBrush}"/>
+						</Trigger>
+						<MultiTrigger>
+							<MultiTrigger.Conditions>
+								<Condition Property="IsMouseOver" Value="True"/>
+								<Condition Property="IsSelected" Value="False"/>
+							</MultiTrigger.Conditions>
+							<Setter TargetName="Bd" Property="Background" Value="{StaticResource Unenable}"/>
+						</MultiTrigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	<Style x:Key="List_NormalItem_Style" TargetType="{x:Type ListBoxItem}">
+		<Setter Property="Margin" Value="2"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="ListBoxItem">
+					<Border x:Name="Bd" Background="Transparent" BorderThickness="0" CornerRadius="8" Padding="0,4,7,4" SnapsToDevicePixels="true">
+						<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+					</Border>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsSelected" Value="True">
+							<Setter TargetName="Bd" Property="Background" Value="{StaticResource Theme.Secondary.Normal.SolidColorBrush}"/>
+						</Trigger>
+						<MultiTrigger>
+							<MultiTrigger.Conditions>
+								<Condition Property="IsMouseOver" Value="True"/>
+								<Condition Property="IsSelected" Value="False"/>
+							</MultiTrigger.Conditions>
+							<Setter TargetName="Bd" Property="Background" Value="{StaticResource Theme.Primary.Dark.Background.SolidColorBrush}"/>
+						</MultiTrigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
 </ResourceDictionary>

@@ -1,5 +1,6 @@
 ﻿using RCT3Launcher.Models;
 using RCT3Launcher.ViewModels.BaseClass;
+using RCT3Launcher.Views.MessageBoxPages;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -23,9 +24,17 @@ namespace RCT3Launcher.ViewModels
 							installation =>
 							{
 								if (GlobalStateHelper.HasGameRunnings)
-									if (MessageBox.Show("存在正在运行的游戏实例，确定要继续运行？", "警告", MessageBoxButton.YesNo) == MessageBoxResult.No)
-										return;
-								installation.GameProcess = Process.Start(installation.GameFileFullName);
+								{
+									MessageBox.Show(new Action<MessageBoxResult>(res =>
+									{
+										if (res == MessageBoxResult.Yes)
+											installation.GameProcess = Process.Start(installation.GameFileFullName);
+									}),
+									new TextMessageBoxPage(Application.Current.Resources["LauncherPage_Repeat_Run_Warning_MessageBoxText"].ToString()),
+									Application.Current.Resources["Text_Warning"].ToString(), MessageBoxButton.YesNo);
+								}
+								else
+									installation.GameProcess = Process.Start(installation.GameFileFullName);
 							}
 							)
 						);

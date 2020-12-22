@@ -23,7 +23,7 @@ namespace RCT3Launcher.ViewModels
 						new Action<SwitchComboBox>(
 							self =>
 							{
-								LanguageOption setting = OptionsManager.GetOptionObject<LanguageOption>(OptionsManager.OptionType.Language);
+								LanguageOption setting = OptionsManager.Instance.GetOptionObject<LanguageOption>(OptionType.Language);
 								switch (self.SelectedIndex)
 								{
 									case 0:
