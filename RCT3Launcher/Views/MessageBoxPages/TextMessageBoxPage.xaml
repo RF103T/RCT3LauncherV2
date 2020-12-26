@@ -5,10 +5,9 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:RCT3Launcher.Views.MessageBoxPages"
       mc:Ignorable="d" 
-      d:DesignHeight="260" d:DesignWidth="420"
-      Title="TextMessageBoxPage">
+      d:DesignHeight="260" d:DesignWidth="420">
 	<Grid>
 		<TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="" Foreground="{StaticResource Theme.Primary.Text}"
-			       FontSize="13" FontWeight="Bold"/>
+			       FontSize="13" FontWeight="Bold" MaxWidth="240"/>
 	</Grid>
 </Page>

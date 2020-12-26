@@ -1,4 +1,4 @@
-﻿<Page x:Class="RCT3Launcher.Views.Pages.LauncherSettingsPage"
+﻿<Page x:Class="RCT3Launcher.Views.Pages.LauncherPreferencePage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -13,26 +13,19 @@
       xmlns:Behaviors="http://schemas.microsoft.com/xaml/behaviors"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="LauncherSettingsPage"
-	  DataContext="{StaticResource launcherSettingsPageViewModel}"
+	  DataContext="{StaticResource launcherPreferencePageViewModel}"
 	  Background="{StaticResource Theme.Secondary.Normal.SolidColorBrush}">
 	<Page.Resources>
 		<Converters:DoubleNormalizationConverter x:Key="doubleNormalizationConverter"/>
+		<Converters:BooleanToVisibilityMultiValueConverter x:Key="booleanToVisibilityMultiValueConverter"/>
 	</Page.Resources>
-	<Grid>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="0.2*"/>
-			<RowDefinition Height="0.6*"/>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="2*"/>
-			<RowDefinition Height="0.75*"/>
-		</Grid.RowDefinitions>
-		<StackPanel Grid.Row="2" Margin="50,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
-			<TextBlock Text="{DynamicResource GuidePage_Language_Setting_Title}" Foreground="{StaticResource Theme.Primary.Text}" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+	<ItemsControl Margin="30,0">
+		<StackPanel Margin="0,30,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
+			<TextBlock Text="{DynamicResource LauncherPreferencePage_Language_Preference_Title}" Foreground="{StaticResource Theme.Primary.Text}" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 			<RCT3LauncherControls:SwitchComboBox x:Name="switchComboBox" Height="35" Width="200" Margin="0,10,0,10"
 												 FontSize="14" FontWeight="Bold" Foreground="{StaticResource Theme.Primary.Text}" NegativeForeground="{StaticResource Theme.Secondary.Text}" HorizontalAlignment="Left"
 												 SelectedIndex="{Binding LanguageSetting, Mode=OneWay, Source={StaticResource settingsViewModel}}"
-												 Command="{Binding LanguageSwitchComboBoxCommand, Mode=OneWay}"
+												 Command="{Binding LanguageSwitchComboBoxCommand, Mode=OneWay,Source={StaticResource launcherPreferencePageViewModel}}"
 												 CommandParameter="{Binding Mode=OneWay, RelativeSource={RelativeSource Self}}">
 				<RCT3LauncherControls:SwitchComboBox.Items>
 					<RCT3LauncherSwitchComboBoxItem:SwitchComboBoxItemModel Content="简体中文"/>
@@ -40,15 +33,15 @@
 				</RCT3LauncherControls:SwitchComboBox.Items>
 			</RCT3LauncherControls:SwitchComboBox>
 		</StackPanel>
-		<!--<Grid Grid.Row="3" Margin="50,0,50,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+		<Grid Margin="0,10,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="Auto"/>
 				<RowDefinition Height="*"/>
 				<RowDefinition Height="Auto"/>
 			</Grid.RowDefinitions>
-			<TextBlock Grid.Row="0" Text="{DynamicResource GuidePage_Game_Installations_Setting_Title}" Foreground="{StaticResource Theme.Primary.Text}" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+			<TextBlock Grid.Row="0" Text="{DynamicResource LauncherPreferencePage_Game_Installations_Preference_Title}" Foreground="{StaticResource Theme.Primary.Text}" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 			<ItemsControl Grid.Row="1" Margin="0,10,0,10" Style="{StaticResource Scroll_ItemsControl_Style}"
-						  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Validation.Error="SettingsValidationError"
+						  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Validation.Error="PreferencesValidationError"
 						  DataContext="{StaticResource settingsViewModel}" ItemsSource="{Binding GameInstallationItems}">
 				<ItemsControl.ItemTemplate>
 					<DataTemplate>
@@ -71,6 +64,7 @@
 									<Grid.ColumnDefinitions>
 										<ColumnDefinition Width="Auto"/>
 										<ColumnDefinition Width="*"/>
+										<ColumnDefinition Width="Auto"/>
 										<ColumnDefinition Width="40"/>
 										<ColumnDefinition Width="30"/>
 									</Grid.ColumnDefinitions>
@@ -86,10 +80,22 @@
 									<TextBlock Grid.Column="1" Margin="8,5"
 											   Foreground="{StaticResource Theme.Secondary.Text}" FontSize="14" FontWeight="Bold"
 										       HorizontalAlignment="Left" VerticalAlignment="Center"
-										       Text="{Binding FullNamePath}"/>
-									<Image Grid.Column="2" Margin="9,0" VerticalAlignment="Stretch" Stretch="Uniform"
-										   Source="{Binding ElementName=listBox,Path=SelectedItem.Content.Source}"/>
-									<ToggleButton Grid.Column="3" Background="{StaticResource Theme.Primary.Dark.Background.SolidColorBrush}"
+										       Text="{Binding GameDirectory}"/>
+									<Image Grid.Column="2" Width="20" Margin="4,0" VerticalAlignment="Stretch" Stretch="Uniform"
+										   Source="{StaticResource State_Error}" ToolTip="{DynamicResource State_Error_ToolTip}">
+										<Image.Visibility>
+											<MultiBinding Converter="{StaticResource booleanToVisibilityMultiValueConverter}" Mode="OneWay">
+												<MultiBinding.Bindings>
+													<Binding Path="(Validation.HasError)" ElementName="gamePathTextBox"/>
+													<Binding Path="(Validation.HasError)" ElementName="gameInstallationNameTextBox"/>
+												</MultiBinding.Bindings>
+											</MultiBinding>
+										</Image.Visibility>
+									</Image>
+									<Image Grid.Column="3" Margin="9,0" VerticalAlignment="Stretch" Stretch="Uniform"
+										   Source="{Binding DarkIcon}"/>
+									<ToggleButton Grid.Column="4" Background="{StaticResource Theme.Primary.Dark.Background.SolidColorBrush}"
+												  HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
 												  Style="{StaticResource Arrow_ToggleButton_Style}">
 										<ToggleButton.Triggers>
 											<EventTrigger RoutedEvent="ToggleButton.Checked">
@@ -125,7 +131,7 @@
 									<Grid.ColumnDefinitions>
 										<ColumnDefinition Width="Auto"/>
 										<ColumnDefinition Width="*"/>
-										<ColumnDefinition Width="150"/>
+										<ColumnDefinition Width="160"/>
 									</Grid.ColumnDefinitions>
 									<Grid.RowDefinitions>
 										<RowDefinition Height="*"/>
@@ -134,7 +140,7 @@
 									<TextBlock Grid.Row="0" Grid.Column="0" Margin="5,0"
 											   VerticalAlignment="Center" HorizontalAlignment="Right"
 											   Foreground="{StaticResource Theme.Secondary.Text}" FontSize="14" FontWeight="Bold"
-											   Text="{DynamicResource GuidePage_Game_Installations_Name}"/>
+											   Text="{DynamicResource LauncherPreferencePage_Game_Installations_Name}"/>
 									<Grid Grid.Row="0" Grid.Column="1" Margin="5,10"
 										  MinWidth="300">
 										<Rectangle Fill="{StaticResource Theme.Primary.Light.Background.SolidColorBrush}"
@@ -144,16 +150,25 @@
 												<DropShadowEffect Direction="290" ShadowDepth="2" BlurRadius="6" Opacity="0.16" Color="Black" RenderingBias="Performance"/>
 											</Rectangle.Effect>
 										</Rectangle>
-										<TextBox Margin="3" Background="Transparent" BorderBrush="{x:Null}"
+										<TextBox x:Name="gameInstallationNameTextBox" Margin="3" Background="Transparent" BorderBrush="{x:Null}"
 												 VerticalAlignment="Center" HorizontalAlignment="Stretch"
 												 VerticalContentAlignment="Center" HorizontalContentAlignment="Left"
 												 Foreground="{StaticResource Theme.Secondary.Text}" FontSize="14" FontWeight="Bold"
-												 Text="{Binding Name,Mode=TwoWay}" Style="{StaticResource Single_Line_TextBox_Style}"/>
+												 Style="{StaticResource Single_Line_TextBox_Style}">
+											<TextBox.Text>
+												<Binding Path="Name" Mode="TwoWay" NotifyOnValidationError="True"
+														 UpdateSourceTrigger="PropertyChanged">
+													<Binding.ValidationRules>
+														<ValidationRules:ValueNotNullRule ValidatesOnTargetUpdated="True"/>
+													</Binding.ValidationRules>
+												</Binding>
+											</TextBox.Text>
+										</TextBox>
 									</Grid>
 									<TextBlock Grid.Row="1" Grid.Column="0" Margin="5,0"
 											   VerticalAlignment="Center" HorizontalAlignment="Right"
 											   Foreground="{StaticResource Theme.Secondary.Text}" FontSize="14" FontWeight="Bold"
-											   Text="{DynamicResource GuidePage_Game_Installations_Path}"/>
+											   Text="{DynamicResource LauncherPreferencePage_Game_Installations_Path}"/>
 									<Grid Grid.Row="1" Grid.Column="1" Margin="5,10"
 										  MinWidth="300">
 										<Grid.ColumnDefinitions>
@@ -168,13 +183,13 @@
 												<DropShadowEffect Direction="290" ShadowDepth="2" BlurRadius="6" Opacity="0.16" Color="Black" RenderingBias="Performance"/>
 											</Rectangle.Effect>
 										</Rectangle>
-										<TextBox Grid.Column="0" Margin="3" Background="Transparent" BorderBrush="{x:Null}"
+										<TextBox x:Name="gamePathTextBox" Grid.Column="0" Margin="3" Background="Transparent" BorderBrush="{x:Null}"
 												 VerticalAlignment="Center" HorizontalAlignment="Stretch"
 												 VerticalContentAlignment="Center" HorizontalContentAlignment="Left"
 												 Foreground="{StaticResource Theme.Secondary.Text}" FontSize="14" FontWeight="Bold"
 												 Style="{StaticResource Single_Line_TextBox_Style}">
 											<TextBox.Text>
-												<Binding Path="FullNamePath" Mode="TwoWay" NotifyOnValidationError="True"
+												<Binding Path="GameDirectory" Mode="TwoWay" NotifyOnValidationError="True"
 														 UpdateSourceTrigger="PropertyChanged">
 													<Binding.ValidationRules>
 														<ValidationRules:FilePathValidationRule ValidatesOnTargetUpdated="True"/>
@@ -188,7 +203,8 @@
 												Style="{StaticResource Transparent_Button_Style}">
 											<Behaviors:Interaction.Triggers>
 												<Behaviors:EventTrigger EventName="Click">
-													<Behaviors:InvokeCommandAction Command="{Binding ChooseGamePathCommand, Source={StaticResource settingsViewModel}}" CommandParameter="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}"/>
+													<Behaviors:InvokeCommandAction Command="{Binding ChooseGamePathCommand, Source={StaticResource settingsViewModel}}"
+																				   CommandParameter="{Binding ElementName=gamePathTextBox}"/>
 												</Behaviors:EventTrigger>
 											</Behaviors:Interaction.Triggers>
 											<Image Margin="2,0" Source="{StaticResource Dark_Folder_Close}"/>
@@ -196,14 +212,14 @@
 									</Grid>
 									<ListBox x:Name="listBox"
 											 Grid.RowSpan="2" Grid.Column="2" Margin="5"
-											 SelectedIndex="{Binding IconIndex,Mode=TwoWay}"
-											 Style="{StaticResource Grid_ListBox_Style}">
-										<ListBoxItem Style="{StaticResource List_ImageItem_Style}">
-											<Image Width="30" Height="30" Stretch="Uniform" Source="{StaticResource Dark_Steam_Logo}" VerticalAlignment="Stretch"/>
-										</ListBoxItem>
-										<ListBoxItem Style="{StaticResource List_ImageItem_Style}">
-											<Image Width="30" Height="30" Stretch="Uniform" Source="{StaticResource Dark_Epic_Logo}" VerticalAlignment="Stretch"/>
-										</ListBoxItem>
+											 SelectedIndex="{Binding IconIndex,Mode=TwoWay}" Style="{StaticResource Grid_ListBox_Style}"
+											 ItemContainerStyle="{StaticResource List_ImageItem_Style}"
+											 ItemsSource="{Binding GameInstallationItemIcons, Source={StaticResource settingsViewModel}}">
+										<ListBox.ItemTemplate>
+											<DataTemplate>
+												<Image Width="30" Height="30" Stretch="Uniform" Source="{Binding}" VerticalAlignment="Stretch"/>
+											</DataTemplate>
+										</ListBox.ItemTemplate>
 									</ListBox>
 								</Grid>
 							</Border>
@@ -216,7 +232,8 @@
 								</Button.RenderTransform>
 								<Behaviors:Interaction.Triggers>
 									<Behaviors:EventTrigger EventName="Click">
-										<Behaviors:InvokeCommandAction Command="{Binding DeleteGamePathCommand, Source={StaticResource settingsViewModel}}" CommandParameter="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}"/>
+										<Behaviors:InvokeCommandAction Command="{Binding DeleteGamePathCommand, Source={StaticResource settingsViewModel}}"
+																	   CommandParameter="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}"/>
 									</Behaviors:EventTrigger>
 								</Behaviors:Interaction.Triggers>
 								<Image Width="20" Height="20" Margin="3,0,3,0" Source="{StaticResource Dark_Ashbin}" Stretch="Uniform" HorizontalAlignment="Center"/>
@@ -247,10 +264,18 @@
 				</Behaviors:Interaction.Triggers>
 				<StackPanel Margin="2" Orientation="Horizontal" VerticalAlignment="Center">
 					<Image Width="15" Height="15" Source="{StaticResource Light_Add}"/>
-					<ContentPresenter Margin="6,0,0,0" Content="{DynamicResource GuidePage_Add_New_Path_Button}"/>
+					<ContentPresenter Margin="6,0,0,0" Content="{DynamicResource LauncherPreferencePage_Add_New_Path_Button}"/>
 				</StackPanel>
 			</Button>
-		</Grid>-->
-	</Grid>
+		</Grid>
+		<Grid Margin="0,10,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="Auto"/>
+			</Grid.RowDefinitions>
+			<TextBlock Grid.Row="0" Text="{DynamicResource LauncherPreferencePage_About_Title}" Foreground="{StaticResource Theme.Primary.Text}" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+		</Grid>
+	</ItemsControl>
 </Page>
  

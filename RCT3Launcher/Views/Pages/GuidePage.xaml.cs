@@ -21,7 +21,7 @@ namespace RCT3Launcher.Views.Pages
 			applyButtonIsEnableBinding = applyButton.GetBindingExpression(Button.IsEnabledProperty);
 		}
 
-		private void SettingsValidationError(object sender, ValidationErrorEventArgs e)
+		private void PreferencesValidationError(object sender, ValidationErrorEventArgs e)
 		{
 			if (e.Action == ValidationErrorEventAction.Added)
 				errorSet.Add((e.OriginalSource as FrameworkElement).DataContext);

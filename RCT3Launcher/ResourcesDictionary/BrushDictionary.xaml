@@ -17,7 +17,9 @@
 	<SolidColorBrush x:Key="Theme.Primary.Dark.Background.SolidColorBrush.Transparent" Color="{StaticResource Theme.Primary.Dark.Background.Color.Transparent}"/>
 	<SolidColorBrush x:Key="Theme.Primary.Text" Color="{StaticResource Theme.Primary.Text.Color}"/>
 	<SolidColorBrush x:Key="Theme.Secondary.Normal.SolidColorBrush" Color="{StaticResource Theme.Secondary.Normal.Color}"/>
+	<SolidColorBrush x:Key="Theme.Secondary.Normal.SolidColorBrush.Transparent" Color="{StaticResource Theme.Secondary.Normal.Color.Transparent}"/>
 	<SolidColorBrush x:Key="Theme.Secondary.Dark.SolidColorBrush" Color="{StaticResource Theme.Secondary.Dark.Color}"/>
+	<SolidColorBrush x:Key="Theme.Secondary.Dark.SolidColorBrush.Transparent" Color="{StaticResource Theme.Secondary.Dark.Color.Transparent}"/>
 	<SolidColorBrush x:Key="Theme.Secondary.Text" Color="{StaticResource Theme.Secondary.Text.Color}"/>
 
 	<!--通用笔刷-->

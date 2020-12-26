@@ -16,9 +16,9 @@ namespace RCT3Launcher.Views.Pages
 	/// <summary>
 	/// GameSettingsPage.xaml 的交互逻辑
 	/// </summary>
-	public partial class GameSettingsPage : Page
+	public partial class GamePreferencePage : Page
 	{
-		public GameSettingsPage()
+		public GamePreferencePage()
 		{
 			InitializeComponent();
 		}

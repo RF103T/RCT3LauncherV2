@@ -137,10 +137,9 @@
 						</Grid.ColumnDefinitions>
 						<TextBlock x:Name="messageBoxTitle" Grid.Column="0" Margin="10,0,0,0" Text="" Foreground="{StaticResource Theme.Primary.Text}"
 								   FontSize="15" FontWeight="Bold" VerticalAlignment="Center"/>
-						<Button x:Name="messageBoxCloseButton" Grid.Column="1" Height="29"
-								Style="{StaticResource Window_Title_Button_Style}" Tag="OK" Click="MessageBoxButton_Click"
-								Background="#A0999999" Content="✕" ControlExtensions:ButtonExtensions.CornerRadius="0,10,0,0">
-						</Button>
+						<Button x:Name="messageBoxCloseButton" Grid.Column="1"
+								Style="{StaticResource Window_Title_Button_Style}" Tag="Cancel" Click="MessageBoxButton_Click"
+								Background="#A0999999" Content="✕" ControlExtensions:ButtonExtensions.CornerRadius="00,10,00,00"/>
 					</Grid>
 					<Frame x:Name="messageBoxContent" NavigationUIVisibility="Hidden" Focusable="False"
 						   Grid.Row="1" Margin="20,10" Source=""/>

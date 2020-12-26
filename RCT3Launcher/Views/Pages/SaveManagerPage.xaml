@@ -22,7 +22,7 @@
 	<Grid Margin="20,0,20,0">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="40"/>
-			<RowDefinition Height="35"/>
+			<RowDefinition Height="40"/>
 			<RowDefinition Height="*"/>
 			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
@@ -45,8 +45,8 @@
 		</Grid>
 		<ListBox x:Name="listBox"
 				 Grid.Row="2" Margin="0,10,0,0"
-				 SelectionMode="Single" Tag="List"
-				 ItemsSource="{Binding GameSaves, Mode=TwoWay}"
+				 SelectionMode="Single" Tag="List" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+				 ItemsSource="{Binding GameSaves, Mode=TwoWay}" Validation.Error="SaveNameValidationError"
 				 Style="{StaticResource List_ListBox_Style}">
 			<ListBox.ItemContainerStyleSelector>
 				<StyleSelector:ListItemStyleSelector EvenItemStyle="{StaticResource List_EvenItem_Style}" OddItemStyle="{StaticResource List_OddItem_Style}"/>
@@ -64,6 +64,12 @@
 					Style="{StaticResource No_Animation_RadiusButton_Style}"
 					IsEnabled="{Binding SelectedIndex, Converter={StaticResource listBoxIsSelectedItemConverter}, ElementName=listBox}"
 					Visibility="{Binding Path=IsChecked,ElementName=multipleModeCheckBox,Converter={StaticResource booleanToVisibilityConverterReverse}}">
+				<Behaviors:Interaction.Triggers>
+					<Behaviors:EventTrigger EventName="Click">
+						<Behaviors:InvokeCommandAction Command="{Binding ExportCommand}"
+													   CommandParameter="{Binding SelectedItems, ElementName=listBox}"/>
+					</Behaviors:EventTrigger>
+				</Behaviors:Interaction.Triggers>
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
 					<Image Margin="5,10" Source="{StaticResource Light_Export}"/>
 					<Label Content="{DynamicResource SaveManagerPage_Export_Saves}" Foreground="{StaticResource Theme.Primary.Text}" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -73,6 +79,11 @@
 					Background="{StaticResource Theme.Primary.Normal.LinearGradientBrush}"
 					Style="{StaticResource No_Animation_RadiusButton_Style}"
 					Visibility="{Binding Path=IsChecked,ElementName=multipleModeCheckBox,Converter={StaticResource booleanToVisibilityConverter}}">
+				<Behaviors:Interaction.Triggers>
+					<Behaviors:EventTrigger EventName="Click">
+						<Behaviors:InvokeCommandAction Command="{Binding ImportCommand}"/>
+					</Behaviors:EventTrigger>
+				</Behaviors:Interaction.Triggers>
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
 					<Image Margin="5,10" Source="{StaticResource Light_Import}"/>
 					<Label Content="{DynamicResource SaveManagerPage_Import_Saves}" Foreground="{StaticResource Theme.Primary.Text}" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>

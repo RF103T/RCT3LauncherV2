@@ -13,6 +13,20 @@ namespace RCT3Launcher.ViewModels
 {
 	class LauncherPageViewModel : ViewModelBase
 	{
+		private int gameInstallationSelectedIndex;
+		public int GameInstallationSelectedIndex
+		{
+			get
+			{
+				return gameInstallationSelectedIndex;
+			}
+			set
+			{
+				gameInstallationSelectedIndex = value < 0 ? 0 : value;
+				RaisePropertyChanged(nameof(GameInstallationSelectedIndex));
+			}
+		}
+
 		public CommandBase<GameInstallation> LaunchGameCommand
 		{
 			get
@@ -20,23 +34,21 @@ namespace RCT3Launcher.ViewModels
 				if (launchGameCommand == null)
 				{
 					launchGameCommand = new CommandBase<GameInstallation>(
-						new Action<GameInstallation>(
 							installation =>
 							{
 								if (GlobalStateHelper.HasGameRunnings)
 								{
-									MessageBox.Show(new Action<MessageBoxResult>(res =>
+									MessageBox.Show(res =>
 									{
 										if (res == MessageBoxResult.Yes)
 											installation.GameProcess = Process.Start(installation.GameFileFullName);
-									}),
+									},
 									new TextMessageBoxPage(Application.Current.Resources["LauncherPage_Repeat_Run_Warning_MessageBoxText"].ToString()),
 									Application.Current.Resources["Text_Warning"].ToString(), MessageBoxButton.YesNo);
 								}
 								else
 									installation.GameProcess = Process.Start(installation.GameFileFullName);
 							}
-							)
 						);
 				}
 				return launchGameCommand;

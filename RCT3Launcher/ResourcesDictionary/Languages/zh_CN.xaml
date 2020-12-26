@@ -14,10 +14,14 @@
 	<s:String x:Key="Text_Cancel">取消</s:String>
 	<s:String x:Key="Text_Yes">是</s:String>
 	<s:String x:Key="Text_No">否</s:String>
-	<s:String x:Key="Text_Information">信息</s:String>
+	<s:String x:Key="Text_Information">提示</s:String>
 	<s:String x:Key="Text_Warning">警告</s:String>
 	<s:String x:Key="Text_Error">错误</s:String>
 	<s:String x:Key="State_Error_ToolTip">出现了一些错误</s:String>
+	
+	<s:String x:Key="SaveType_Park_FormattedText">乐园</s:String>
+	<s:String x:Key="SaveType_Scenario_FormattedText">剧本</s:String>
+	<s:String x:Key="SaveType_Start_New_Scenario_FormattedText">开始新剧本</s:String>
 	
 	<!--表单验证-->
 	<s:String x:Key="ValidationRule_ValueNullError">值不能为空</s:String>
@@ -29,8 +33,8 @@
 	<s:String x:Key="Mod_Manager_MenuItem">扩充管理</s:String>
 	<s:String x:Key="Save_Manager_MenuItem">存档管理</s:String>
 	<s:String x:Key="Music_Manager_MenuItem">音乐管理</s:String>
-	<s:String x:Key="Game_Settings_MenuItem">游戏设置</s:String>
-	<s:String x:Key="Launcher_Settings_MenuItem">启动器设置</s:String>
+	<s:String x:Key="Game_Preference_MenuItem">游戏设置</s:String>
+	<s:String x:Key="Launcher_Preference_MenuItem">启动器设置</s:String>
 
 	<!--LauncherPage-->
 	<s:String x:Key="LauncherPage_Game_Path_State_Right">游戏路径已设定</s:String>
@@ -41,8 +45,8 @@
 
 	<!--GuidePage-->
 	<s:String x:Key="GuidePage_Title">欢迎使用RCT3启动器</s:String>
-	<s:String x:Key="GuidePage_Language_Setting_Title">想要使用的显示语言</s:String>
-	<s:String x:Key="GuidePage_Game_Installations_Setting_Title">游戏配置</s:String>
+	<s:String x:Key="GuidePage_Language_Preference_Title">想要使用的语言</s:String>
+	<s:String x:Key="GuidePage_Game_Installations_Preference_Title">游戏配置</s:String>
 	<s:String x:Key="GuidePage_Game_Installations_Name">名称</s:String>
 	<s:String x:Key="GuidePage_Game_Installations_Path">路径</s:String>
 	<s:String x:Key="GuidePage_Add_New_Path_Button">添加新的配置</s:String>
@@ -55,8 +59,19 @@
 	<s:String x:Key="SaveManagerPage_Import_Saves">导入存档</s:String>
 	<s:String x:Key="SaveManagerPage_Export_Saves">导出存档</s:String>
 	<s:String x:Key="SaveManagerPage_Delete_Saves">删除存档</s:String>
-	<s:String x:Key="SaveManagerPage_Single_Select_Delete_Warning_MessageBoxText">你确定要删除这个存档吗？“{0}”将会永久失去！（真的很久！）</s:String>
-	<s:String x:Key="SaveManagerPage_Multi_Select_Delete_Warning_MessageBoxText">你确定要删除这{0}个存档吗？它们将会永久失去！（真的很久！）</s:String>
+	<s:String x:Key="SaveManagerPage_Single_Select_Delete_Warning_MessageBoxText" xml:space="preserve">你确定要删除这个存档吗？&#13;“{0}”将会永久失去！（真的很久！）</s:String>
+	<s:String x:Key="SaveManagerPage_Multi_Select_Delete_Warning_MessageBoxText" xml:space="preserve">你确定要删除这{0}个存档吗？&#13;它们将会永久失去！（真的很久！）</s:String>
 	<s:String x:Key="SaveManagerPage_Import_FileDialog_Title">选择导入文件</s:String>
-	<s:String x:Key="SaveManagerPage_Import_FileDialog_Filter">存档文件|*.dat|存档备份文件|*.bak|导出的压缩文件|*.zip</s:String>
+	<s:String x:Key="SaveManagerPage_Import_FileDialog_Filter">存档文件|*.dat|导出的压缩文件|*.zip</s:String>
+	<s:String x:Key="SaveManagerPage_Import_Type_Select_MessageBoxText">你想把存档导入到哪里？</s:String>
+	<s:String x:Key="SaveManagerPage_Export_FileDialog_Title">选择导出位置</s:String>
+	<s:String x:Key="SaveManagerPage_Export_FileDialog_Filter">导出的压缩文件|*.zip</s:String>
+
+	<!--LauncherPreferencePage-->
+	<s:String x:Key="LauncherPreferencePage_Language_Preference_Title">语言</s:String>
+	<s:String x:Key="LauncherPreferencePage_Game_Installations_Preference_Title">游戏配置</s:String>
+	<s:String x:Key="LauncherPreferencePage_Game_Installations_Name">名称</s:String>
+	<s:String x:Key="LauncherPreferencePage_Game_Installations_Path">路径</s:String>
+	<s:String x:Key="LauncherPreferencePage_Add_New_Path_Button">添加新的配置</s:String>
+	<s:String x:Key="LauncherPreferencePage_About_Title">关于</s:String>
 </ResourceDictionary>

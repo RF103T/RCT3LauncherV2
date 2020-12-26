@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
@@ -15,9 +16,10 @@ namespace RCT3Launcher.Views.ViewHelpers.Converters
 
 		public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
 		{
-			bool temp = false;
+			bool temp = true;
 			foreach (object value in values)
-				temp &= System.Convert.ToBoolean(value);
+				if (value != DependencyProperty.UnsetValue)
+					temp &= System.Convert.ToBoolean(value);
 			return IsReverse ^ temp;
 		}
 

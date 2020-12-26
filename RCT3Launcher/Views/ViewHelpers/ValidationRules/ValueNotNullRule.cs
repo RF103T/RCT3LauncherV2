@@ -13,9 +13,16 @@ namespace RCT3Launcher.Views.ViewHelpers.ValidationRules
 	{
 		public override ValidationResult Validate(object value, CultureInfo cultureInfo)
 		{
-		if (value != null && value.ToString() != string.Empty)
+			if (value != null && value.ToString() != string.Empty)
 				return ValidationResult.ValidResult;
 			return new ValidationResult(false, Application.Current.Resources["ValidationRule_ValueNullError"]);
+		}
+
+		public static bool _validate(object value)
+		{
+			if (value != null && value.ToString() != string.Empty)
+				return true;
+			return false;
 		}
 	}
 }

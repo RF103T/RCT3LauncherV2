@@ -37,13 +37,13 @@ namespace RCT3Launcher.ViewModels
 				{
 					NavigationPage = "Pages/MusicManagerPage.xaml"
 				},
-				new MainMenuItem("Game_Settings_Page_Icon","Game_Settings_MenuItem")
+				new MainMenuItem("Game_Preference_Page_Icon","Game_Preference_MenuItem")
 				{
-					NavigationPage = "Pages/GameSettingsPage.xaml"
+					NavigationPage = "Pages/GamePreferencePage.xaml"
 				},
-				new MainMenuItem("Launcher_Settings_Page_Icon","Launcher_Settings_MenuItem")
+				new MainMenuItem("Launcher_Preference_Page_Icon","Launcher_Preference_MenuItem")
 				{
-					NavigationPage = "Pages/LauncherSettingsPage.xaml"
+					NavigationPage = "Pages/LauncherPreferencePage.xaml"
 				}
 			};
 
@@ -138,12 +138,11 @@ namespace RCT3Launcher.ViewModels
 				if (closeWindowButtonClickCommand == null)
 				{
 					closeWindowButtonClickCommand = new CommandBase(
-						new Action(() =>
-							{
-								OptionsManager.Instance.SaveOptionFile();
-								Application.Current.Shutdown();
-							}
-							)
+						() =>
+						{
+							OptionsManager.Instance.SaveOptionFile();
+							Application.Current.Shutdown();
+						}
 						);
 				}
 				return closeWindowButtonClickCommand;
@@ -158,9 +157,7 @@ namespace RCT3Launcher.ViewModels
 				if (minimizeWindowButtonClickCommand == null)
 				{
 					minimizeWindowButtonClickCommand = new CommandBase(
-						new Action(
 							() => Application.Current.MainWindow.WindowState = WindowState.Minimized
-							)
 						);
 				}
 				return minimizeWindowButtonClickCommand;

@@ -34,7 +34,7 @@
 			<TextBlock Text="{DynamicResource GuidePage_Title}" Foreground="{StaticResource Theme.Primary.Text}" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 		</Viewbox>
 		<StackPanel Grid.Row="2" Margin="50,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
-			<TextBlock Text="{DynamicResource GuidePage_Language_Setting_Title}" Foreground="{StaticResource Theme.Primary.Text}" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+			<TextBlock Text="{DynamicResource GuidePage_Language_Preference_Title}" Foreground="{StaticResource Theme.Primary.Text}" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 			<RCT3LauncherControls:SwitchComboBox x:Name="switchComboBox" Height="35" Width="200" Margin="0,10,0,10"
 												 FontSize="14" FontWeight="Bold" Foreground="{StaticResource Theme.Primary.Text}" NegativeForeground="{StaticResource Theme.Secondary.Text}" HorizontalAlignment="Left"
 												 SelectedIndex="{Binding LanguageSetting, Mode=OneWay, Source={StaticResource settingsViewModel}}"
@@ -52,9 +52,9 @@
 				<RowDefinition Height="*"/>
 				<RowDefinition Height="Auto"/>
 			</Grid.RowDefinitions>
-			<TextBlock Grid.Row="0" Text="{DynamicResource GuidePage_Game_Installations_Setting_Title}" Foreground="{StaticResource Theme.Primary.Text}" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+			<TextBlock Grid.Row="0" Text="{DynamicResource GuidePage_Game_Installations_Preference_Title}" Foreground="{StaticResource Theme.Primary.Text}" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 			<ItemsControl Grid.Row="1" Margin="0,10,0,10" Style="{StaticResource Scroll_ItemsControl_Style}"
-						  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Validation.Error="SettingsValidationError"
+						  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Validation.Error="PreferencesValidationError"
 						  DataContext="{StaticResource settingsViewModel}" ItemsSource="{Binding GameInstallationItems}">
 				<ItemsControl.ItemTemplate>
 					<DataTemplate>

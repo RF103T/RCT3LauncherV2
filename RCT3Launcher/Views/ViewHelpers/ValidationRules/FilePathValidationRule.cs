@@ -19,5 +19,13 @@ namespace RCT3Launcher.Views.ViewHelpers.ValidationRules
 				return ValidationResult.ValidResult;
 			return new ValidationResult(false, Application.Current.Resources["ValidationRule_FilePathError"]);
 		}
+
+		public static bool _validate(object value)
+		{
+			Regex regex = new Regex(@"^[a-zA-Z]:(((\\(?! )[^/:*?<>\""|\\]+)+\\?)|(\\)?)\s*$");
+			if (regex.IsMatch(value.ToString()))
+				return true;
+			return false;
+		}
 	}
 }

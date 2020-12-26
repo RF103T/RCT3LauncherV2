@@ -14,7 +14,9 @@
 	<Color x:Key="Theme.Primary.Dark.Background.Color.Transparent" A="0x00" R="0xE7" G="0xE7" B="0xE7"/>
 	<Color x:Key="Theme.Primary.Text.Color" A="0xFF" R="0xFF" G="0xFF" B="0xFF"/>
 	<Color x:Key="Theme.Secondary.Normal.Color" A="0xFF" R="0x37" G="0x47" B="0x4F"/>
+	<Color x:Key="Theme.Secondary.Normal.Color.Transparent" A="0x00" R="0x37" G="0x47" B="0x4F"/>
 	<Color x:Key="Theme.Secondary.Dark.Color" A="0xFF" R="0x26" G="0x32" B="0x38"/>
+	<Color x:Key="Theme.Secondary.Dark.Color.Transparent" A="0x00" R="0x26" G="0x32" B="0x38"/>
 	<Color x:Key="Theme.Secondary.Text.Color" A="0xFF" R="0x37" G="0x47" B="0x4F"/>
 
 	<Color x:Key="Unenable.Color" A="0xFF" R="0xBC" G="0xBC" B="0xBC"/>

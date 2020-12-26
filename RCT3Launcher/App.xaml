@@ -17,7 +17,7 @@
 			<ViewModels:SettingsViewModel x:Key="settingsViewModel"/>
 			<ViewModels:LauncherPageViewModel x:Key="launcherPageViewModel"/>
 			<ViewModels:SaveManagerPageViewModel x:Key="saveManagerPageViewModel"/>
-			<ViewModels:LauncherSettingsPageViewModel x:Key="launcherSettingsPageViewModel"/>
+			<ViewModels:LauncherPreferencePageViewModel x:Key="launcherPreferencePageViewModel"/>
 		</ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -16,15 +16,19 @@ namespace RCT3Launcher.FileSystemWatchers
 
 		private readonly Dictionary<GameSaveType, FileSystemWatcher> watchers = new Dictionary<GameSaveType, FileSystemWatcher>()
 		{
-			//{GameSaveType.Park,new FileSystemWatcher(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\RCT3\Parks")
-			//{
-			//	Filter="*.dat"
-			//}},
-			//{GameSaveType.Scenario,new FileSystemWatcher(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\RCT3\Scenarios")
-			//{
-			//	Filter="*.dat"
-			//}},
-			{GameSaveType.Start_New_Scenario,new FileSystemWatcher(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\RCT3\Start New Scenarios")
+			{GameSaveType.Park,new FileSystemWatcher(GameSaveTypeHelper.GetGameSaveTypeFullPath(GameSaveType.Park))
+			{
+				Filter = "*.dat",
+				NotifyFilter = NotifyFilters.FileName | NotifyFilters.Size,
+				EnableRaisingEvents = true
+			}},
+			{GameSaveType.Scenario,new FileSystemWatcher(GameSaveTypeHelper.GetGameSaveTypeFullPath(GameSaveType.Scenario))
+			{
+				Filter = "*.dat",
+				NotifyFilter = NotifyFilters.FileName | NotifyFilters.Size,
+				EnableRaisingEvents = true
+			}},
+			{GameSaveType.Start_New_Scenario,new FileSystemWatcher(GameSaveTypeHelper.GetGameSaveTypeFullPath(GameSaveType.Start_New_Scenario))
 			{
 				Filter = "*.dat",
 				NotifyFilter = NotifyFilters.FileName | NotifyFilters.Size,

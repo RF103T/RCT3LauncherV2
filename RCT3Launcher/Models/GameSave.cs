@@ -13,15 +13,15 @@ namespace RCT3Launcher.Models
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		public GameSave()
+		public GameSave(FileInfo info)
 		{
-
+			SaveFileInfo = info;
+			GetSaveImage();
 		}
 
-		public GameSave(string filePath)
+		public GameSave(string filePath) : this(new FileInfo(filePath))
 		{
-			SaveFileInfo = new FileInfo(filePath);
-			GetSaveImage();
+
 		}
 
 		private int id;
@@ -46,30 +46,36 @@ namespace RCT3Launcher.Models
 			{
 				if (name != value)
 				{
-					//演示
-					//if (SaveFileInfo != null && value != string.Empty && value != SaveFileInfo.Name)
-					//{
-					//	StringBuilder builder = new StringBuilder(SaveFileInfo.FullName.Substring(0, SaveFileInfo.FullName.Length - SaveFileInfo.Name.Length));
-					//	builder.Append(value).Append(".dat");
-					//	SaveFileInfo.MoveTo(builder.ToString(), true);
-					//}
+					if (name != null && SaveFileInfo != null)
+					{
+						StringBuilder builder = new StringBuilder(SaveFileInfo.FullName.Substring(0, SaveFileInfo.FullName.Length - SaveFileInfo.Name.Length));
+						builder.Append(value).Append(".dat");
+						SaveFileInfo.MoveTo(builder.ToString(), true);
+					}
 					name = value;
 					PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Name)));
 				}
 			}
 		}
 
-		private GameSaveType type;
-		public GameSaveType Type
+		public GameSaveType SaveType
 		{
-			get { return type; }
-			set
+			get
 			{
-				if (type != value)
-				{
-					type = value;
-					PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Type)));
-				}
+				string fullName = saveFileInfo.FullName;
+				if (fullName.Contains(@"\Parks"))
+					return GameSaveType.Park;
+				else if (fullName.Contains(@"\Scenarios"))
+					return GameSaveType.Scenario;
+				return GameSaveType.Start_New_Scenario;
+			}
+		}
+
+		public string SaveTypeFormattedName
+		{
+			get
+			{
+				return GameSaveTypeHelper.GetGameSaveTypeFormattedText(SaveType);
 			}
 		}
 

@@ -33,5 +33,25 @@ namespace RCT3Launcher.Views.ViewHelpers.ValidationRules
 			}
 			return new ValidationResult(false, Application.Current.Resources["ValidationRule_GameFileError"]);
 		}
+
+		public static bool _validate(object value)
+		{
+			DirectoryInfo gameDirectory = new DirectoryInfo(value.ToString());
+			if (gameDirectory.Exists)
+			{
+				FileInfo[] subFiles = gameDirectory.GetFiles();
+				foreach (FileInfo info in subFiles)
+				{
+					if (info.Extension.ToLower() == ".exe" && info.Name.Contains("RCT3"))
+					{
+						using FileStream peFileStream = new FileStream(info.FullName, FileMode.Open);
+						PeFile peFile = new PeFile(peFileStream);
+						if (GameVersionHelper.ValidTimeDateStamps.Keys.Contains(peFile.ImageNtHeaders.FileHeader.TimeDateStamp))
+							return true;
+					}
+				}
+			}
+			return false;
+		}
 	}
 }

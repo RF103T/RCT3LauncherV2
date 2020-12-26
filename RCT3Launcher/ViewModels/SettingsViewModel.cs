@@ -61,15 +61,13 @@ namespace RCT3Launcher.ViewModels
 				if (deleteGamePathCommand == null)
 				{
 					deleteGamePathCommand = new CommandBase<GameInstallation>(
-						new Action<GameInstallation>(
-							item =>
-							{
-								int id = item.ID;
-								for (int i = id; i < GameInstallationItems.Count; i++)
-									GameInstallationItems[i].ID--;
-								GameInstallationItems.Remove(item);
-							}
-						)
+						item =>
+						{
+							int id = item.ID;
+							for (int i = id; i < GameInstallationItems.Count; i++)
+								GameInstallationItems[i].ID--;
+							GameInstallationItems.Remove(item);
+						}
 					);
 				}
 				return deleteGamePathCommand;
@@ -84,17 +82,15 @@ namespace RCT3Launcher.ViewModels
 				if (chooseGamePathCommand == null)
 				{
 					chooseGamePathCommand = new CommandBase<TextBox>(
-						new Action<TextBox>(
-							textBox =>
+						textBox =>
+						{
+							CommonOpenFileDialog dialog = new CommonOpenFileDialog()
 							{
-								CommonOpenFileDialog dialog = new CommonOpenFileDialog()
-								{
-									IsFolderPicker = true
-								};
-								if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
-									textBox.SetValue(TextBox.TextProperty, dialog.FileName);
-							}
-						)
+								IsFolderPicker = true
+							};
+							if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+								textBox.SetValue(TextBox.TextProperty, dialog.FileName);
+						}
 					);
 				}
 				return chooseGamePathCommand;

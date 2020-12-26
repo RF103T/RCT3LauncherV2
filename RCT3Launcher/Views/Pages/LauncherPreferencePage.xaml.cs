@@ -16,16 +16,16 @@ namespace RCT3Launcher.Views.Pages
 	/// <summary>
 	/// LauncherSettingsPage.xaml 的交互逻辑
 	/// </summary>
-	public partial class LauncherSettingsPage : Page
+	public partial class LauncherPreferencePage : Page
 	{
 		private HashSet<object> errorSet = new HashSet<object>();
 
-		public LauncherSettingsPage()
+		public LauncherPreferencePage()
 		{
 			InitializeComponent();
 		}
 
-		private void SettingsValidationError(object sender, ValidationErrorEventArgs e)
+		private void PreferencesValidationError(object sender, ValidationErrorEventArgs e)
 		{
 			if (e.Action == ValidationErrorEventAction.Added)
 				errorSet.Add((e.OriginalSource as FrameworkElement).DataContext);

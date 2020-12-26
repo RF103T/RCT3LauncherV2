@@ -18,6 +18,10 @@
 	<s:String x:Key="Text_Warning">Warning</s:String>
 	<s:String x:Key="Text_Error">Error</s:String>
 	<s:String x:Key="State_Error_ToolTip">Something is wrong</s:String>
+	
+	<s:String x:Key="SaveType_Park_FormattedText">Park</s:String>
+	<s:String x:Key="SaveType_Scenario_FormattedText">Scenario</s:String>
+	<s:String x:Key="SaveType_Start_New_Scenario_FormattedText">Start New Scenario</s:String>
 
 	<!--表单验证-->
 	<s:String x:Key="ValidationRule_ValueNullError">Value can't be null</s:String>
@@ -29,8 +33,8 @@
 	<s:String x:Key="Mod_Manager_MenuItem">Mod Manager</s:String>
 	<s:String x:Key="Save_Manager_MenuItem">Save Manager</s:String>
 	<s:String x:Key="Music_Manager_MenuItem">Music Manager</s:String>
-	<s:String x:Key="Game_Settings_MenuItem">Game Settings</s:String>
-	<s:String x:Key="Launcher_Settings_MenuItem">Launcher Settings</s:String>
+	<s:String x:Key="Game_Preference_MenuItem">Game Settings</s:String>
+	<s:String x:Key="Launcher_Preference_MenuItem">Launcher Settings</s:String>
 
 	<!--LauncherPage-->
 	<s:String x:Key="LauncherPage_Game_Address_State_Right">The game path has been set</s:String>
@@ -41,8 +45,8 @@
 
 	<!--GuidePage-->
 	<s:String x:Key="GuidePage_Title">Welcome to RCT3 Launcher</s:String>
-	<s:String x:Key="GuidePage_Language_Setting_Title">Languages</s:String>
-	<s:String x:Key="GuidePage_Game_Installations_Setting_Title">Game Installations</s:String>
+	<s:String x:Key="GuidePage_Language_Preference_Title">Language</s:String>
+	<s:String x:Key="GuidePage_Game_Installations_Preference_Title">Game Installations</s:String>
 	<s:String x:Key="GuidePage_Game_Installations_Name">Name</s:String>
 	<s:String x:Key="GuidePage_Game_Installations_Path">Path</s:String>
 	<s:String x:Key="GuidePage_Add_New_Path_Button">Add New Installations</s:String>
@@ -55,8 +59,19 @@
 	<s:String x:Key="SaveManagerPage_Import_Saves">Import</s:String>
 	<s:String x:Key="SaveManagerPage_Export_Saves">Export</s:String>
 	<s:String x:Key="SaveManagerPage_Delete_Saves">Delete</s:String>
-	<s:String x:Key="SaveManagerPage_Single_Select_Delete_Warning_MessageBoxText">Are you sure you want to delete this save? '{0}' will be lost forever! (A long time!)</s:String>
-	<s:String x:Key="SaveManagerPage_Multi_Select_Delete_Warning_MessageBoxText">Are you sure you want to delete these {0} saves? They will be lost forever! (A long time!)</s:String>
-	<s:String x:Key="SaveManagerPage_Import_FileDialog_Title">Select Save Files</s:String>
-	<s:String x:Key="SaveManagerPage_Import_FileDialog_Filter">Save File|*.dat|Save Backup File|*.bak|Exported Zip File|*.zip</s:String>
+	<s:String x:Key="SaveManagerPage_Single_Select_Delete_Warning_MessageBoxText">Are you sure you want to delete this save?&#13;'{0}' will be lost forever! (A long time!)</s:String>
+	<s:String x:Key="SaveManagerPage_Multi_Select_Delete_Warning_MessageBoxText">Are you sure you want to delete these {0} saves?&#13;They will be lost forever! (A long time!)</s:String>
+	<s:String x:Key="SaveManagerPage_Import_FileDialog_Title">Select Imported Save Files</s:String>
+	<s:String x:Key="SaveManagerPage_Import_FileDialog_Filter">Save File|*.dat|Exported Zip File|*.zip</s:String>
+	<s:String x:Key="SaveManagerPage_Import_Type_Select_MessageBoxText">Where do you want to import the save?</s:String>
+	<s:String x:Key="SaveManagerPage_Export_FileDialog_Title">Select Export Location</s:String>
+	<s:String x:Key="SaveManagerPage_Export_FileDialog_Filter">Exported Zip File|*.zip</s:String>
+
+	<!--LauncherPreferencePage-->
+	<s:String x:Key="LauncherPreferencePage_Language_Preference_Title">Language</s:String>
+	<s:String x:Key="LauncherPreferencePage_Game_Installations_Preference_Title">Game Installations</s:String>
+	<s:String x:Key="LauncherPreferencePage_Game_Installations_Name">Name</s:String>
+	<s:String x:Key="LauncherPreferencePage_Game_Installations_Path">Path</s:String>
+	<s:String x:Key="LauncherPreferencePage_Add_New_Path_Button">Add New Installations</s:String>
+	<s:String x:Key="LauncherPreferencePage_About_Title">About</s:String>
 </ResourceDictionary>

@@ -26,7 +26,7 @@ namespace RCT3Launcher
 		{
 			messageBoxTitle.Text = title;
 			messageBoxContent.Navigate(content);
-			messageBoxCloseButton.IsEnabled = false;
+			messageBoxCloseButton.IsEnabled = true;
 			messageBoxOKButton.Visibility = Visibility.Collapsed;
 			messageBoxYesButton.Visibility = Visibility.Collapsed;
 			messageBoxNoButton.Visibility = Visibility.Collapsed;
@@ -35,7 +35,6 @@ namespace RCT3Launcher
 			{
 				case MessageBoxButton.OK:
 				{
-					messageBoxCloseButton.IsEnabled = true;
 					messageBoxOKButton.Visibility = Visibility.Visible;
 					break;
 				}
@@ -54,6 +53,7 @@ namespace RCT3Launcher
 				}
 				case MessageBoxButton.YesNo:
 				{
+					messageBoxCloseButton.IsEnabled = false;
 					messageBoxYesButton.Visibility = Visibility.Visible;
 					messageBoxNoButton.Visibility = Visibility.Visible;
 					break;
@@ -70,21 +70,25 @@ namespace RCT3Launcher
 				case "OK":
 				{
 					EventSystem.EventCenter.Boardcast<MessageBoxResult>(EventSystem.EventType.MessageBoxClose, MessageBoxResult.OK);
+					EventSystem.EventCenter.Boardcast<MessageBoxResult, object>(EventSystem.EventType.MessageBoxClose, MessageBoxResult.OK, messageBoxContent.Content);
 					break;
 				}
 				case "Yes":
 				{
 					EventSystem.EventCenter.Boardcast<MessageBoxResult>(EventSystem.EventType.MessageBoxClose, MessageBoxResult.Yes);
+					EventSystem.EventCenter.Boardcast<MessageBoxResult, object>(EventSystem.EventType.MessageBoxClose, MessageBoxResult.Yes, messageBoxContent.Content);
 					break;
 				}
 				case "No":
 				{
 					EventSystem.EventCenter.Boardcast<MessageBoxResult>(EventSystem.EventType.MessageBoxClose, MessageBoxResult.No);
+					EventSystem.EventCenter.Boardcast<MessageBoxResult, object>(EventSystem.EventType.MessageBoxClose, MessageBoxResult.No, messageBoxContent.Content);
 					break;
 				}
 				case "Cancel":
 				{
 					EventSystem.EventCenter.Boardcast<MessageBoxResult>(EventSystem.EventType.MessageBoxClose, MessageBoxResult.Cancel);
+					EventSystem.EventCenter.Boardcast<MessageBoxResult, object>(EventSystem.EventType.MessageBoxClose, MessageBoxResult.Cancel, messageBoxContent.Content);
 					break;
 				}
 			}

@@ -274,5 +274,15 @@ namespace RCT3Launcher.Models
 				return gameProcess == null || gameProcess.HasExited;
 			}
 		}
+
+		[XmlIgnore]
+		public bool IsDataHasError
+		{
+			get
+			{
+				return ValueNotNullRule._validate(Name) && ValueNotNullRule._validate(GameDirectory)
+					&& FilePathValidationRule._validate(GameDirectory) && GameFileValidationRule._validate(GameDirectory);
+			}
+		}
 	}
 }

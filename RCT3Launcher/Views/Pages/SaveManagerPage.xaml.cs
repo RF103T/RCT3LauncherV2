@@ -18,9 +18,19 @@ namespace RCT3Launcher.Views.Pages
 	/// </summary>
 	public partial class SaveManagerPage : Page
 	{
+		private HashSet<object> errorSet = new HashSet<object>();
+
 		public SaveManagerPage()
 		{
 			InitializeComponent();
+		}
+
+		private void SaveNameValidationError(object sender, ValidationErrorEventArgs e)
+		{
+			if (e.Action == ValidationErrorEventAction.Added)
+				errorSet.Add((e.OriginalSource as FrameworkElement).DataContext);
+			else
+				errorSet.Remove((e.OriginalSource as FrameworkElement).DataContext);
 		}
 
 		private void multipleModeCheckBox_Checked(object sender, RoutedEventArgs e)

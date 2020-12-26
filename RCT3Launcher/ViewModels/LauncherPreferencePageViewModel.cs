@@ -2,27 +2,21 @@
 using RCT3Launcher.EventSystem;
 using RCT3Launcher.Models;
 using RCT3Launcher.Option;
-using RCT3Launcher.Option.EventArgs;
 using RCT3Launcher.Option.LauncherOptions;
 using RCT3Launcher.ViewModels.BaseClass;
 using RCT3Launcher.Views.Pages;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
 
 namespace RCT3Launcher.ViewModels
 {
-	public class GuidePageViewModel : ViewModelBase
+	public class LauncherPreferencePageViewModel : ViewModelBase
 	{
-		public GuidePageViewModel()
-		{
-
-		}
-
 		public ObservableCollection<GameInstallation> GameInstallationItems
 		{
 			get
