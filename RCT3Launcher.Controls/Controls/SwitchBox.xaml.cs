@@ -48,6 +48,42 @@ namespace RCT3Launcher.Controls
 		public static readonly DependencyProperty IsCheckedProperty =
 			DependencyProperty.Register("IsChecked", typeof(bool), typeof(SwitchBox), new PropertyMetadata(false));
 
+		public event RoutedEventHandler Checked
+		{
+			add
+			{
+				AddHandler(checkedEvent, value);
+			}
+			remove
+			{
+				RemoveHandler(checkedEvent, value);
+			}
+		}
+		public static readonly RoutedEvent checkedEvent =
+			EventManager.RegisterRoutedEvent("Checked", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(SwitchBox));
+		private void CheckBox_Checked(object sender, RoutedEventArgs e)
+		{
+			RaiseEvent(new RoutedEventArgs(checkedEvent, this));
+		}
+
+		public event RoutedEventHandler Unchecked
+		{
+			add
+			{
+				AddHandler(uncheckedEvent, value);
+			}
+			remove
+			{
+				RemoveHandler(uncheckedEvent, value);
+			}
+		}
+		public static readonly RoutedEvent uncheckedEvent =
+			EventManager.RegisterRoutedEvent("Unchecked", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(SwitchBox));
+		private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+		{
+			RaiseEvent(new RoutedEventArgs(uncheckedEvent, this));
+		}
+
 		public SwitchBox()
 		{
 			InitializeComponent();

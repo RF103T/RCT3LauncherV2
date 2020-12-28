@@ -1,21 +1,24 @@
-﻿using RCT3Launcher.Models;
+﻿using RCT3Launcher.EventSystem;
+using RCT3Launcher.Models;
 using RCT3Launcher.Option;
 using RCT3Launcher.Option.EventArgs;
 using RCT3Launcher.Option.LauncherOptions;
 using RCT3Launcher.ViewModels.BaseClass;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 
 namespace RCT3Launcher.ViewModels
 {
-	class MainWindowViewModel : ViewModelBase
+	public class MainWindowViewModel : ViewModelBase
 	{
 		public MainWindowViewModel()
 		{
+			OptionsManager.Instance.GetOptionObject<LanguageOption>(OptionType.Language).ValueChanged += OnLanguageChanged;
+			EventCenter.AddListener<string>(EventType.PageNavigate, OnPageNavigate);
+
 			MainMenuItems = new ObservableCollection<MainMenuItem>
 			{
 				new MainMenuItem("Launcher_Page_Icon","Launcher_MenuItem")
@@ -23,7 +26,7 @@ namespace RCT3Launcher.ViewModels
 					NavigationPage = "Pages/LauncherPage.xaml"
 				},
 				new MainMenuItem("Mod_Manager_Page_Icon","Mod_Manager_MenuItem")
-				{   
+				{
 					NavigationPage = "Pages/ModManagerPage.xaml"
 				},
 				new MainMenuItem("Save_Manager_Page_Icon","Save_Manager_MenuItem")
@@ -34,18 +37,20 @@ namespace RCT3Launcher.ViewModels
 				{
 					NavigationPage = "Pages/MusicManagerPage.xaml"
 				},
-				new MainMenuItem("Game_Settings_Page_Icon","Game_Settings_MenuItem")
+				new MainMenuItem("Game_Preference_Page_Icon","Game_Preference_MenuItem")
 				{
-					NavigationPage = "Pages/GameSettingsPage.xaml"
+					NavigationPage = "Pages/GamePreferencePage.xaml"
 				},
-				new MainMenuItem("Launcher_Settings_Page_Icon","Launcher_Settings_MenuItem")
+				new MainMenuItem("Launcher_Preference_Page_Icon","Launcher_Preference_MenuItem")
 				{
-					NavigationPage = "Pages/LauncherSettingsPage.xaml"
+					NavigationPage = "Pages/LauncherPreferencePage.xaml"
 				}
 			};
-			NavigationPageSource = "Pages/GuidePage.xaml";
 
-			(OptionsManager.optionMap[OptionsManager.OptionType.Language] as LanguageOption).ValueChanged += OnLanguageChanged;
+			//if (!OptionsManager.Instance.IsOptionsInitialized)
+			NavigationPageSource = "Pages/GuidePage.xaml";
+			//else
+			//	NavigationPageSource = MainMenuItems[0].NavigationPage;
 		}
 
 		#region 菜单
@@ -62,7 +67,7 @@ namespace RCT3Launcher.ViewModels
 				if (_mainMenuItems != value)
 				{
 					_mainMenuItems = value;
-					RaisePropertyChanged("MainMenuItems");
+					RaisePropertyChanged(nameof(MainMenuItems));
 				}
 			}
 		}
@@ -98,15 +103,9 @@ namespace RCT3Launcher.ViewModels
 					_selectedValue = value;
 					if (_selectedValue != null)
 						SelectedIndex = _mainMenuItems.IndexOf(_selectedValue as MainMenuItem);
-					RaisePropertyChanged("SelectedValue");
+					RaisePropertyChanged(nameof(SelectedValue));
 				}
 			}
-		}
-
-		public void OnLanguageChanged(object sender, ValueChangedEventArgs<LanguageOption.LanguageParameter> e)
-		{
-			foreach (MainMenuItem item in MainMenuItems)
-				item.UpdateResource();
 		}
 
 		#endregion
@@ -124,50 +123,66 @@ namespace RCT3Launcher.ViewModels
 				if (_navigationPageSource != value)
 				{
 					_navigationPageSource = value;
-					RaisePropertyChanged("NavigationPageSource");
+					RaisePropertyChanged(nameof(NavigationPageSource));
 				}
 			}
 		}
 		#endregion
 
 		#region 按钮
-		private CommandBase<RoutedEventArgs> _closeWindowButtonClickCommand;
-		public CommandBase<RoutedEventArgs> CloseWindowButtonClickCommand
+		private CommandBase closeWindowButtonClickCommand;
+		public CommandBase CloseWindowButtonClickCommand
 		{
 			get
 			{
-				if (_closeWindowButtonClickCommand == null)
+				if (closeWindowButtonClickCommand == null)
 				{
-					_closeWindowButtonClickCommand = new CommandBase<RoutedEventArgs>(
-						new Action<RoutedEventArgs>(
-							args =>
-							{
-								OptionsManager.SaveOptionFile();
-								Application.Current.Shutdown();
-							}
-							)
+					closeWindowButtonClickCommand = new CommandBase(
+						() =>
+						{
+							OptionsManager.Instance.SaveOptionFile();
+							Application.Current.Shutdown();
+						}
 						);
 				}
-				return _closeWindowButtonClickCommand;
+				return closeWindowButtonClickCommand;
 			}
 		}
 
-		private CommandBase<RoutedEventArgs> _minimizeWindowButtonClickCommand;
-		public CommandBase<RoutedEventArgs> MinimizeWindowButtonClickCommand
+		private CommandBase minimizeWindowButtonClickCommand;
+		public CommandBase MinimizeWindowButtonClickCommand
 		{
 			get
 			{
-				if (_minimizeWindowButtonClickCommand == null)
+				if (minimizeWindowButtonClickCommand == null)
 				{
-					_minimizeWindowButtonClickCommand = new CommandBase<RoutedEventArgs>(
-						new Action<RoutedEventArgs>(
-							args => App.Current.MainWindow.WindowState = WindowState.Minimized
-							)
+					minimizeWindowButtonClickCommand = new CommandBase(
+							() => Application.Current.MainWindow.WindowState = WindowState.Minimized
 						);
 				}
-				return _minimizeWindowButtonClickCommand;
+				return minimizeWindowButtonClickCommand;
 			}
 		}
 		#endregion
+
+		public void OnLanguageChanged(object sender, ValueChangedEventArgs<LanguageOption.LanguageParameter> e)
+		{
+			foreach (MainMenuItem item in MainMenuItems)
+				item.UpdateResource();
+		}
+
+		private void OnPageNavigate(string pageName)
+		{
+			string navigationUrl = string.Format("Pages/{0}.xaml", pageName);
+			foreach (MainMenuItem item in MainMenuItems)
+			{
+				if (item.NavigationPage == navigationUrl)
+				{
+					SelectedValue = item;
+					return;
+				}
+			}
+			NavigationPageSource = navigationUrl;
+		}
 	}
 }

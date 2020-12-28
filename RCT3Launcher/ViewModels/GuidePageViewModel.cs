@@ -1,4 +1,5 @@
 ﻿using RCT3Launcher.Controls;
+using RCT3Launcher.EventSystem;
 using RCT3Launcher.Models;
 using RCT3Launcher.Option;
 using RCT3Launcher.Option.EventArgs;
@@ -11,36 +12,28 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace RCT3Launcher.ViewModels
 {
-	class GuidePageViewModel : ViewModelBase
+	public class GuidePageViewModel : ViewModelBase
 	{
 		public GuidePageViewModel()
 		{
-			GamePathItems = new ObservableCollection<GamePathItem>()
-			{
-				new GamePathItem()
-				{
-					ID = 1
-				}
-			};
+
 		}
 
-		private ObservableCollection<GamePathItem> _gamePathItems;
-		public ObservableCollection<GamePathItem> GamePathItems
+		public ObservableCollection<GameInstallation> GameInstallationItems
 		{
 			get
 			{
-				return _gamePathItems;
+				SettingsViewModel settings = Application.Current.Resources["settingsViewModel"] as SettingsViewModel;
+				return settings.GameInstallationItems;
 			}
 			set
 			{
-				if (_gamePathItems != value)
-				{
-					_gamePathItems = value;
-					RaisePropertyChanged("GamePathItems");
-				}
+				SettingsViewModel settings = Application.Current.Resources["settingsViewModel"] as SettingsViewModel;
+				settings.GameInstallationItems = value;
 			}
 		}
 
@@ -52,10 +45,9 @@ namespace RCT3Launcher.ViewModels
 				if (languageSwitchComboBoxCommand == null)
 				{
 					languageSwitchComboBoxCommand = new CommandBase<SwitchComboBox>(
-						new Action<SwitchComboBox>(
 							self =>
 							{
-								LanguageOption setting = OptionsManager.optionMap[OptionsManager.OptionType.Language] as LanguageOption;
+								LanguageOption setting = OptionsManager.Instance.GetOptionObject<LanguageOption>(OptionType.Language);
 								switch (self.SelectedIndex)
 								{
 									case 0:
@@ -70,7 +62,6 @@ namespace RCT3Launcher.ViewModels
 									}
 								}
 							}
-							)
 						);
 				}
 				return languageSwitchComboBoxCommand;
@@ -85,13 +76,14 @@ namespace RCT3Launcher.ViewModels
 				if (addNewGamePathCommand == null)
 				{
 					addNewGamePathCommand = new CommandBase<RoutedEventArgs>(
-						new Action<RoutedEventArgs>(
-							args => GamePathItems.Add(
-								new GamePathItem()
+							args => GameInstallationItems.Add(
+								new GameInstallation()
 								{
-									ID = GamePathItems.Count + 1
+									Name = "配置" + (GameInstallationItems.Count + 1),
+									IconIndex = 0,
+									GameDirectory = "",
+									ID = GameInstallationItems.Count + 1
 								}
-							)
 						)
 					);
 				}
@@ -99,43 +91,18 @@ namespace RCT3Launcher.ViewModels
 			}
 		}
 
-		private CommandBase<GamePathItem> deleteGamePathCommand;
-		public CommandBase<GamePathItem> DeleteGamePathCommand
-		{
-			get
-			{
-				if (deleteGamePathCommand == null)
-				{
-					deleteGamePathCommand = new CommandBase<GamePathItem>(
-						new Action<GamePathItem>(
-							item =>
-							{
-								int id = item.ID;
-								for (int i = id; i < GamePathItems.Count; i++)
-									GamePathItems[i].ID--;
-								GamePathItems.Remove(item);
-							}
-						)
-					);
-				}
-				return deleteGamePathCommand;
-			}
-		}
-
-		private CommandBase<Page> applyCommand;
-		public CommandBase<Page> ApplyCommand
+		private CommandBase<object> applyCommand;
+		public CommandBase<object> ApplyCommand
 		{
 			get
 			{
 				if (applyCommand == null)
 				{
-					applyCommand = new CommandBase<Page>(
-						new Action<Page>(
-							page =>
-							{
-								page.NavigationService.Navigate(new LauncherPage());
-							}
-						)
+					applyCommand = new CommandBase<object>(
+						obj =>
+						{
+							EventCenter.Boardcast<string>(EventType.PageNavigate, nameof(LauncherPage));
+						}
 					);
 				}
 				return applyCommand;

@@ -3,6 +3,7 @@
                     xmlns:s="clr-namespace:System;assembly=System.Runtime">
 	<!--应用程序-->
 	<s:String x:Key="Application_Title">RCT3 Lanucher</s:String>
+	<s:String x:Key="Application_Version">v0.1.0 alpha</s:String>
 
 	<!--通用字符串-->
 	<s:String x:Key="RCT3_Complete_Edition_Name">RollerCoaster Tycoon® 3: Complete Edition</s:String>
@@ -12,26 +13,67 @@
 	<s:String x:Key="Text_OK">OK</s:String>
 	<s:String x:Key="Text_Apply">Apply</s:String>
 	<s:String x:Key="Text_Cancel">Cancel</s:String>
+	<s:String x:Key="Text_Yes">Yes</s:String>
+	<s:String x:Key="Text_No">No</s:String>
+	<s:String x:Key="Text_Information">Information</s:String>
+	<s:String x:Key="Text_Warning">Warning</s:String>
+	<s:String x:Key="Text_Error">Error</s:String>
+	<s:String x:Key="State_Error_ToolTip">Something is wrong</s:String>
+	
+	<s:String x:Key="SaveType_Park_FormattedText">Park</s:String>
+	<s:String x:Key="SaveType_Scenario_FormattedText">Scenario</s:String>
+	<s:String x:Key="SaveType_Start_New_Scenario_FormattedText">Start New Scenario</s:String>
+
+	<s:String x:Key="Terms_Of_Use_Description_Text">I have agreed and accepted</s:String>
+	<s:String x:Key="Terms_Of_Use_Description_Link_Text">The Terms of Use and Open Source Software Agreement</s:String>
+	<s:String x:Key="Terms_Of_Use_Description_Link">https://github.com/RF103T/RCT3LauncherV2/blob/feature-ui/LICENSE_en</s:String>
+
+	<!--表单验证-->
+	<s:String x:Key="ValidationRule_ValueNullError">Value can't be null</s:String>
+	<s:String x:Key="ValidationRule_FilePathError">Invalid path format</s:String>
+	<s:String x:Key="ValidationRule_GameFileError">Can't find game files</s:String>
 
 	<!--MainWindow-->
 	<s:String x:Key="Launcher_MenuItem">Start Game</s:String>
 	<s:String x:Key="Mod_Manager_MenuItem">Mod Manager</s:String>
 	<s:String x:Key="Save_Manager_MenuItem">Save Manager</s:String>
 	<s:String x:Key="Music_Manager_MenuItem">Music Manager</s:String>
-	<s:String x:Key="Game_Settings_MenuItem">Game Settings</s:String>
-	<s:String x:Key="Launcher_Settings_MenuItem">Launcher Settings</s:String>
+	<s:String x:Key="Game_Preference_MenuItem">Game Settings</s:String>
+	<s:String x:Key="Launcher_Preference_MenuItem">Launcher Settings</s:String>
 
 	<!--LauncherPage-->
 	<s:String x:Key="LauncherPage_Game_Address_State_Right">The game path has been set</s:String>
 	<s:String x:Key="LauncherPage_Game_Address_State_Wrong">The game path has not been set</s:String>
-	<s:String x:Key="Start_Game_Button">Start Game</s:String>
+	<s:String x:Key="LauncherPage_Start_Game_Button">Start Game</s:String>
+	<s:String x:Key="LauncherPage_Running_State_Icon_ToolTip">Running game installation</s:String>
+	<s:String x:Key="LauncherPage_Repeat_Run_Warning_MessageBoxText">There is already a running game. Do you want to continue?</s:String>
 
 	<!--GuidePage-->
 	<s:String x:Key="GuidePage_Title">Welcome to RCT3 Launcher</s:String>
-	<s:String x:Key="GuidePage_Language_Setting_Title">Languages</s:String>
-	<s:String x:Key="GuidePage_Game_Path_Setting_Title">Game Path</s:String>
-	<s:String x:Key="GuidePage_Game_Path_Placeholder">Name</s:String>
-	<s:String x:Key="GuidePage_Choose_Game_Path">Choose Game Path</s:String>
-	<s:String x:Key="GuidePage_Add_New_Path_Button">Add New Path</s:String>
-	<s:String x:Key="GuidePage_Terms_Of_Use_Description">I have agreed and accepted the terms of use.</s:String>
+	<s:String x:Key="GuidePage_Language_Preference_Title">Language</s:String>
+	<s:String x:Key="GuidePage_Game_Installations_Preference_Title">Game Installations</s:String>
+	<s:String x:Key="GuidePage_Game_Installations_Name">Name</s:String>
+	<s:String x:Key="GuidePage_Game_Installations_Path">Path</s:String>
+	<s:String x:Key="GuidePage_Add_New_Path_Button">Add New Installations</s:String>
+
+	<!--SaveManagerPage-->
+	<s:String x:Key="SaveManagerPage_Multiple_Mode">Multi-Select</s:String>
+	<s:String x:Key="SaveManagerPage_Import_Saves">Import</s:String>
+	<s:String x:Key="SaveManagerPage_Export_Saves">Export</s:String>
+	<s:String x:Key="SaveManagerPage_Delete_Saves">Delete</s:String>
+	<s:String x:Key="SaveManagerPage_Single_Select_Delete_Warning_MessageBoxText">Are you sure you want to delete this save?&#13;'{0}' will be lost forever! (A long time!)</s:String>
+	<s:String x:Key="SaveManagerPage_Multi_Select_Delete_Warning_MessageBoxText">Are you sure you want to delete these {0} saves?&#13;They will be lost forever! (A long time!)</s:String>
+	<s:String x:Key="SaveManagerPage_Import_FileDialog_Title">Select Imported Save Files</s:String>
+	<s:String x:Key="SaveManagerPage_Import_FileDialog_Filter">Save File|*.dat|Exported Zip File|*.zip</s:String>
+	<s:String x:Key="SaveManagerPage_Import_Type_Select_MessageBoxText">Where do you want to import the save?</s:String>
+	<s:String x:Key="SaveManagerPage_Export_FileDialog_Title">Select Export Location</s:String>
+	<s:String x:Key="SaveManagerPage_Export_FileDialog_Filter">Exported Zip File|*.zip</s:String>
+
+	<!--LauncherPreferencePage-->
+	<s:String x:Key="LauncherPreferencePage_Language_Preference_Title">Language</s:String>
+	<s:String x:Key="LauncherPreferencePage_Game_Installations_Preference_Title">Game Installations</s:String>
+	<s:String x:Key="LauncherPreferencePage_Game_Installations_Name">Name</s:String>
+	<s:String x:Key="LauncherPreferencePage_Game_Installations_Path">Path</s:String>
+	<s:String x:Key="LauncherPreferencePage_Add_New_Path_Button">Add New Installations</s:String>
+	<s:String x:Key="LauncherPreferencePage_About_Title">About</s:String>
 </ResourceDictionary>

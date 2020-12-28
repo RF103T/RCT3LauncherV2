@@ -7,7 +7,7 @@
 			<Setter.Value>
 				<ControlTemplate TargetType="ListBoxItem">
 					<Border x:Name="Bd" Background="Transparent" BorderThickness="0">
-						<Grid x:Name="RootGrid" Background="#008BC34A">
+						<Grid x:Name="RootGrid" Background="{StaticResource Theme.Primary.Normal.SolidColorBrush.Transparent}">
 							<Grid.RowDefinitions>
 								<RowDefinition Height="*"/>
 								<RowDefinition Height="10"/>
@@ -16,7 +16,7 @@
 								<ColumnDefinition Width="*"/>
 							</Grid.ColumnDefinitions>
 							<ContentPresenter Grid.Row="0" Grid.Column="0" Margin="0,12,0,3" HorizontalAlignment="Stretch"/>
-							<StackPanel Grid.Row="1" Grid.Column="0" Height="1" Margin="20,0,20,0" Background="#90FFFFFF" VerticalAlignment="Bottom"/>
+							<StackPanel Grid.Row="1" Grid.Column="0" Height="1" Margin="20,0,20,0" Background="{StaticResource Theme.Primary.Light.Background.SolidColorBrush}" Opacity="0.9" VerticalAlignment="Bottom"/>
 						</Grid>
 					</Border>
 					<ControlTemplate.Triggers>
@@ -115,14 +115,129 @@
 	</Style>
 	<Style x:Key="List_EvenItem_Style" TargetType="{x:Type ListBoxItem}">
 		<Setter Property="Padding" Value="0"/>
-		<Setter Property="BorderThickness" Value="0"/>
 		<Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-		<Setter Property="Background" Value="White"/>
+		<Setter Property="Background" Value="{StaticResource Theme.Primary.Light.Background.SolidColorBrush}"/>
+		<Setter Property="Foreground" Value="{StaticResource Theme.Secondary.Text}"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type ListBoxItem}">
+					<Border x:Name="Bd" Background="{TemplateBinding Background}" BorderThickness="0" BorderBrush="{x:Null}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
+						<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+					</Border>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsMouseOver" Value="True">
+							<Setter Property="Background" TargetName="Bd" Value="{StaticResource Theme.Primary.Light.SolidColorBrush}"/>
+						</Trigger>
+						<Trigger Property="IsSelected" Value="True">
+							<Setter Property="Background" TargetName="Bd" Value="{StaticResource Theme.Primary.Normal.LinearGradientBrush}"/>
+							<Setter Property="Foreground" Value="{StaticResource Theme.Primary.Text}"/>
+						</Trigger>
+						<Trigger Property="IsEnabled" Value="False">
+							<Setter Property="TextElement.Foreground" TargetName="Bd" Value="{StaticResource Unenable}"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
 	</Style>
 	<Style x:Key="List_OddItem_Style" TargetType="{x:Type ListBoxItem}">
 		<Setter Property="Padding" Value="0"/>
-		<Setter Property="BorderThickness" Value="0"/>
 		<Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-		<Setter Property="Background" Value="#FFE7E7E7"/>
+		<Setter Property="Background" Value="{StaticResource Theme.Primary.Dark.Background.SolidColorBrush}"/>
+		<Setter Property="Foreground" Value="{StaticResource Theme.Secondary.Text}"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type ListBoxItem}">
+					<Border x:Name="Bd" Background="{TemplateBinding Background}" BorderThickness="0" BorderBrush="{x:Null}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
+						<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+					</Border>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsMouseOver" Value="True">
+							<Setter Property="Background" TargetName="Bd" Value="{StaticResource Theme.Primary.Light.SolidColorBrush}"/>
+						</Trigger>
+						<Trigger Property="IsSelected" Value="True">
+							<Setter Property="Background" TargetName="Bd" Value="{StaticResource Theme.Primary.Normal.LinearGradientBrush}"/>
+							<Setter Property="Foreground" Value="{StaticResource Theme.Primary.Text}"/>
+						</Trigger>
+						<Trigger Property="IsEnabled" Value="False">
+							<Setter Property="TextElement.Foreground" TargetName="Bd" Value="{StaticResource Unenable}"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	<Style x:Key="List_ImageItem_Style" TargetType="{x:Type ListBoxItem}">
+		<Setter Property="Margin" Value="5"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="ListBoxItem">
+					<Border x:Name="Bd" Background="Transparent" BorderThickness="0" CornerRadius="8" Padding="4" SnapsToDevicePixels="true">
+						<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+					</Border>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsSelected" Value="True">
+							<Setter TargetName="Bd" Property="Background" Value="{StaticResource Theme.Primary.Normal.LinearGradientBrush}"/>
+						</Trigger>
+						<MultiTrigger>
+							<MultiTrigger.Conditions>
+								<Condition Property="IsMouseOver" Value="True"/>
+								<Condition Property="IsSelected" Value="False"/>
+							</MultiTrigger.Conditions>
+							<Setter TargetName="Bd" Property="Background" Value="{StaticResource Unenable}"/>
+						</MultiTrigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	<Style x:Key="List_ImageItem2_Style" TargetType="{x:Type ListBoxItem}">
+		<Setter Property="Margin" Value="1"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="ListBoxItem">
+					<Border x:Name="Bd" Background="Transparent" BorderThickness="0" CornerRadius="8" Padding="4" SnapsToDevicePixels="true">
+						<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+					</Border>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsSelected" Value="True">
+							<Setter TargetName="Bd" Property="Background" Value="{StaticResource Theme.Primary.Normal.LinearGradientBrush}"/>
+						</Trigger>
+						<MultiTrigger>
+							<MultiTrigger.Conditions>
+								<Condition Property="IsMouseOver" Value="True"/>
+								<Condition Property="IsSelected" Value="False"/>
+							</MultiTrigger.Conditions>
+							<Setter TargetName="Bd" Property="Background" Value="{StaticResource Unenable}"/>
+						</MultiTrigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	<Style x:Key="List_NormalItem_Style" TargetType="{x:Type ListBoxItem}">
+		<Setter Property="Margin" Value="2"/>
+		<Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="ListBoxItem">
+					<Border x:Name="Bd" Background="Transparent" BorderThickness="0" CornerRadius="8" Padding="0,4,7,4" SnapsToDevicePixels="true">
+						<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+					</Border>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsSelected" Value="True">
+							<Setter TargetName="Bd" Property="Background" Value="{StaticResource Theme.Secondary.Normal.SolidColorBrush}"/>
+						</Trigger>
+						<MultiTrigger>
+							<MultiTrigger.Conditions>
+								<Condition Property="IsMouseOver" Value="True"/>
+								<Condition Property="IsSelected" Value="False"/>
+							</MultiTrigger.Conditions>
+							<Setter TargetName="Bd" Property="Background" Value="{StaticResource Theme.Primary.Dark.Background.SolidColorBrush}"/>
+						</MultiTrigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
 	</Style>
 </ResourceDictionary>

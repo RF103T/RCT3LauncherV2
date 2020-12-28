@@ -1,13 +1,16 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 	<ResourceDictionary.MergedDictionaries>
-		<ResourceDictionary Source="/ResourcesDictionary/Styles/ButtonStyles.xaml"/>
-		<ResourceDictionary Source="/ResourcesDictionary/Styles/ListBoxItemStyles.xaml"/>
-		<ResourceDictionary Source="/ResourcesDictionary/Styles/ListBoxStyles.xaml"/>
-		<ResourceDictionary Source="/ResourcesDictionary/Styles/ComboBoxStyles.xaml"/>
-		<ResourceDictionary Source="/ResourcesDictionary/Styles/ItemsControlStyles.xaml"/>
-		<ResourceDictionary Source="/ResourcesDictionary/Styles/TextBoxStyles.xaml"/>
-		<ResourceDictionary Source="/ResourcesDictionary/Styles/ScrollerStyles.xaml"/>
-		<ResourceDictionary Source="/ResourcesDictionary/Styles/CheckBoxStyles.xaml"/>
+		<ResourceDictionary Source="pack://application:,,,/ResourcesDictionary/Styles/ListBoxStyles.xaml"/>
+		<ResourceDictionary Source="pack://application:,,,/ResourcesDictionary/Styles/ButtonStyles.xaml"/>
+		<ResourceDictionary Source="pack://application:,,,/ResourcesDictionary/Styles/ListBoxItemStyles.xaml"/>
+		<ResourceDictionary Source="pack://application:,,,/ResourcesDictionary/Styles/ComboBoxStyles.xaml"/>
+		<ResourceDictionary Source="pack://application:,,,/ResourcesDictionary/Styles/ItemsControlStyles.xaml"/>
+		<ResourceDictionary Source="pack://application:,,,/ResourcesDictionary/Styles/TextBoxStyles.xaml"/>
+		<ResourceDictionary Source="pack://application:,,,/ResourcesDictionary/Styles/ScrollerStyles.xaml"/>
+		<ResourceDictionary Source="pack://application:,,,/ResourcesDictionary/Styles/CheckBoxStyles.xaml"/>
+		<ResourceDictionary Source="pack://application:,,,/ResourcesDictionary/Styles/ToggleButtonStyles.xaml"/>
+		<ResourceDictionary Source="pack://application:,,,/ResourcesDictionary/Styles/HyperlinkStyles.xaml"/>
+		<ResourceDictionary Source="pack://application:,,,/ResourcesDictionary/Styles/ToolTipStyles.xaml"/>
 	</ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

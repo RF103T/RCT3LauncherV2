@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 	<Style x:Key="Window_Title_Button_Style" TargetType="{x:Type Button}">
 		<Setter Property="BorderBrush" Value="Transparent"/>
-		<Setter Property="Foreground" Value="White"/>
+		<Setter Property="Foreground" Value="{StaticResource Theme.Primary.Text}"/>
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type Button}">
@@ -35,62 +35,94 @@
 			</Setter.Value>
 		</Setter>
 	</Style>
-	<Style x:Key="Normal_Button_Style" TargetType="{x:Type Button}">
+	<Style x:Key="No_Animation_Button_Style" TargetType="{x:Type Button}">
+		<Setter Property="FontWeight" Value="Bold"/>
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type Button}">
-					<Border x:Name="Border" RenderTransformOrigin="0.5,0.5">
+					<Border x:Name="Border">
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal">
+									<Storyboard>
+										<DoubleAnimation To="0" Duration="0:0:0.2" Storyboard.TargetName="Button_Background_Front" Storyboard.TargetProperty="Opacity"/>
+										<DoubleAnimation To="0" Duration="0:0:0.2" Storyboard.TargetName="Button_Background_Unenable" Storyboard.TargetProperty="Opacity"/>
+									</Storyboard>
+								</VisualState>
+								<VisualState x:Name="MouseOver">
+									<Storyboard Storyboard.TargetName="Button_Background_Front">
+										<DoubleAnimation To="0.3" Duration="0:0:0.1" Storyboard.TargetProperty="Opacity"/>
+									</Storyboard>
+								</VisualState>
+								<VisualState x:Name="Pressed">
+									<Storyboard Storyboard.TargetName="Button_Background_Front">
+										<DoubleAnimation To="0.15" Duration="0:0:0.1" Storyboard.TargetProperty="Opacity"/>
+									</Storyboard>
+								</VisualState>
+								<VisualState x:Name="Disabled">
+									<Storyboard Storyboard.TargetName="Button_Background_Unenable">
+										<DoubleAnimation To="1" Duration="0:0:0.2" Storyboard.TargetProperty="Opacity"/>
+									</Storyboard>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
 						<Grid>
 							<Rectangle x:Name="Button_Background" Fill="{TemplateBinding Background}"/>
-							<Rectangle x:Name="Button_Background_Front" Fill="#FFA7A7A7" Opacity="0"/>
+							<Rectangle x:Name="Button_Background_Front" Fill="{StaticResource Theme.Primary.Light.Background.SolidColorBrush}" Opacity="0"/>
+							<Rectangle x:Name="Button_Background_Unenable" Fill="{StaticResource Unenable}" Opacity="0"/>
 							<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
 						</Grid>
 					</Border>
-					<ControlTemplate.Triggers>
-						<Trigger Property="IsEnabled" Value="False">
-							<Setter TargetName="Button_Background_Front" Property="Fill" Value="#FFA7A7A7"/>
-							<Setter TargetName="Button_Background_Front" Property="Opacity" Value="1"/>
-						</Trigger>
-						<MultiTrigger>
-							<MultiTrigger.Conditions>
-								<Condition Property="IsEnabled" Value="True"/>
-								<Condition Property="IsMouseOver" Value="True"/>
-							</MultiTrigger.Conditions>
-							<MultiTrigger.Setters>
-								<Setter TargetName="Button_Background_Front" Property="Fill" Value="#FFFFFFFF"/>
-							</MultiTrigger.Setters>
-							<MultiTrigger.EnterActions>
-								<BeginStoryboard>
-									<Storyboard>
-										<DoubleAnimation To="0.3" Duration="0:0:0.2" Storyboard.TargetName="Button_Background_Front" Storyboard.TargetProperty="Opacity"/>
-									</Storyboard>
-								</BeginStoryboard>
-							</MultiTrigger.EnterActions>
-							<MultiTrigger.ExitActions>
-								<BeginStoryboard>
-									<Storyboard>
-										<DoubleAnimation To="0" Duration="0:0:0.2" Storyboard.TargetName="Button_Background_Front" Storyboard.TargetProperty="Opacity"/>
-									</Storyboard>
-								</BeginStoryboard>
-							</MultiTrigger.ExitActions>
-						</MultiTrigger>
-					</ControlTemplate.Triggers>
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
 	</Style>
-	<Style x:Key="Animate_Button_Style" TargetType="{x:Type Button}">
-		<Setter Property="Background">
+	<Style x:Key="No_Animation_RadiusButton_Style" TargetType="{x:Type Button}">
+		<Setter Property="FontWeight" Value="Bold"/>
+		<Setter Property="Template">
 			<Setter.Value>
-				<LinearGradientBrush StartPoint="0.1,0.1" EndPoint="1,1.2">
-					<GradientStop x:Name="StartPointGradientColor" Offset="0" Color="#FF8BC34A"/>
-					<GradientStop x:Name="EndPointGradientColor" Offset="1" Color="#FF4CAF50"/>
-				</LinearGradientBrush>
+				<ControlTemplate TargetType="{x:Type Button}">
+					<Border x:Name="Border">
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal">
+									<Storyboard>
+										<DoubleAnimation To="0" Duration="0:0:0.2" Storyboard.TargetName="Button_Background_Front" Storyboard.TargetProperty="Opacity"/>
+										<DoubleAnimation To="0" Duration="0:0:0.2" Storyboard.TargetName="Button_Background_Unenable" Storyboard.TargetProperty="Opacity"/>
+									</Storyboard>
+								</VisualState>
+								<VisualState x:Name="MouseOver">
+									<Storyboard Storyboard.TargetName="Button_Background_Front">
+										<DoubleAnimation To="0.3" Duration="0:0:0.1" Storyboard.TargetProperty="Opacity"/>
+									</Storyboard>
+								</VisualState>
+								<VisualState x:Name="Pressed">
+									<Storyboard Storyboard.TargetName="Button_Background_Front">
+										<DoubleAnimation To="0.15" Duration="0:0:0.1" Storyboard.TargetProperty="Opacity"/>
+									</Storyboard>
+								</VisualState>
+								<VisualState x:Name="Disabled">
+									<Storyboard Storyboard.TargetName="Button_Background_Unenable">
+										<DoubleAnimation To="1" Duration="0:0:0.2" Storyboard.TargetProperty="Opacity"/>
+									</Storyboard>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+						<Grid>
+							<Rectangle x:Name="Button_Background" Fill="{TemplateBinding Background}" RadiusX="6" RadiusY="6"/>
+							<Rectangle x:Name="Button_Background_Front" Fill="{StaticResource Theme.Primary.Light.Background.SolidColorBrush}" Opacity="0" RadiusX="6" RadiusY="6"/>
+							<Rectangle x:Name="Button_Background_Unenable" Fill="{StaticResource Unenable}" Opacity="0" RadiusX="6" RadiusY="6"/>
+							<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+						</Grid>
+					</Border>
+				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
+	</Style>
+	<Style x:Key="Animation_RadiusButton_Style" TargetType="{x:Type Button}">
+		<Setter Property="Background" Value="{StaticResource Theme.Primary.Normal.LinearGradientBrush}"/>
 		<Setter Property="BorderBrush" Value="Transparent"/>
-		<Setter Property="Foreground" Value="White"/>
-		<Setter Property="FontSize" Value="6"/>
+		<Setter Property="Foreground" Value="{StaticResource Theme.Primary.Text}"/>
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type Button}">
@@ -112,6 +144,7 @@
 												<ElasticEase/>
 											</DoubleAnimation.EasingFunction>
 										</DoubleAnimation>
+										<DoubleAnimation To="0" Duration="0:0:0.2" Storyboard.TargetName="Button_Background_Unenable" Storyboard.TargetProperty="Opacity"/>
 										<ColorAnimation To="#FF8BC34A" Duration="0:0:0.2" Storyboard.TargetName="Button_Background" Storyboard.TargetProperty="(Rectangle.Fill).(LinearGradientBrush.GradientStops)[0].Color"/>
 										<ColorAnimation To="#FF4CAF50" Duration="0:0:0.2" Storyboard.TargetName="Button_Background" Storyboard.TargetProperty="(Rectangle.Fill).(LinearGradientBrush.GradientStops)[1].Color"/>
 									</Storyboard>
@@ -136,10 +169,16 @@
 										<ColorAnimation To="#FF56AF5A" Duration="0:0:0.2" Storyboard.TargetName="Button_Background" Storyboard.TargetProperty="(Rectangle.Fill).(LinearGradientBrush.GradientStops)[1].Color"/>
 									</Storyboard>
 								</VisualState>
+								<VisualState x:Name="Disabled">
+									<Storyboard Storyboard.TargetName="Button_Background_Unenable">
+										<DoubleAnimation To="1" Duration="0:0:0.2" Storyboard.TargetProperty="Opacity"/>
+									</Storyboard>
+								</VisualState>
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 						<Grid>
-							<Rectangle x:Name="Button_Background" Fill="{TemplateBinding Background}" RadiusX="2" RadiusY="2"/>
+							<Rectangle x:Name="Button_Background" Fill="{TemplateBinding Background}" RadiusX="6" RadiusY="6"/>
+							<Rectangle x:Name="Button_Background_Unenable" Fill="{StaticResource Unenable}" Opacity="0" RadiusX="6" RadiusY="6"/>
 							<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
 						</Grid>
 					</Border>
@@ -148,7 +187,7 @@
 		</Setter>
 	</Style>
 	<Style x:Key="Transparent_Button_Style" TargetType="{x:Type Button}">
-		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="Background" Value="White"/>
 		<Setter Property="BorderBrush" Value="Transparent"/>
 		<Setter Property="Template">
 			<Setter.Value>
@@ -174,7 +213,7 @@
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 						<Grid>
-							<Rectangle x:Name="Button_Background" Fill="#FFE7E7E7" Opacity="0"/>
+							<Rectangle x:Name="Button_Background" Fill="{TemplateBinding Background}" Opacity="0" RadiusX="3" RadiusY="3"/>
 							<ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
 						</Grid>
 					</Border>

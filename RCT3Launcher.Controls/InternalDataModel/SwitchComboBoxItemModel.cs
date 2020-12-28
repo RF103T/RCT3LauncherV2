@@ -6,34 +6,35 @@ using System.Windows;
 
 namespace RCT3Launcher.Controls.InternalDataModel
 {
-	public class SwitchComboBoxItemModel : FrameworkElement, INotifyPropertyChanged
+	public class SwitchComboBoxItemModel : INotifyPropertyChanged
 	{
+		private int id;
 		public int ID
 		{
-			get { return (int)GetValue(IDProperty); }
+			get { return id; }
 			set
 			{
-				PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ID"));
-				SetValue(IDProperty, value);
+				if (id != value)
+				{
+					id = value;
+					PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ID"));
+				}
 			}
 		}
-		public static readonly DependencyProperty IDProperty =
-			DependencyProperty.RegisterAttached("ID", typeof(int), typeof(SwitchComboBoxItemModel), new PropertyMetadata(0));
 
-
-
+		private string content;
 		public string Content
 		{
-			get { return (string)GetValue(ContentProperty); }
+			get { return content; }
 			set
 			{
-				PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Content"));
-				SetValue(ContentProperty, value);
+				if (content != value)
+				{
+					content = value;
+					PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Content"));
+				}
 			}
 		}
-		public static readonly DependencyProperty ContentProperty =
-			DependencyProperty.RegisterAttached("Content", typeof(string), typeof(SwitchComboBoxItemModel), new PropertyMetadata(""));
-
 
 		public event PropertyChangedEventHandler PropertyChanged;
 	}

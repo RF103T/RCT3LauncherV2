@@ -30,8 +30,8 @@
 					  IsChecked="{Binding IsChecked, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SwitchBox}}}"
 					  IsEnabled="{Binding IsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SwitchBox}}}"
 					  FontSize="{Binding FontSize, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SwitchBox}}}"
-					  HorizontalAlignment="Stretch"
-					  VerticalAlignment="Stretch">
+					  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+					  Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked">
 				<CheckBox.Style>
 					<Style TargetType="{x:Type CheckBox}">
 						<Setter Property="Template">

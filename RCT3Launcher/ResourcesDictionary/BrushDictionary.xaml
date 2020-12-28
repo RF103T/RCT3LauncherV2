@@ -1,0 +1,32 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<!--主题笔刷-->
+	<SolidColorBrush x:Key="Theme.Primary.Normal.SolidColorBrush" Color="{StaticResource Theme.Primary.Normal.Color}"/>
+	<SolidColorBrush x:Key="Theme.Primary.Normal.SolidColorBrush.Transparent" Color="{StaticResource Theme.Primary.Normal.Color.Transparent}"/>
+	<LinearGradientBrush x:Key="Theme.Primary.Normal.LinearGradientBrush" StartPoint="0.2,0.2" EndPoint="1,1.2">
+		<GradientStop Offset="0" Color="{StaticResource Theme.Primary.Normal.LinearGradientStart.Color}"/>
+		<GradientStop Offset="1" Color="{StaticResource Theme.Primary.Normal.LinearGradientEnd.Color}"/>
+	</LinearGradientBrush>	
+	<SolidColorBrush x:Key="Theme.Primary.Light.SolidColorBrush" Color="{StaticResource Theme.Primary.Light.Color}"/>
+	<SolidColorBrush x:Key="Theme.Primary.Light.SolidColorBrush.Transparent" Color="{StaticResource Theme.Primary.Light.Color.Transparent}"/>
+	<SolidColorBrush x:Key="Theme.Primary.Light.Background.SolidColorBrush" Color="{StaticResource Theme.Primary.Light.Background.Color}"/>
+	<SolidColorBrush x:Key="Theme.Primary.Light.Background.SolidColorBrush.Transparent" Color="{StaticResource Theme.Primary.Light.Background.Color.Transparent}"/>
+	<SolidColorBrush x:Key="Theme.Primary.Dark.SolidColorBrush" Color="{StaticResource Theme.Primary.Dark.Color}"/>
+	<SolidColorBrush x:Key="Theme.Primary.Dark.SolidColorBrush.Transparent" Color="{StaticResource Theme.Primary.Dark.Color.Transparent}"/>
+	<SolidColorBrush x:Key="Theme.Primary.Dark.Background.SolidColorBrush" Color="{StaticResource Theme.Primary.Dark.Background.Color}"/>
+	<SolidColorBrush x:Key="Theme.Primary.Dark.Background.SolidColorBrush.Transparent" Color="{StaticResource Theme.Primary.Dark.Background.Color.Transparent}"/>
+	<SolidColorBrush x:Key="Theme.Primary.Text" Color="{StaticResource Theme.Primary.Text.Color}"/>
+	<SolidColorBrush x:Key="Theme.Secondary.Normal.SolidColorBrush" Color="{StaticResource Theme.Secondary.Normal.Color}"/>
+	<SolidColorBrush x:Key="Theme.Secondary.Normal.SolidColorBrush.Transparent" Color="{StaticResource Theme.Secondary.Normal.Color.Transparent}"/>
+	<SolidColorBrush x:Key="Theme.Secondary.Dark.SolidColorBrush" Color="{StaticResource Theme.Secondary.Dark.Color}"/>
+	<SolidColorBrush x:Key="Theme.Secondary.Dark.SolidColorBrush.Transparent" Color="{StaticResource Theme.Secondary.Dark.Color.Transparent}"/>
+	<SolidColorBrush x:Key="Theme.Secondary.Text" Color="{StaticResource Theme.Secondary.Text.Color}"/>
+
+	<!--通用笔刷-->
+	<SolidColorBrush x:Key="Unenable" Color="{StaticResource Unenable.Color}"/>
+	<SolidColorBrush x:Key="Warning.SolidColorBrush" Color="{StaticResource Warning.Color}"/>
+	<LinearGradientBrush x:Key="Warning.LinearGradientBrush" StartPoint="0.1,0.1" EndPoint="1,1.2">
+		<GradientStop Offset="0" Color="{StaticResource Warning.LinearGradientStart.Color}"/>
+		<GradientStop Offset="1" Color="{StaticResource Warning.LinearGradientEnd.Color}"/>
+	</LinearGradientBrush>
+</ResourceDictionary>

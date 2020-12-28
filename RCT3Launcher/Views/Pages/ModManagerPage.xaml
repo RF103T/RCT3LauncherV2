@@ -7,22 +7,9 @@
 	  xmlns:ViewModels="clr-namespace:RCT3Launcher.ViewModels"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
+	  Background="{StaticResource Theme.Secondary.Normal.SolidColorBrush}"
       Title="ModManagerPage">
-	<Grid DataContext="{Binding ViewModel, RelativeSource={RelativeSource AncestorType={x:Type Page}}}">
-		<TextBox Height="50" Text="{Binding Password, ValidatesOnNotifyDataErrors=True}">
-			<TextBox.Style>
-				<Style TargetType="{x:Type TextBox}">
-					<Style.Triggers>
-						<Trigger Property="Validation.HasError" Value="True">
-							<Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self},Path=(Validation.Errors)[0].ErrorContent}"/>
-						</Trigger>
-						<Trigger Property="Validation.HasError" Value="False">
-							<Setter Property="ToolTip" Value=""/>
-						</Trigger>
-					</Style.Triggers>
-				</Style>
-			</TextBox.Style>
-		</TextBox>
-		<Button VerticalAlignment="Bottom" Click="Button_Click" Style="{StaticResource Normal_Button_Style}">test</Button>
+	<Grid>
+
 	</Grid>
 </Page>
