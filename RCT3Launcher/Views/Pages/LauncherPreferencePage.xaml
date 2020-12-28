@@ -22,7 +22,7 @@
 	<ItemsControl Margin="30,0">
 		<StackPanel Margin="0,30,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
 			<TextBlock Text="{DynamicResource LauncherPreferencePage_Language_Preference_Title}" Foreground="{StaticResource Theme.Primary.Text}" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-			<RCT3LauncherControls:SwitchComboBox x:Name="switchComboBox" Height="35" Width="200" Margin="0,10,0,10"
+			<RCT3LauncherControls:SwitchComboBox x:Name="switchComboBox" Height="35" Width="200" Margin="0,10,0,0"
 												 FontSize="14" FontWeight="Bold" Foreground="{StaticResource Theme.Primary.Text}" NegativeForeground="{StaticResource Theme.Secondary.Text}" HorizontalAlignment="Left"
 												 SelectedIndex="{Binding LanguageSetting, Mode=OneWay, Source={StaticResource settingsViewModel}}"
 												 Command="{Binding LanguageSwitchComboBoxCommand, Mode=OneWay,Source={StaticResource launcherPreferencePageViewModel}}"
@@ -271,10 +271,19 @@
 		<Grid Margin="0,10,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="Auto"/>
-				<RowDefinition Height="*"/>
 				<RowDefinition Height="Auto"/>
 			</Grid.RowDefinitions>
 			<TextBlock Grid.Row="0" Text="{DynamicResource LauncherPreferencePage_About_Title}" Foreground="{StaticResource Theme.Primary.Text}" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+			<TextBlock Grid.Row="1" Margin="10,10,0,0" Cursor="Hand" FontSize="12">
+				<Hyperlink TextDecorations="{x:Null}">
+					<Behaviors:Interaction.Triggers>
+						<Behaviors:EventTrigger EventName="Click">
+							<Behaviors:LaunchUriOrFileAction Path="{DynamicResource Terms_Of_Use_Description_Link}"/>
+						</Behaviors:EventTrigger>
+					</Behaviors:Interaction.Triggers>
+					<TextBlock Text="{DynamicResource Terms_Of_Use_Description_Link_Text}"/>
+				</Hyperlink>
+			</TextBlock>
 		</Grid>
 	</ItemsControl>
 </Page>

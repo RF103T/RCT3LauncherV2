@@ -97,7 +97,10 @@
 				<RowDefinition Height="*"/>
 			</Grid.RowDefinitions>
 			<Viewbox Grid.Row="0" Margin="20,10,0,0" MaxHeight="22" Stretch="Uniform" HorizontalAlignment="Left">
-				<TextBlock Text="{DynamicResource Application_Title}" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Foreground="{StaticResource Theme.Primary.Text}"/>
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Text="{DynamicResource Application_Title}" Grid.Column="0" VerticalAlignment="Center" FontSize="16" Foreground="{StaticResource Theme.Primary.Text}"/>
+					<TextBlock Text="{DynamicResource Application_Version}" Grid.Column="0" Margin="6,0,0,0" VerticalAlignment="Bottom" FontSize="12" Foreground="{StaticResource Theme.Primary.Text}"/>
+				</StackPanel>
 			</Viewbox>
 			<ListBox x:Name="MainMenuList" Grid.Row="1" Margin="0,10,0,0" Style="{StaticResource Transparent_ListBox_Style}" ItemsSource="{Binding MainMenuItems,Mode=TwoWay}" SelectedValue="{Binding SelectedValue}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" VerticalAlignment="Stretch">
 				<ListBox.ItemContainerStyleSelector>

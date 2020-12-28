@@ -3,6 +3,7 @@
                     xmlns:s="clr-namespace:System;assembly=System.Runtime">
 	<!--应用程序-->
 	<s:String x:Key="Application_Title">RCT3启动器</s:String>
+	<s:String x:Key="Application_Version">v0.1.0 alpha</s:String>
 
 	<!--通用字符串-->
 	<s:String x:Key="RCT3_Complete_Edition_Name">RollerCoaster Tycoon® 3: Complete Edition</s:String>
@@ -22,7 +23,11 @@
 	<s:String x:Key="SaveType_Park_FormattedText">乐园</s:String>
 	<s:String x:Key="SaveType_Scenario_FormattedText">剧本</s:String>
 	<s:String x:Key="SaveType_Start_New_Scenario_FormattedText">开始新剧本</s:String>
-	
+
+	<s:String x:Key="Terms_Of_Use_Description_Text">我已同意并接受</s:String>
+	<s:String x:Key="Terms_Of_Use_Description_Link_Text">使用条款及开源代码协议</s:String>
+	<s:String x:Key="Terms_Of_Use_Description_Link">https://github.com/RF103T/RCT3LauncherV2/blob/feature-ui/LICENSE_zh</s:String>
+
 	<!--表单验证-->
 	<s:String x:Key="ValidationRule_ValueNullError">值不能为空</s:String>
 	<s:String x:Key="ValidationRule_FilePathError">无效的路径格式</s:String>
@@ -50,10 +55,7 @@
 	<s:String x:Key="GuidePage_Game_Installations_Name">名称</s:String>
 	<s:String x:Key="GuidePage_Game_Installations_Path">路径</s:String>
 	<s:String x:Key="GuidePage_Add_New_Path_Button">添加新的配置</s:String>
-	<s:String x:Key="GuidePage_Terms_Of_Use_Description_Text">我已同意并接受</s:String>
-	<s:String x:Key="GuidePage_Terms_Of_Use_Description_Link_Text">使用条款</s:String>
-	<s:String x:Key="GuidePage_Terms_Of_Use_Description_Link">https://rf103t.club/</s:String>
-	
+
 	<!--SaveManagerPage-->
 	<s:String x:Key="SaveManagerPage_Multiple_Mode">多选</s:String>
 	<s:String x:Key="SaveManagerPage_Import_Saves">导入存档</s:String>

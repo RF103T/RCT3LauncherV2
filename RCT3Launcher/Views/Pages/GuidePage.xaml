@@ -286,15 +286,15 @@
 					  Style="{StaticResource Normal_NotNull_Hook_CheckBox_Style}"
 					  HorizontalAlignment="Center" FontSize="12">
 				<StackPanel Orientation="Horizontal">
-					<TextBlock Text="{DynamicResource GuidePage_Terms_Of_Use_Description_Text}"/>
+					<TextBlock Text="{DynamicResource Terms_Of_Use_Description_Text}"/>
 					<TextBlock Margin="3,0,0,0" Cursor="Hand">
 						<Hyperlink TextDecorations="{x:Null}">
 							<Behaviors:Interaction.Triggers>
 								<Behaviors:EventTrigger EventName="Click">
-									<Behaviors:LaunchUriOrFileAction Path="{DynamicResource GuidePage_Terms_Of_Use_Description_Link}"/>
+									<Behaviors:LaunchUriOrFileAction Path="{DynamicResource Terms_Of_Use_Description_Link}"/>
 								</Behaviors:EventTrigger>
 							</Behaviors:Interaction.Triggers>
-							<TextBlock Text="{DynamicResource GuidePage_Terms_Of_Use_Description_Link_Text}"/>
+							<TextBlock Text="{DynamicResource Terms_Of_Use_Description_Link_Text}"/>
 						</Hyperlink>
 					</TextBlock>
 				</StackPanel>
