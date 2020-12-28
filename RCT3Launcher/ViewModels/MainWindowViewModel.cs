@@ -4,6 +4,7 @@ using RCT3Launcher.Option;
 using RCT3Launcher.Option.EventArgs;
 using RCT3Launcher.Option.LauncherOptions;
 using RCT3Launcher.ViewModels.BaseClass;
+using RCT3Launcher.Views.Pages;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -25,85 +26,102 @@ namespace RCT3Launcher.ViewModels
 				{
 					NavigationPage = "Pages/LauncherPage.xaml"
 				},
-				new MainMenuItem("Mod_Manager_Page_Icon","Mod_Manager_MenuItem")
-				{
-					NavigationPage = "Pages/ModManagerPage.xaml"
-				},
+				//new MainMenuItem("Mod_Manager_Page_Icon","Mod_Manager_MenuItem")
+				//{
+				//	NavigationPage = "Pages/ModManagerPage.xaml"
+				//},
 				new MainMenuItem("Save_Manager_Page_Icon","Save_Manager_MenuItem")
 				{
 					NavigationPage = "Pages/SaveManagerPage.xaml"
 				},
-				new MainMenuItem("Music_Manager_Page_Icon","Music_Manager_MenuItem")
-				{
-					NavigationPage = "Pages/MusicManagerPage.xaml"
-				},
-				new MainMenuItem("Game_Preference_Page_Icon","Game_Preference_MenuItem")
-				{
-					NavigationPage = "Pages/GamePreferencePage.xaml"
-				},
+				//new MainMenuItem("Music_Manager_Page_Icon","Music_Manager_MenuItem")
+				//{
+				//	NavigationPage = "Pages/MusicManagerPage.xaml"
+				//},
+				//new MainMenuItem("Game_Preference_Page_Icon","Game_Preference_MenuItem")
+				//{
+				//	NavigationPage = "Pages/GamePreferencePage.xaml"
+				//},
 				new MainMenuItem("Launcher_Preference_Page_Icon","Launcher_Preference_MenuItem")
 				{
 					NavigationPage = "Pages/LauncherPreferencePage.xaml"
 				}
 			};
 
-			//if (!OptionsManager.Instance.IsOptionsInitialized)
-			NavigationPageSource = "Pages/GuidePage.xaml";
-			//else
-			//	NavigationPageSource = MainMenuItems[0].NavigationPage;
+			if (!OptionsManager.Instance.IsOptionsInitialized)
+				EventCenter.Boardcast<string>(EventType.PageNavigate, nameof(GuidePage));
+			else
+				EventCenter.Boardcast<string>(EventType.PageNavigate, nameof(LauncherPage));
 		}
 
 		#region 菜单
 
-		private ObservableCollection<MainMenuItem> _mainMenuItems;
+		private ObservableCollection<MainMenuItem> mainMenuItems;
 		public ObservableCollection<MainMenuItem> MainMenuItems
 		{
 			get
 			{
-				return _mainMenuItems;
+				return mainMenuItems;
 			}
 			set
 			{
-				if (_mainMenuItems != value)
+				if (mainMenuItems != value)
 				{
-					_mainMenuItems = value;
+					mainMenuItems = value;
 					RaisePropertyChanged(nameof(MainMenuItems));
 				}
 			}
 		}
 
-		private int _selectedIndex = -1;
+		private int selectedIndex = -1;
 		public int SelectedIndex
 		{
 			get
 			{
-				return _selectedIndex;
+				return selectedIndex;
 			}
 			set
 			{
-				if (_selectedIndex != value)
+				if (selectedIndex != value)
 				{
-					_selectedIndex = value;
-					NavigationPageSource = _mainMenuItems[_selectedIndex].NavigationPage;
+					selectedIndex = value;
+					NavigationPageSource = mainMenuItems[selectedIndex].NavigationPage;
 				}
 			}
 		}
 
-		private object _selectedValue;
+		private object selectedValue;
 		public object SelectedValue
 		{
 			get
 			{
-				return _selectedValue;
+				return selectedValue;
 			}
 			set
 			{
-				if (_selectedValue != value)
+				if (selectedValue != value)
 				{
-					_selectedValue = value;
-					if (_selectedValue != null)
-						SelectedIndex = _mainMenuItems.IndexOf(_selectedValue as MainMenuItem);
+					selectedValue = value;
+					if (selectedValue != null)
+						SelectedIndex = mainMenuItems.IndexOf(selectedValue as MainMenuItem);
 					RaisePropertyChanged(nameof(SelectedValue));
+				}
+			}
+		}
+
+		private bool isMainMenuEnabled;
+		public bool IsMainMenuEnabled
+		{
+			get
+			{
+				return isMainMenuEnabled;
+			}
+			set
+			{
+				if (isMainMenuEnabled != value)
+				{
+					isMainMenuEnabled = value;
+					RaisePropertyChanged(nameof(IsMainMenuEnabled));
 				}
 			}
 		}
@@ -178,10 +196,12 @@ namespace RCT3Launcher.ViewModels
 			{
 				if (item.NavigationPage == navigationUrl)
 				{
+					IsMainMenuEnabled = true;
 					SelectedValue = item;
 					return;
 				}
 			}
+			IsMainMenuEnabled = false;
 			NavigationPageSource = navigationUrl;
 		}
 	}

@@ -26,7 +26,7 @@
 
 	<s:String x:Key="Terms_Of_Use_Description_Text">我已同意并接受</s:String>
 	<s:String x:Key="Terms_Of_Use_Description_Link_Text">使用条款及开源代码协议</s:String>
-	<s:String x:Key="Terms_Of_Use_Description_Link">https://github.com/RF103T/RCT3LauncherV2/blob/feature-ui/LICENSE_zh</s:String>
+	<s:String x:Key="Terms_Of_Use_Description_Link">https://github.com/RF103T/RCT3LauncherV2/blob/main/LICENSE_zh</s:String>
 
 	<!--表单验证-->
 	<s:String x:Key="ValidationRule_ValueNullError">值不能为空</s:String>

@@ -26,7 +26,7 @@
 
 	<s:String x:Key="Terms_Of_Use_Description_Text">I have agreed and accepted</s:String>
 	<s:String x:Key="Terms_Of_Use_Description_Link_Text">The Terms of Use and Open Source Software Agreement</s:String>
-	<s:String x:Key="Terms_Of_Use_Description_Link">https://github.com/RF103T/RCT3LauncherV2/blob/feature-ui/LICENSE_en</s:String>
+	<s:String x:Key="Terms_Of_Use_Description_Link">https://github.com/RF103T/RCT3LauncherV2/blob/main/LICENSE_en</s:String>
 
 	<!--表单验证-->
 	<s:String x:Key="ValidationRule_ValueNullError">Value can't be null</s:String>

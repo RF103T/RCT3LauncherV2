@@ -101,6 +101,7 @@ namespace RCT3Launcher.ViewModels
 					applyCommand = new CommandBase<object>(
 						obj =>
 						{
+							OptionsManager.Instance.UserInitializeCompleted();
 							EventCenter.Boardcast<string>(EventType.PageNavigate, nameof(LauncherPage));
 						}
 					);

@@ -31,7 +31,7 @@ namespace RCT3Launcher.Option
 				return instance;
 			}
 		}
-		public static readonly OptionsManager instance = new OptionsManager();
+		private static readonly OptionsManager instance = new OptionsManager();
 
 		static OptionsManager()
 		{
@@ -54,7 +54,7 @@ namespace RCT3Launcher.Option
 		}
 		private bool isOptionsInitialized;
 
-		private readonly XmlDocument optionsXmlDocument;
+		private readonly XmlDocument optionsXmlDocument = new XmlDocument();
 		private readonly Dictionary<OptionType, IOption> optionMap = new Dictionary<OptionType, IOption>()
 		{
 			{OptionType.Language,new LanguageOption(LanguageOption.LanguageParameter.zh_CN)},
@@ -74,11 +74,20 @@ namespace RCT3Launcher.Option
 
 		private OptionsManager()
 		{
-			optionsXmlDocument = new XmlDocument();
-			if (!File.Exists(optionsXmlFilePath))
+			try
+			{
+				optionsXmlDocument.Load(optionsXmlFilePath);
+				if (!optionsXmlDocument.DocumentElement.HasAttribute("IsOptionsInitialized") ||
+					!System.Convert.ToBoolean(optionsXmlDocument.DocumentElement.GetAttribute("IsOptionsInitialized")))
+					throw new Exception();
+			}
+			catch (Exception)
+			{
+				optionsXmlDocument.RemoveAll();
 				InitializeOptionsXmlFile();
-			else
-				InitializeOptions();
+				return;
+			}
+			InitializeOptions();
 		}
 
 		/// <summary>
@@ -147,9 +156,18 @@ namespace RCT3Launcher.Option
 			option.UpdateOptionValueInXmlElement(ref optionNode);
 		}
 
+		public void UserInitializeCompleted()
+		{
+			IsOptionsInitialized = true;
+			optionsXmlDocument.DocumentElement.SetAttribute("IsOptionsInitialized", System.Convert.ToString(IsOptionsInitialized));
+		}
+
 		private void InitializeOptionsXmlFile()
 		{
 			XmlElement rootNode = optionsXmlDocument.CreateElement("Options");
+			XmlAttribute isInitializedAttribute = optionsXmlDocument.CreateAttribute("IsOptionsInitialized");
+			isInitializedAttribute.Value = System.Convert.ToString(false);
+			rootNode.Attributes.Append(isInitializedAttribute);
 			optionsXmlDocument.AppendChild(rootNode);
 
 			foreach (KeyValuePair<OptionType, IOption> pair in optionMap)
@@ -164,8 +182,6 @@ namespace RCT3Launcher.Option
 		private void InitializeOptions()
 		{
 			IsOptionsInitialized = true;
-
-			optionsXmlDocument.Load(optionsXmlFilePath);
 
 			foreach (KeyValuePair<OptionType, IOption> pair in optionMap)
 			{
