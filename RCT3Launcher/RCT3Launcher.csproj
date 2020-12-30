@@ -10,7 +10,7 @@
     <Platforms>AnyCPU;x86;x64</Platforms>
     <Authors>RF103T</Authors>
     <Copyright>Copyright © 2020 RF103T</Copyright>
-    <Version>0.1.0</Version>
+    <Version>0.1.1</Version>
     <Company />
     <Description />
     <SignAssembly>false</SignAssembly>

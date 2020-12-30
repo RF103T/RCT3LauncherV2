@@ -3,7 +3,8 @@
                     xmlns:s="clr-namespace:System;assembly=System.Runtime">
 	<!--应用程序-->
 	<s:String x:Key="Application_Title">RCT3 Lanucher</s:String>
-	<s:String x:Key="Application_Version">v0.1.0 alpha</s:String>
+	<s:String x:Key="Application_Version">v0.1.1 alpha</s:String>
+	<s:String x:Key="Application_Version_Tag">v0.1.1-alpha</s:String>
 
 	<!--通用字符串-->
 	<s:String x:Key="RCT3_Complete_Edition_Name">RollerCoaster Tycoon® 3: Complete Edition</s:String>
