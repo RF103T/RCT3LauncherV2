@@ -11,7 +11,7 @@ namespace RCT3Launcher
 {
 	class GlobalStateHelper
 	{
-		public static bool HasGameRunnings
+		public static bool HasGameRunning
 		{
 			get
 			{
@@ -20,6 +20,18 @@ namespace RCT3Launcher
 					if (!installation.IsGameProcessExited)
 						return true;
 				return false;
+			}
+		}
+
+		public static GameInstallation RunningGameInfo
+		{
+			get
+			{
+				IEnumerable<GameInstallation> gameInstallationItems = OptionsManager.Instance.GetOptionObject<GameInstallationsOption>(OptionType.GameInstallation).Value;
+				foreach (GameInstallation installation in gameInstallationItems)
+					if (!installation.IsGameProcessExited)
+						return installation;
+				return null;
 			}
 		}
 	}

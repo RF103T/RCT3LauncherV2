@@ -36,7 +36,7 @@ namespace RCT3Launcher.ViewModels
 					launchGameCommand = new CommandBase<GameInstallation>(
 							installation =>
 							{
-								if (GlobalStateHelper.HasGameRunnings)
+								if (GlobalStateHelper.HasGameRunning)
 								{
 									MessageBox.Show(res =>
 									{

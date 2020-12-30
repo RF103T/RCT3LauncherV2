@@ -29,11 +29,11 @@
 		<Viewbox Grid.Column="0" Grid.Row="1" Margin="30,0,0,0">
 			<StackPanel>
 				<TextBlock Text="{Binding SelectedValue.GameVersionName, ElementName=gameInstallationListBox}" FontWeight="Bold" Foreground="{StaticResource Theme.Primary.Text}"/>
-				<StackPanel Orientation="Horizontal" Visibility="{Binding SelectedValue.IsDataHasError, ElementName=gameInstallationListBox,Converter={StaticResource booleanToVisibilityConverterReverse}}">
+				<StackPanel Orientation="Horizontal" Visibility="{Binding SelectedValue.IsDataHasError, ElementName=gameInstallationListBox,Converter={StaticResource booleanToVisibilityConverter}}">
 					<Image Height="12" Width="12" Source="{StaticResource State_OK}" Stretch="UniformToFill"/>
 					<Label FontSize="10" Content="{Binding SelectedValue.Name, ElementName=gameInstallationListBox}" Foreground="{StaticResource Theme.Primary.Normal.SolidColorBrush}" VerticalContentAlignment="Center"/>
 				</StackPanel>
-				<StackPanel Orientation="Horizontal" Visibility="{Binding SelectedValue.IsDataHasError, ElementName=gameInstallationListBox,Converter={StaticResource booleanToVisibilityConverter}}">
+				<StackPanel Orientation="Horizontal" Visibility="{Binding SelectedValue.IsDataHasError, ElementName=gameInstallationListBox,Converter={StaticResource booleanToVisibilityConverterReverse}}">
 					<Image Height="12" Width="12" Source="{StaticResource State_Error}" Stretch="UniformToFill"/>
 					<Label FontSize="10" Content="{StaticResource State_Error_ToolTip}" Foreground="{StaticResource Warning.LinearGradientBrush}" VerticalContentAlignment="Center"/>
 				</StackPanel>
@@ -152,7 +152,7 @@
 				<Button.IsEnabled>
 					<MultiBinding Converter="{StaticResource booleanToBooleanMultiValueConverter}">
 						<Binding Path="SelectedValue.IsGameProcessExited" ElementName="gameInstallationListBox" Mode="OneWay"/>
-						<Binding Path="SelectedValue.IsDataHasError" ElementName="gameInstallationListBox" Mode="OneWay"/>
+						<Binding Path="SelectedValue.IsDataHasError" ElementName="gameInstallationListBox" Mode="OneWay" Converter="{StaticResource booleanInversionConverter}"/>
 					</MultiBinding>
 				</Button.IsEnabled>
 				<Button.Effect>

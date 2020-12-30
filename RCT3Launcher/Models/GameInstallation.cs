@@ -1,5 +1,4 @@
 ﻿using PeNet;
-using RCT3Launcher.Class.Validation;
 using RCT3Launcher.ViewModels;
 using RCT3Launcher.Views.ViewHelpers.ValidationRules;
 using System;
@@ -280,8 +279,8 @@ namespace RCT3Launcher.Models
 		{
 			get
 			{
-				return ValueNotNullRule._validate(Name) && ValueNotNullRule._validate(GameDirectory)
-					&& FilePathValidationRule._validate(GameDirectory) && GameFileValidationRule._validate(GameDirectory);
+				return IsGameProcessExited && !(ValueNotNullRule._validate(Name) && ValueNotNullRule._validate(GameDirectory)
+					&& FilePathValidationRule._validate(GameDirectory) && GameFileValidationRule._validate(GameDirectory));
 			}
 		}
 	}

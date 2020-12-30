@@ -1,4 +1,5 @@
 ﻿using PeNet;
+using RCT3Launcher.Models;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -24,10 +25,15 @@ namespace RCT3Launcher.Views.ViewHelpers.ValidationRules
 				{
 					if (info.Extension.ToLower() == ".exe" && info.Name.Contains("RCT3"))
 					{
-						using FileStream peFileStream = new FileStream(info.FullName, FileMode.Open);
-						PeFile peFile = new PeFile(peFileStream);
-						if (GameVersionHelper.ValidTimeDateStamps.Keys.Contains(peFile.ImageNtHeaders.FileHeader.TimeDateStamp))
-							return ValidationResult.ValidResult;
+						GameInstallation installation = GlobalStateHelper.RunningGameInfo;
+						if (installation == null || installation.GameFileFullName != info.FullName)
+						{
+							using FileStream peFileStream = new FileStream(info.FullName, FileMode.Open);
+							PeFile peFile = new PeFile(peFileStream);
+							if (!GameVersionHelper.ValidTimeDateStamps.Keys.Contains(peFile.ImageNtHeaders.FileHeader.TimeDateStamp))
+								continue;
+						}
+						return ValidationResult.ValidResult;
 					}
 				}
 			}

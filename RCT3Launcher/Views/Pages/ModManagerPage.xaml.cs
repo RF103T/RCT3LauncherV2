@@ -19,17 +19,9 @@ namespace RCT3Launcher.Views.Pages
 	/// </summary>
 	public partial class ModManagerPage : Page
 	{
-		public ModManagerPageViewModel ViewModel { get; set; }
-
 		public ModManagerPage()
 		{
-			ViewModel = new ModManagerPageViewModel();
 			InitializeComponent();
-		}
-
-		private void Button_Click(object sender, RoutedEventArgs e)
-		{
-			ViewModel.ValidateAsync().Wait();
 		}
 	}
 }
