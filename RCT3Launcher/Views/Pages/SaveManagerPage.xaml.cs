@@ -64,7 +64,7 @@ namespace RCT3Launcher.Views.Pages
 				builder.Append("_ListBox_Style");
 			else
 				builder.Append("_Multiple_ListBox_Style");
-			listBox.SetValue(ListBox.StyleProperty, Application.Current.Resources[builder.ToString()]);
+			listBox.SetValue(ListBox.StyleProperty, App.Current.Resources[builder.ToString()]);
 		}
 	}
 }

@@ -1,4 +1,5 @@
 ﻿using RCT3Launcher.ViewModels;
+using RCT3Launcher.Views.MessageBoxPages;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -19,17 +20,9 @@ namespace RCT3Launcher.Views.Pages
 	/// </summary>
 	public partial class ModManagerPage : Page
 	{
-		public ModManagerPageViewModel ViewModel { get; set; }
-
 		public ModManagerPage()
 		{
-			ViewModel = new ModManagerPageViewModel();
 			InitializeComponent();
-		}
-
-		private void Button_Click(object sender, RoutedEventArgs e)
-		{
-			ViewModel.ValidateAsync().Wait();
 		}
 	}
 }

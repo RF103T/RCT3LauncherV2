@@ -31,7 +31,7 @@ namespace RCT3Launcher.Option
 				return instance;
 			}
 		}
-		public static readonly OptionsManager instance = new OptionsManager();
+		private static readonly OptionsManager instance = new OptionsManager();
 
 		static OptionsManager()
 		{

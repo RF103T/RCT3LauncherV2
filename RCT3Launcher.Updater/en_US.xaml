@@ -1,0 +1,10 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:s="clr-namespace:System;assembly=mscorlib">
+	<s:String x:Key="Downloading_Text">Downloading</s:String>
+	<s:String x:Key="Download_Canceling_Text">Canceling update</s:String>
+	<s:String x:Key="Updating_Text">Updating</s:String>
+	<s:String x:Key="Updated_Text">Update completed</s:String>
+	<s:String x:Key="Window_Closing_MessageBox_Title">Information</s:String>
+	<s:String x:Key="Window_Closing_MessageBox_Text">Closing this window will stop the update, are you sure?</s:String>
+</ResourceDictionary>

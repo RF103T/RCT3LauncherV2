@@ -15,7 +15,7 @@ namespace RCT3Launcher.Views.ViewHelpers.ValidationRules
 		{
 			if (value != null && value.ToString() != string.Empty)
 				return ValidationResult.ValidResult;
-			return new ValidationResult(false, Application.Current.Resources["ValidationRule_ValueNullError"]);
+			return new ValidationResult(false, App.Current.Resources["ValidationRule_ValueNullError"]);
 		}
 
 		public static bool _validate(object value)

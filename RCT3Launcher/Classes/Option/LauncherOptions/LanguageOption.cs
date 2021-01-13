@@ -69,7 +69,7 @@ namespace RCT3Launcher.Option.LauncherOptions
 					break;
 				}
 			}
-			Application.Current.Resources.MergedDictionaries[0] = dict;
+			App.Current.Resources.MergedDictionaries[0] = dict;
 		}
 	}
 }

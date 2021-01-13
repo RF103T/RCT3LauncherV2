@@ -33,6 +33,11 @@
 	<s:String x:Key="ValidationRule_FilePathError">Invalid path format</s:String>
 	<s:String x:Key="ValidationRule_GameFileError">Can't find game files</s:String>
 
+	<!--Updater-->
+	<s:String x:Key="Updater_New_Version_Detected_Title">A new version is detected, do you want to upgrade?</s:String>
+	<s:String x:Key="Updater_Check_For_Update_Title">Check for update</s:String>
+	<s:String x:Key="Updater_Latest_Version_Text">Currently running the latest version.</s:String>
+
 	<!--MainWindow-->
 	<s:String x:Key="Launcher_MenuItem">Start Game</s:String>
 	<s:String x:Key="Mod_Manager_MenuItem">Mod Manager</s:String>
@@ -75,5 +80,7 @@
 	<s:String x:Key="LauncherPreferencePage_Game_Installations_Name">Name</s:String>
 	<s:String x:Key="LauncherPreferencePage_Game_Installations_Path">Path</s:String>
 	<s:String x:Key="LauncherPreferencePage_Add_New_Path_Button">Add New Installations</s:String>
+	<s:String x:Key="LauncherPreferencePage_Check_For_Update_Title">Update</s:String>
+	<s:String x:Key="LauncherPreferencePage_Check_For_Update_Button">Check for update</s:String>
 	<s:String x:Key="LauncherPreferencePage_About_Title">About</s:String>
 </ResourceDictionary>

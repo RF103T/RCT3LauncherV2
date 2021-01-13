@@ -18,9 +18,9 @@ namespace RCT3Launcher.Views.ViewHelpers.Converters
 			bool v = System.Convert.ToBoolean(value);
 			string str = parameter.ToString();
 			if (v)
-				return Application.Current.Resources["Light_" + str];
+				return App.Current.Resources["Light_" + str];
 			else
-				return Application.Current.Resources["Dart_" + str];
+				return App.Current.Resources["Dart_" + str];
 		}
 
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -184,14 +184,14 @@
 			<Grid.RowDefinitions>
 				<RowDefinition/>
 			</Grid.RowDefinitions>
-			<Button Grid.Column="1" Height="29" Style="{StaticResource Window_Title_Button_Style}" Background="#A0999999" Content="—" WindowChrome.IsHitTestVisibleInChrome="True">
+			<Button Grid.Column="1" Height="30" Style="{StaticResource Window_Title_Button_Style}" Background="#A0999999" Content="—" WindowChrome.IsHitTestVisibleInChrome="True">
 				<Behaviors:Interaction.Triggers>
 					<Behaviors:EventTrigger EventName="Click">
 						<Behaviors:InvokeCommandAction Command="{Binding MinimizeWindowButtonClickCommand}"/>
 					</Behaviors:EventTrigger>
 				</Behaviors:Interaction.Triggers>
 			</Button>
-			<Button Grid.Column="2" Height="29" Style="{StaticResource Window_Title_Button_Style}" Background="#FFE81123" Content="✕" WindowChrome.IsHitTestVisibleInChrome="True">
+			<Button Grid.Column="2" Height="30" Style="{StaticResource Window_Title_Button_Style}" Background="#FFE81123" Content="✕" WindowChrome.IsHitTestVisibleInChrome="True">
 				<Behaviors:Interaction.Triggers>
 					<Behaviors:EventTrigger EventName="Click">
 						<Behaviors:InvokeCommandAction Command="{Binding CloseWindowButtonClickCommand}"/>

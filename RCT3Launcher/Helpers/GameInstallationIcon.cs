@@ -19,11 +19,11 @@ namespace RCT3Launcher
 		}
 		private readonly static List<DrawingImage> darkIconDrawingImages = new List<DrawingImage>()
 		{
-			Application.Current.Resources["Dark_Steam_Logo"] as DrawingImage,
-			Application.Current.Resources["Dark_Epic_Logo"] as DrawingImage,
-			Application.Current.Resources["Dark_Gog_Logo"] as DrawingImage,
-			Application.Current.Resources["Dark_Computer_Logo"] as DrawingImage,
-			Application.Current.Resources["Dark_Game_Logo"] as DrawingImage,
+			App.Current.Resources["Dark_Steam_Logo"] as DrawingImage,
+			App.Current.Resources["Dark_Epic_Logo"] as DrawingImage,
+			App.Current.Resources["Dark_Gog_Logo"] as DrawingImage,
+			App.Current.Resources["Dark_Computer_Logo"] as DrawingImage,
+			App.Current.Resources["Dark_Game_Logo"] as DrawingImage,
 		};
 
 		public static List<DrawingImage> LightIconDrawingImages
@@ -35,11 +35,11 @@ namespace RCT3Launcher
 		}
 		private readonly static List<DrawingImage> lightIconDrawingImages = new List<DrawingImage>()
 		{
-			Application.Current.Resources["Light_Steam_Logo"] as DrawingImage,
-			Application.Current.Resources["Light_Epic_Logo"] as DrawingImage,
-			Application.Current.Resources["Light_Gog_Logo"] as DrawingImage,
-			Application.Current.Resources["Light_Computer_Logo"] as DrawingImage,
-			Application.Current.Resources["Light_Game_Logo"] as DrawingImage,
+			App.Current.Resources["Light_Steam_Logo"] as DrawingImage,
+			App.Current.Resources["Light_Epic_Logo"] as DrawingImage,
+			App.Current.Resources["Light_Gog_Logo"] as DrawingImage,
+			App.Current.Resources["Light_Computer_Logo"] as DrawingImage,
+			App.Current.Resources["Light_Game_Logo"] as DrawingImage,
 		};
 	}
 }

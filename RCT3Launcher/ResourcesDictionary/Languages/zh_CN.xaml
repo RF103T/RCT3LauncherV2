@@ -32,6 +32,11 @@
 	<s:String x:Key="ValidationRule_ValueNullError">值不能为空</s:String>
 	<s:String x:Key="ValidationRule_FilePathError">无效的路径格式</s:String>
 	<s:String x:Key="ValidationRule_GameFileError">找不到游戏文件</s:String>
+	
+	<!--Updater-->
+	<s:String x:Key="Updater_New_Version_Detected_Title">检测到新版本，要升级吗？</s:String>
+	<s:String x:Key="Updater_Check_For_Update_Title">检查更新</s:String>
+	<s:String x:Key="Updater_Latest_Version_Text">目前运行的是最新的版本。</s:String>
 
 	<!--MainWindow-->
 	<s:String x:Key="Launcher_MenuItem">启动游戏</s:String>
@@ -75,5 +80,7 @@
 	<s:String x:Key="LauncherPreferencePage_Game_Installations_Name">名称</s:String>
 	<s:String x:Key="LauncherPreferencePage_Game_Installations_Path">路径</s:String>
 	<s:String x:Key="LauncherPreferencePage_Add_New_Path_Button">添加新的配置</s:String>
+	<s:String x:Key="LauncherPreferencePage_Check_For_Update_Title">更新</s:String>
+	<s:String x:Key="LauncherPreferencePage_Check_For_Update_Button">检查更新</s:String>
 	<s:String x:Key="LauncherPreferencePage_About_Title">关于</s:String>
 </ResourceDictionary>

@@ -21,12 +21,12 @@ namespace RCT3Launcher.ViewModels
 		{
 			get
 			{
-				SettingsViewModel settings = Application.Current.Resources["settingsViewModel"] as SettingsViewModel;
+				SettingsViewModel settings = App.Current.Resources["settingsViewModel"] as SettingsViewModel;
 				return settings.GameInstallationItems;
 			}
 			set
 			{
-				SettingsViewModel settings = Application.Current.Resources["settingsViewModel"] as SettingsViewModel;
+				SettingsViewModel settings = App.Current.Resources["settingsViewModel"] as SettingsViewModel;
 				settings.GameInstallationItems = value;
 			}
 		}
@@ -85,21 +85,21 @@ namespace RCT3Launcher.ViewModels
 			}
 		}
 
-		private CommandBase<object> applyCommand;
-		public CommandBase<object> ApplyCommand
+		private CommandBase checkForUpdatesCommand;
+		public CommandBase CheckForUpdatesCommand
 		{
 			get
 			{
-				if (applyCommand == null)
+				if (checkForUpdatesCommand == null)
 				{
-					applyCommand = new CommandBase<object>(
-						obj =>
+					checkForUpdatesCommand = new CommandBase(
+						() =>
 						{
-							EventCenter.Boardcast<string>(EventType.PageNavigate, nameof(LauncherPage));
+							UpdateChecker.Instance.CheckUpdate();
 						}
 					);
 				}
-				return applyCommand;
+				return checkForUpdatesCommand;
 			}
 		}
 	}

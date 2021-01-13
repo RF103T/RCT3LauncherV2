@@ -273,6 +273,22 @@
 				<RowDefinition Height="Auto"/>
 				<RowDefinition Height="Auto"/>
 			</Grid.RowDefinitions>
+			<TextBlock Grid.Row="0" Text="{DynamicResource LauncherPreferencePage_Check_For_Update_Title}" Foreground="{StaticResource Theme.Primary.Text}" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+			<Button Grid.Row="1" Width="90" Height="25" Margin="10,10,0,0" Style="{StaticResource No_Animation_RadiusButton_Style}" Background="{StaticResource Theme.Primary.Normal.SolidColorBrush}"
+					HorizontalAlignment="Left">
+				<Behaviors:Interaction.Triggers>
+					<Behaviors:EventTrigger EventName="Click">
+						<Behaviors:InvokeCommandAction Command="{Binding CheckForUpdatesCommand}"/>
+					</Behaviors:EventTrigger>
+				</Behaviors:Interaction.Triggers>
+				<TextBlock Text="{DynamicResource LauncherPreferencePage_Check_For_Update_Button}" FontSize="10" Foreground="{StaticResource Theme.Primary.Text}"/>
+			</Button>
+		</Grid>
+		<Grid Margin="0,10,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+			</Grid.RowDefinitions>
 			<TextBlock Grid.Row="0" Text="{DynamicResource LauncherPreferencePage_About_Title}" Foreground="{StaticResource Theme.Primary.Text}" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 			<TextBlock Grid.Row="1" Margin="10,10,0,0" Cursor="Hand" FontSize="12">
 				<Hyperlink TextDecorations="{x:Null}">
