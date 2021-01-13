@@ -10,6 +10,6 @@
 	  Background="{StaticResource Theme.Secondary.Normal.SolidColorBrush}"
       Title="ModManagerPage">
 	<Grid>
-
+		
 	</Grid>
 </Page>

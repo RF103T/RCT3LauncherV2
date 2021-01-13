@@ -81,9 +81,9 @@ namespace RCT3Launcher.ViewModels
 							);
 							if (waitForDelSaves.Count > 0)
 								if (waitForDelSaves.Count == 1)
-									messageBoxText = String.Format(Application.Current.Resources["SaveManagerPage_Single_Select_Delete_Warning_MessageBoxText"].ToString(), waitForDelSaves[0].Name);
+									messageBoxText = String.Format(App.Current.Resources["SaveManagerPage_Single_Select_Delete_Warning_MessageBoxText"].ToString(), waitForDelSaves[0].Name);
 								else
-									messageBoxText = String.Format(Application.Current.Resources["SaveManagerPage_Multi_Select_Delete_Warning_MessageBoxText"].ToString(), waitForDelSaves.Count);
+									messageBoxText = String.Format(App.Current.Resources["SaveManagerPage_Multi_Select_Delete_Warning_MessageBoxText"].ToString(), waitForDelSaves.Count);
 							else
 								return;
 							MessageBox.Show<TextMessageBoxPage>(res =>
@@ -91,7 +91,7 @@ namespace RCT3Launcher.ViewModels
 								if (res == MessageBoxResult.Yes)
 									foreach (GameSave save in waitForDelSaves)
 										save.SaveFileInfo.Delete();
-							}, new TextMessageBoxPage(messageBoxText), Application.Current.Resources["Text_Warning"].ToString(), MessageBoxButton.YesNo);
+							}, new TextMessageBoxPage(messageBoxText), App.Current.Resources["Text_Warning"].ToString(), MessageBoxButton.YesNo);
 						}
 					);
 				}
@@ -111,8 +111,8 @@ namespace RCT3Launcher.ViewModels
 						{
 							OpenFileDialog openFileDialog = new OpenFileDialog()
 							{
-								Title = Application.Current.Resources["SaveManagerPage_Import_FileDialog_Title"].ToString(),
-								Filter = Application.Current.Resources["SaveManagerPage_Import_FileDialog_Filter"].ToString(),
+								Title = App.Current.Resources["SaveManagerPage_Import_FileDialog_Title"].ToString(),
+								Filter = App.Current.Resources["SaveManagerPage_Import_FileDialog_Filter"].ToString(),
 								Multiselect = true,
 								DefaultExt = "dat"
 							};
@@ -125,14 +125,14 @@ namespace RCT3Launcher.ViewModels
 										 if (res == MessageBoxResult.OK)
 											 ImportSaveFiles(openFileDialog.FileNames, GameSaveTypeHelper.GetGameSaveTypeFullPath((GameSaveType)sender.GetReturnValue()));
 									 },
-									 new SwitchComboBoxMessageBoxPage(Application.Current.Resources["SaveManagerPage_Import_Type_Select_MessageBoxText"].ToString(),
+									 new SwitchComboBoxMessageBoxPage(App.Current.Resources["SaveManagerPage_Import_Type_Select_MessageBoxText"].ToString(),
 										new List<SwitchComboBoxItemModel>()
 										{
 											new SwitchComboBoxItemModel(){ID = 0,Content=GameSaveTypeHelper.GetGameSaveTypeFormattedText(GameSaveType.Park)},
 											new SwitchComboBoxItemModel(){ID = 1,Content=GameSaveTypeHelper.GetGameSaveTypeFormattedText(GameSaveType.Scenario)},
 											new SwitchComboBoxItemModel(){ID = 2,Content=GameSaveTypeHelper.GetGameSaveTypeFormattedText(GameSaveType.Start_New_Scenario)}
 										}),
-									Application.Current.Resources["Text_Information"].ToString(), MessageBoxButton.OK);
+									App.Current.Resources["Text_Information"].ToString(), MessageBoxButton.OK);
 							}
 							else
 								ImportSaveFiles(openFileDialog.FileNames, null);
@@ -166,10 +166,10 @@ namespace RCT3Launcher.ViewModels
 								return;
 							SaveFileDialog dialog = new SaveFileDialog()
 							{
-								Title = Application.Current.Resources["SaveManagerPage_Export_FileDialog_Title"].ToString(),
+								Title = App.Current.Resources["SaveManagerPage_Export_FileDialog_Title"].ToString(),
 								FileName = "saves",
 								DefaultExt = ".zip",
-								Filter = Application.Current.Resources["SaveManagerPage_Export_FileDialog_Filter"].ToString()
+								Filter = App.Current.Resources["SaveManagerPage_Export_FileDialog_Filter"].ToString()
 							};
 							if (dialog.ShowDialog().Value)
 							{

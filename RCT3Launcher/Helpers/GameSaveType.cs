@@ -30,9 +30,9 @@ namespace RCT3Launcher
 		{
 			return type switch
 			{
-				GameSaveType.Park => Application.Current.Resources["SaveType_Park_FormattedText"].ToString(),
-				GameSaveType.Scenario => Application.Current.Resources["SaveType_Scenario_FormattedText"].ToString(),
-				GameSaveType.Start_New_Scenario => Application.Current.Resources["SaveType_Start_New_Scenario_FormattedText"].ToString(),
+				GameSaveType.Park => App.Current.Resources["SaveType_Park_FormattedText"].ToString(),
+				GameSaveType.Scenario => App.Current.Resources["SaveType_Scenario_FormattedText"].ToString(),
+				GameSaveType.Start_New_Scenario => App.Current.Resources["SaveType_Start_New_Scenario_FormattedText"].ToString(),
 				_ => throw new NotImplementedException(),
 			};
 		}

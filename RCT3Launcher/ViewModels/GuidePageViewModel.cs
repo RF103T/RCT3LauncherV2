@@ -27,12 +27,12 @@ namespace RCT3Launcher.ViewModels
 		{
 			get
 			{
-				SettingsViewModel settings = Application.Current.Resources["settingsViewModel"] as SettingsViewModel;
+				SettingsViewModel settings = App.Current.Resources["settingsViewModel"] as SettingsViewModel;
 				return settings.GameInstallationItems;
 			}
 			set
 			{
-				SettingsViewModel settings = Application.Current.Resources["settingsViewModel"] as SettingsViewModel;
+				SettingsViewModel settings = App.Current.Resources["settingsViewModel"] as SettingsViewModel;
 				settings.GameInstallationItems = value;
 			}
 		}

@@ -1,0 +1,15 @@
+{
+  "profiles": {
+    "RCT3Launcher": {
+      "commandName": "Project"
+    },
+    "Remote": {
+      "commandName": "Executable",
+      "executablePath": "\\\\DESKTOP-PL2JUBJ\\RCT3Launcher\\RCT3Launcher.exe",
+      "workingDirectory": "\\\\DESKTOP-PL2JUBJ\\RCT3Launcher",
+      "remoteDebugEnabled": true,
+      "remoteDebugMachine": "DESKTOP-PL2JUBJ",
+      "authenticationMode": "None"
+    }
+  }
+}

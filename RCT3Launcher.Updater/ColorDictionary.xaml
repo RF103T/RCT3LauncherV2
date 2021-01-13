@@ -1,0 +1,26 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<Color x:Key="Theme.Primary.Normal.Color" A="0xFF" R="0x8B" G="0xC3" B="0x4A"/>
+	<Color x:Key="Theme.Primary.Normal.Color.Transparent" A="0x00" R="0x8B" G="0xC3" B="0x4A"/>
+	<Color x:Key="Theme.Primary.Normal.LinearGradientStart.Color" A="0xFF" R="0x8B" G="0xC3" B="0x4A"/>
+	<Color x:Key="Theme.Primary.Normal.LinearGradientEnd.Color" A="0xFF" R="0x4C" G="0xAF" B="0x50"/>
+	<Color x:Key="Theme.Primary.Light.Color" A="0xFF" R="0xBE" G="0xF6" B="0x7A"/>
+	<Color x:Key="Theme.Primary.Light.Color.Transparent" A="0x00" R="0xBE" G="0xF6" B="0x7A"/>
+	<Color x:Key="Theme.Primary.Light.Background.Color" A="0xFF" R="0xFF" G="0xFF" B="0xFF"/>
+	<Color x:Key="Theme.Primary.Light.Background.Color.Transparent" A="0x00" R="0xFF" G="0xFF" B="0xFF"/>
+	<Color x:Key="Theme.Primary.Dark.Color" A="0xFF" R="0x5A" G="0x92" B="0x16"/>
+	<Color x:Key="Theme.Primary.Dark.Color.Transparent" A="0x00" R="0x5A" G="0x92" B="0x16"/>
+	<Color x:Key="Theme.Primary.Dark.Background.Color" A="0xFF" R="0xE7" G="0xE7" B="0xE7"/>
+	<Color x:Key="Theme.Primary.Dark.Background.Color.Transparent" A="0x00" R="0xE7" G="0xE7" B="0xE7"/>
+	<Color x:Key="Theme.Primary.Text.Color" A="0xFF" R="0xFF" G="0xFF" B="0xFF"/>
+	<Color x:Key="Theme.Secondary.Normal.Color" A="0xFF" R="0x37" G="0x47" B="0x4F"/>
+	<Color x:Key="Theme.Secondary.Normal.Color.Transparent" A="0x00" R="0x37" G="0x47" B="0x4F"/>
+	<Color x:Key="Theme.Secondary.Dark.Color" A="0xFF" R="0x26" G="0x32" B="0x38"/>
+	<Color x:Key="Theme.Secondary.Dark.Color.Transparent" A="0x00" R="0x26" G="0x32" B="0x38"/>
+	<Color x:Key="Theme.Secondary.Text.Color" A="0xFF" R="0x37" G="0x47" B="0x4F"/>
+
+	<Color x:Key="Unenable.Color" A="0xFF" R="0xBC" G="0xBC" B="0xBC"/>
+	<Color x:Key="Warning.Color" A="0xFF" R="0xFB" G="0x28" B="0x28"/>
+	<Color x:Key="Warning.LinearGradientStart.Color" A="0xFF" R="0xC3" G="0x4A" B="0x4A"/>
+	<Color x:Key="Warning.LinearGradientEnd.Color" A="0xFF" R="0xF7" G="0x4D" B="0x0B"/>
+</ResourceDictionary>

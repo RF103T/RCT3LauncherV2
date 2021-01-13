@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Configurations>Debug;Release;Publish;Release_with_environment</Configurations>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_with_environment|AnyCPU'">
+    <DefineConstants>TRACE;WITH_ENVIRONMENT</DefineConstants>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Page Update="BrushDictionary.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ColorDictionary.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
+</Project>

@@ -159,7 +159,7 @@ namespace RCT3Launcher.ViewModels
 						() =>
 						{
 							OptionsManager.Instance.SaveOptionFile();
-							Application.Current.Shutdown();
+							App.Current.Shutdown();
 						}
 						);
 				}
@@ -175,7 +175,7 @@ namespace RCT3Launcher.ViewModels
 				if (minimizeWindowButtonClickCommand == null)
 				{
 					minimizeWindowButtonClickCommand = new CommandBase(
-							() => Application.Current.MainWindow.WindowState = WindowState.Minimized
+							() => App.Current.MainWindow.WindowState = WindowState.Minimized
 						);
 				}
 				return minimizeWindowButtonClickCommand;

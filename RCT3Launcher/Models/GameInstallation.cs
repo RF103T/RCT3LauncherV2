@@ -243,6 +243,7 @@ namespace RCT3Launcher.Models
 					if (gameProcess != null && gameProcessExitedHandler != null)
 					{
 						gameProcess.Exited -= gameProcessExitedHandler;
+						gameProcess.Dispose();
 						gameProcess = null;
 						gameProcessExitedHandler = null;
 					}

@@ -30,9 +30,9 @@ namespace RCT3Launcher
 			switch (gameVersion)
 			{
 				case GameVersion.RollerCoaster_Tycoon_3_Complete_Edition:
-					return Application.Current.Resources["RCT3_Complete_Edition_Name"].ToString();
+					return App.Current.Resources["RCT3_Complete_Edition_Name"].ToString();
 				default:
-					return Application.Current.Resources["RCT3_Platinum_Name"].ToString();
+					return App.Current.Resources["RCT3_Platinum_Name"].ToString();
 			}
 		}
 	}

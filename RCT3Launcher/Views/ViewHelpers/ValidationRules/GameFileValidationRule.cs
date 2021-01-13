@@ -37,7 +37,7 @@ namespace RCT3Launcher.Views.ViewHelpers.ValidationRules
 					}
 				}
 			}
-			return new ValidationResult(false, Application.Current.Resources["ValidationRule_GameFileError"]);
+			return new ValidationResult(false, App.Current.Resources["ValidationRule_GameFileError"]);
 		}
 
 		public static bool _validate(object value)
