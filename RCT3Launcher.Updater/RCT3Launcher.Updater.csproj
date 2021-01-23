@@ -5,10 +5,17 @@
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
     <Configurations>Debug;Release;Publish;Release_with_environment</Configurations>
+    <AssemblyName>Updater</AssemblyName>
+    <PackageId>RCT3Launcher.Updater</PackageId>
+    <Authors>RF103T</Authors>
+    <Company>RF103T</Company>
+    <Product>RCT3Launcher.Updater</Product>
+    <Copyright>Copyright © 2021 RF103T</Copyright>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile></DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_with_environment|AnyCPU'">

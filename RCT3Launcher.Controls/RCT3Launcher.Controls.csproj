@@ -6,8 +6,12 @@
     <Version>0.2.0</Version>
     <Authors>RF103T</Authors>
     <Company>RF103T</Company>
-    <Copyright>Copyright © 2020 RF103T</Copyright>
+    <Copyright>Copyright © 2021 RF103T</Copyright>
     <Configurations>Debug;Release;Publish;Release_with_environment</Configurations>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_with_environment|AnyCPU'">
+    <DefineConstants>TRACE</DefineConstants>
   </PropertyGroup>
 
 </Project>
