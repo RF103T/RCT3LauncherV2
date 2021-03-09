@@ -103,7 +103,16 @@ namespace RCT3Launcher.Updater
 
 				DirectoryInfo tempFilesDir = new DirectoryInfo(@"tempfiles");
 				foreach (FileInfo file in tempFilesDir.GetFiles())
-					file.CopyTo(file.Name, true);
+				{
+					try
+					{
+						file.CopyTo(file.Name, true);
+					}
+					catch (Exception)
+					{
+
+					}
+				}
 				tempFilesDir.Delete(true);
 
 				App.Current.Dispatcher.Invoke(() => infoTextBox.Text = App.Current.Resources["Updated_Text"].ToString());
