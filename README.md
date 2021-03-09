@@ -1,6 +1,6 @@
 # **RCT3LauncherV2**
 
-![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/RF103T/RCT3LauncherV2?include_prereleases)
+[![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/RF103T/RCT3LauncherV2?include_prereleases)](https://github.com/RF103T/RCT3LauncherV2/releases)
 ![GitHub all releases](https://img.shields.io/github/downloads/RF103T/RCT3LauncherV2/total)
 ![GitHub Repo stars](https://img.shields.io/github/stars/RF103T/RCT3LauncherV2?style=social)
 
@@ -15,12 +15,12 @@
 + 存档实用功能
     - 获取存档列表和基本信息。
     - 存档导入、导出、重命名和删除。
++ 启动器更新
 + 多语言支持
     - 简体中文和英文。
 
 ### 即将实现的功能：
 + 自定义音乐管理
-+ 启动器更新
 
 ### 计划中的功能：
 + 扩充管理
@@ -37,17 +37,17 @@ System support: Windows 7 SP1, Windows 8.1, Windows 10 1703+ (The support situat
 
 ### Features achieved:
 + Multi-version game management
-    + Supports Platinum and Complete Edition.
-    + Support multiple game installations.
+    - Supports Platinum and Complete Edition.
+    - Support multiple game installations.
 + Save management function
-    + Get save list and basic information.
-    + Save(s) import, export, rename and delete.
+    - Get save list and basic information.
+    - Save(s) import, export, rename and delete.
++ Launcher update
 + Multi-language support
-    + Simplified Chinese and English.
+    - Simplified Chinese and English.
 
 ### Features to be implemented:
 + Custom music management
-+ Launcher update
 
 ### Features in the plan:
 + Mods management
