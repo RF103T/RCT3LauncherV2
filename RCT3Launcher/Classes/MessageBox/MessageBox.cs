@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using RCT3Launcher.Classes.MessageBox;
 
 namespace RCT3Launcher
 {
@@ -25,17 +26,16 @@ namespace RCT3Launcher
 		Yes = 6,
 		No = 7,
 		YesToAll = 9,
-
 	}
 
 	public class MessageBox
 	{
-		public static void Show<TContent>(TContent content, string caption = "", MessageBoxButton button = MessageBoxButton.OK) where TContent : IMessageBoxPage
+		public static void Show<TContent>(TContent content, string caption = "", MessageBoxButton button = MessageBoxButton.OK) where TContent : MessageBoxPage, new()
 		{
 			EventSystem.EventCenter.Boardcast<Page, string, MessageBoxButton>(EventSystem.EventType.MessageBoxShow, content as Page, caption, button);
 		}
 
-		public static void Show<TContent>(Action<MessageBoxResult> callback, TContent content, string caption = "", MessageBoxButton button = MessageBoxButton.OK) where TContent : IMessageBoxPage
+		public static void Show<TContent>(Action<MessageBoxResult> callback, TContent content, string caption = "", MessageBoxButton button = MessageBoxButton.OK) where TContent : MessageBoxPage, new()
 		{
 			Action<MessageBoxResult> messageBoxClose = null;
 			messageBoxClose = res =>
@@ -47,7 +47,7 @@ namespace RCT3Launcher
 			EventSystem.EventCenter.Boardcast<Page, string, MessageBoxButton>(EventSystem.EventType.MessageBoxShow, content as Page, caption, button);
 		}
 
-		public static void Show<TContent>(Action<MessageBoxResult, TContent> callback, TContent content, string caption = "", MessageBoxButton button = MessageBoxButton.OK) where TContent : IMessageBoxPage
+		public static void Show<TContent>(Action<MessageBoxResult, TContent> callback, TContent content, string caption = "", MessageBoxButton button = MessageBoxButton.OK) where TContent : MessageBoxPage, new()
 		{
 			Action<MessageBoxResult, object> messageBoxClose = null;
 			messageBoxClose = (res, sender) =>

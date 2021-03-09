@@ -1,9 +1,10 @@
-﻿<Page x:Class="RCT3Launcher.Views.MessageBoxPages.SwitchComboBoxMessageBoxPage"
+﻿<page:MessageBoxPage x:Class="RCT3Launcher.Views.MessageBoxPages.SwitchComboBoxMessageBoxPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:RCT3Launcher.Views.MessageBoxPages"
+	  xmlns:page ="clr-namespace:RCT3Launcher.Classes.MessageBox"
 	  xmlns:RCT3LauncherControls="clr-namespace:RCT3Launcher.Controls;assembly=RCT3Launcher.Controls"
       mc:Ignorable="d" 
       d:DesignHeight="260" d:DesignWidth="420">
@@ -14,4 +15,4 @@
 											 HorizontalAlignment="Stretch" Foreground="{StaticResource Theme.Primary.Text}" NegativeForeground="{StaticResource Theme.Secondary.Text}"
 											 FontSize="12" FontWeight="Bold"/>
 	</StackPanel>
-</Page>
+</page:MessageBoxPage>

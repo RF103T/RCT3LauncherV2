@@ -1,4 +1,5 @@
-﻿using RCT3Launcher.Controls.InternalDataModel;
+﻿using RCT3Launcher.Classes.MessageBox;
+using RCT3Launcher.Controls.InternalDataModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,14 +20,30 @@ namespace RCT3Launcher.Views.MessageBoxPages
 	/// <summary>
 	/// SwitchComboBoxMessageBoxPage.xaml 的交互逻辑
 	/// </summary>
-	public partial class SwitchComboBoxMessageBoxPage : Page, IValueMessageBoxPage<int>
+	public partial class SwitchComboBoxMessageBoxPage : MessageBoxPage, IValueMessageBoxPage<int>
 	{
-		public SwitchComboBoxMessageBoxPage(string text, IEnumerable<SwitchComboBoxItemModel> comboBoxItems)
+		public string Text
+		{
+			get => textBlock.Text;
+			set
+			{
+				if (textBlock.Text != value)
+					textBlock.Text = value;
+			}
+		}
+
+		public SwitchComboBoxMessageBoxPage()
 		{
 			InitializeComponent();
-			textBlock.Text = text;
+		}
+
+		public static SwitchComboBoxMessageBoxPage Create(string text, IEnumerable<SwitchComboBoxItemModel> comboBoxItems)
+		{
+			SwitchComboBoxMessageBoxPage instance = MessageBoxPageFactory.GetInstance<SwitchComboBoxMessageBoxPage>();
+			instance.Text = text;
 			foreach (SwitchComboBoxItemModel item in comboBoxItems)
-				switchComboBox.Items.Add(item);
+				instance.switchComboBox.Items.Add(item);
+			return instance;
 		}
 
 		public int GetReturnValue()

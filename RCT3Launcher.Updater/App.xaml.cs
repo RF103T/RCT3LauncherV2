@@ -9,8 +9,8 @@ namespace RCT3Launcher.Updater
 	/// </summary>
 	public partial class App : Application
 	{
-		private static readonly string downloadUrlTemplate = "https://github.com/RF103T/RCT3LauncherV2/releases/download/{0}/RCT3Launcher.zip";
-		private static readonly string downloadUrlTemplate_with_environment = "https://github.com/RF103T/RCT3LauncherV2/releases/download/{0}/RCT3Launcher_with_environment_update.zip";
+		//private static readonly string downloadUrlTemplate = "https://github.com/RF103T/RCT3LauncherV2/releases/download/{0}/RCT3Launcher.zip";
+		//private static readonly string downloadUrlTemplate_with_environment = "https://github.com/RF103T/RCT3LauncherV2/releases/download/{0}/RCT3Launcher_with_environment_update.zip";
 
 		public static string downloadUrl;
 
@@ -58,9 +58,9 @@ namespace RCT3Launcher.Updater
 			}
 			App.Current.Resources.MergedDictionaries[0] = dict;
 #if WITH_ENVIRONMENT
-			downloadUrl = string.Format(downloadUrlTemplate_with_environment, e.Args[2]);
+			downloadUrl = string.Format("https://github.com/RF103T/RCT3LauncherV2/releases/download/{0}/RCT3Launcher_with_environment_update.zip", e.Args[2]);
 #else
-			downloadUrl = string.Format(downloadUrlTemplate, e.Args[2]);
+			downloadUrl = string.Format("https://github.com/RF103T/RCT3LauncherV2/releases/download/{0}/RCT3Launcher.zip", e.Args[2]);
 #endif
 		}
 	}
