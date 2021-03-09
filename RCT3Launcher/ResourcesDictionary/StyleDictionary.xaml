@@ -12,5 +12,6 @@
 		<ResourceDictionary Source="pack://application:,,,/ResourcesDictionary/Styles/ToggleButtonStyles.xaml"/>
 		<ResourceDictionary Source="pack://application:,,,/ResourcesDictionary/Styles/HyperlinkStyles.xaml"/>
 		<ResourceDictionary Source="pack://application:,,,/ResourcesDictionary/Styles/ToolTipStyles.xaml"/>
+		<ResourceDictionary Source="pack://application:,,,/ResourcesDictionary/Styles/ProgressBarStyles.xaml"/>
 	</ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

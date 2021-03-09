@@ -91,9 +91,9 @@ namespace RCT3Launcher
 															latestReleaseInfo.tag_name);
 							process.Start();
 						}
-					}, new MarkDownMessageBoxPage(latestReleaseInfo.body), App.Current.Resources["Updater_New_Version_Detected_Title"].ToString(), MessageBoxButton.YesNo);
+					}, MarkDownMessageBoxPage.Create(latestReleaseInfo.body), App.Current.Resources["Updater_New_Version_Detected_Title"].ToString(), MessageBoxButton.YesNo);
 				else
-					MessageBox.Show<TextMessageBoxPage>(new TextMessageBoxPage(App.Current.Resources["Updater_Latest_Version_Text"].ToString()), App.Current.Resources["Updater_Check_For_Update_Title"].ToString());
+					MessageBox.Show<TextMessageBoxPage>(TextMessageBoxPage.Create(App.Current.Resources["Updater_Latest_Version_Text"].ToString()), App.Current.Resources["Updater_Check_For_Update_Title"].ToString());
 				isCheckingUpdate = false;
 			}
 		}

@@ -43,7 +43,7 @@ namespace RCT3Launcher.ViewModels
 										if (res == MessageBoxResult.Yes)
 											installation.GameProcess = Process.Start(installation.GameFileFullName);
 									},
-									new TextMessageBoxPage(App.Current.Resources["LauncherPage_Repeat_Run_Warning_MessageBoxText"].ToString()),
+									TextMessageBoxPage.Create(App.Current.Resources["LauncherPage_Repeat_Run_Warning_MessageBoxText"].ToString()),
 									App.Current.Resources["Text_Warning"].ToString(), MessageBoxButton.YesNo);
 								}
 								else

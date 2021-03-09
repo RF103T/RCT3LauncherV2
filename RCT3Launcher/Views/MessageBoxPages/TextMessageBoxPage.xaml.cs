@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RCT3Launcher.Classes.MessageBox;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,15 +16,28 @@ using System.Windows.Shapes;
 
 namespace RCT3Launcher.Views.MessageBoxPages
 {
-	/// <summary>
-	/// TextMessageBoxPage.xaml 的交互逻辑
-	/// </summary>
-	public partial class TextMessageBoxPage : Page, IMessageBoxPage
+	public partial class TextMessageBoxPage : MessageBoxPage
 	{
-		public TextMessageBoxPage(string text)
+		public string Text
+		{
+			get => textBlock.Text;
+			set
+			{
+				if (textBlock.Text != value)
+					textBlock.Text = value;
+			}
+		}
+
+		public TextMessageBoxPage()
 		{
 			InitializeComponent();
-			textBlock.Text = text;
+		}
+
+		public static TextMessageBoxPage Create(string text)
+		{
+			TextMessageBoxPage instance = MessageBoxPageFactory.GetInstance<TextMessageBoxPage>();
+			instance.Text = text;
+			return instance;
 		}
 	}
 }

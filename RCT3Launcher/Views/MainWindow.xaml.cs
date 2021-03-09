@@ -110,6 +110,7 @@ namespace RCT3Launcher
 			{
 				messageBoxOverlay.Visibility = Visibility.Collapsed;
 				messageBoxClose.Completed -= timeLineCompleted;
+				messageBoxContent.Navigate(null);
 			});
 			messageBoxClose.Completed += timeLineCompleted;
 			messageBoxClose.Begin();

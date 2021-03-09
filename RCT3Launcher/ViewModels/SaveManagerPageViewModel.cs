@@ -91,7 +91,7 @@ namespace RCT3Launcher.ViewModels
 								if (res == MessageBoxResult.Yes)
 									foreach (GameSave save in waitForDelSaves)
 										save.SaveFileInfo.Delete();
-							}, new TextMessageBoxPage(messageBoxText), App.Current.Resources["Text_Warning"].ToString(), MessageBoxButton.YesNo);
+							}, TextMessageBoxPage.Create(messageBoxText), App.Current.Resources["Text_Warning"].ToString(), MessageBoxButton.YesNo);
 						}
 					);
 				}
@@ -125,7 +125,7 @@ namespace RCT3Launcher.ViewModels
 										 if (res == MessageBoxResult.OK)
 											 ImportSaveFiles(openFileDialog.FileNames, GameSaveTypeHelper.GetGameSaveTypeFullPath((GameSaveType)sender.GetReturnValue()));
 									 },
-									 new SwitchComboBoxMessageBoxPage(App.Current.Resources["SaveManagerPage_Import_Type_Select_MessageBoxText"].ToString(),
+									 SwitchComboBoxMessageBoxPage.Create(App.Current.Resources["SaveManagerPage_Import_Type_Select_MessageBoxText"].ToString(),
 										new List<SwitchComboBoxItemModel>()
 										{
 											new SwitchComboBoxItemModel(){ID = 0,Content=GameSaveTypeHelper.GetGameSaveTypeFormattedText(GameSaveType.Park)},
