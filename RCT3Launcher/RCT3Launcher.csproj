@@ -10,13 +10,13 @@
     <Platforms>AnyCPU;x86;x64</Platforms>
     <Authors>RF103T</Authors>
     <Copyright>Copyright © 2021 RF103T</Copyright>
-    <Version>0.1.1</Version>
+    <Version>0.2.0</Version>
     <Company />
     <Description />
     <SignAssembly>false</SignAssembly>
     <Configurations>Debug;Release;Publish;Release_with_environment</Configurations>
-    <AssemblyVersion>0.1.0.0</AssemblyVersion>
-    <FileVersion>0.1.1.0</FileVersion>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
+    <FileVersion>0.2.0.0</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
