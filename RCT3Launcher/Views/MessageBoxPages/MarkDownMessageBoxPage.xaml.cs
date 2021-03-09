@@ -46,11 +46,12 @@ namespace RCT3Launcher.Views.MessageBoxPages
 		public async void LoadMarkDown(string markDownBody)
 		{
 			progressBar.Visibility = Visibility.Visible;
-			richTextBox.Document = await Task.Run(() =>
+			string xaml = "";
+			await Task.Run(() =>
 			{
-				string xaml = MarkdownXaml.ToXaml(markDownBody, new MarkdownPipelineBuilder().UseXamlSupportedExtensions().Build());
-				return XamlReader.Parse(xaml) as FlowDocument;
+				xaml = MarkdownXaml.ToXaml(markDownBody, new MarkdownPipelineBuilder().UseXamlSupportedExtensions().Build());
 			});
+			richTextBox.Document = XamlReader.Parse(xaml) as FlowDocument;
 			progressBar.Visibility = Visibility.Hidden;
 		}
 	}

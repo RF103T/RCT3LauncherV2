@@ -84,4 +84,6 @@
 	<s:String x:Key="LauncherPreferencePage_Check_For_Update_Title">Update</s:String>
 	<s:String x:Key="LauncherPreferencePage_Check_For_Update_Button">Check for update</s:String>
 	<s:String x:Key="LauncherPreferencePage_About_Title">About</s:String>
+	<s:String x:Key="LauncherPreferencePage_About_GitHub_Link_Text">GitHub repository</s:String>
+	<s:String x:Key="LauncherPreferencePage_About_GitHub_Link">https://github.com/RF103T/RCT3LauncherV2</s:String>
 </ResourceDictionary>

@@ -288,9 +288,20 @@
 			<Grid.RowDefinitions>
 				<RowDefinition Height="Auto"/>
 				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
 			</Grid.RowDefinitions>
 			<TextBlock Grid.Row="0" Text="{DynamicResource LauncherPreferencePage_About_Title}" Foreground="{StaticResource Theme.Primary.Text}" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 			<TextBlock Grid.Row="1" Margin="10,10,0,0" Cursor="Hand" FontSize="12">
+				<Hyperlink TextDecorations="{x:Null}" Cursor="Hand">
+					<Behaviors:Interaction.Triggers>
+						<Behaviors:EventTrigger EventName="Click">
+							<Behaviors:LaunchUriOrFileAction Path="{DynamicResource LauncherPreferencePage_About_GitHub_Link}"/>
+						</Behaviors:EventTrigger>
+					</Behaviors:Interaction.Triggers>
+					<TextBlock Text="{DynamicResource LauncherPreferencePage_About_GitHub_Link_Text}"/>
+				</Hyperlink>
+			</TextBlock>
+			<TextBlock Grid.Row="2" Margin="10,10,0,0" Cursor="Hand" FontSize="12">
 				<Hyperlink TextDecorations="{x:Null}">
 					<Behaviors:Interaction.Triggers>
 						<Behaviors:EventTrigger EventName="Click">
