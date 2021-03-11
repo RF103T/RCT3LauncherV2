@@ -6,7 +6,7 @@
 
 用于 `RollerCoaster Tycoon® 3 Complete Edition` 和 `RollerCoaster Tycoon® 3 Platinum` 的游戏启动器，此项目是对[RCT3Launcher](https://github.com/RF103T/RCT3Launcher)的重制。
 
-系统支持：Windows 7 SP1、Windows 8.1、Windows 10 1703+ （支持情况会随时间变化，请参考[.NET 5.0支持的操作系统版本](https://github.com/dotnet/core/blob/master/release-notes/5.0/5.0-supported-os.md)）
+系统支持：Windows 7 SP1、Windows 8.1、Windows 10 1607+ （支持情况会随时间变化，请参考[.NET 5.0支持的操作系统版本](https://github.com/dotnet/core/blob/master/release-notes/5.0/5.0-supported-os.md)）
 
 ### 已经实现的功能：
 + 多版本游戏管理
@@ -33,7 +33,7 @@
 
 The game launcher for `RollerCoaster Tycoon® 3 Complete Edition` and `RollerCoaster Tycoon® 3 Platinum`. It is a remake of [RCT3Launcher](https://github.com/RF103T/RCT3Launcher).
 
-System support: Windows 7 SP1, Windows 8.1, Windows 10 1703+ (The support situation will change over time, please refer to [.NET 5 - Supported OS versions](https://github.com/dotnet/core/blob/master/release-notes/5.0/5.0-supported-os.md))
+System support: Windows 7 SP1, Windows 8.1, Windows 10 1607+ (The support situation will change over time, please refer to [.NET 5 - Supported OS versions](https://github.com/dotnet/core/blob/master/release-notes/5.0/5.0-supported-os.md))
 
 ### Features achieved:
 + Multi-version game management
