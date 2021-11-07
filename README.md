@@ -1,45 +1,22 @@
-# **RCT3LauncherV2**
+# **RCT3Launcher V2**
 
 [![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/RF103T/RCT3LauncherV2?include_prereleases)](https://github.com/RF103T/RCT3LauncherV2/releases)
 ![GitHub all releases](https://img.shields.io/github/downloads/RF103T/RCT3LauncherV2/total)
 ![GitHub Repo stars](https://img.shields.io/github/stars/RF103T/RCT3LauncherV2?style=social)
 
-用于 `RollerCoaster Tycoon® 3 Complete Edition` 和 `RollerCoaster Tycoon® 3 Platinum` 的游戏启动器，此项目是对[RCT3Launcher](https://github.com/RF103T/RCT3Launcher)的重制。
+[简体中文](README_zh.md)
 
-![](https://github.com/RF103T/Resources/blob/main/RCT3LauncherV2/Images/MainWindow_Chinese.png)
-
-系统支持：Windows 7 SP1、Windows 8.1、Windows 10 1607+ （支持情况会随时间变化，请参考[.NET 5.0支持的操作系统版本](https://github.com/dotnet/core/blob/master/release-notes/5.0/5.0-supported-os.md)）
-
-### 已经实现的功能：
-+ 多版本游戏管理
-    - 支持白金版（Platinum）和完全版（Complete Edition）。
-    - 支持多个游戏安装位置。
-+ 存档实用功能
-    - 获取存档列表和基本信息。
-    - 存档导入、导出、重命名和删除。
-+ 启动器更新
-+ 多语言支持
-    - 简体中文和英文。
-
-### 即将实现的功能：
-+ 自定义音乐管理
-
-### 计划中的功能：
-+ 扩充管理
-+ 针对 `RollerCoaster Tycoon® 3 Platinum` 的游戏修复向导
-+ 游戏设置
-+ `Reshade` 插件设置
-+ 更多语言的翻译
-
----
-
-The game launcher for `RollerCoaster Tycoon® 3 Complete Edition` and `RollerCoaster Tycoon® 3 Platinum`. It is a remake of [RCT3Launcher](https://github.com/RF103T/RCT3Launcher).
+## Overview
 
 ![](https://github.com/RF103T/Resources/blob/main/RCT3LauncherV2/Images/MainWindow_English.png)
 
-System support: Windows 7 SP1, Windows 8.1, Windows 10 1607+ (The support situation will change over time, please refer to [.NET 5 - Supported OS versions](https://github.com/dotnet/core/blob/master/release-notes/5.0/5.0-supported-os.md))
+A third-party game launcher `RollerCoaster Tycoon® 3 Complete Edition` and `RollerCoaster Tycoon® 3 Platinum`, providing many convenient features outside the game.
 
-### Features achieved:
+It is a remake of [RCT3Launcher](https://github.com/RF103T/RCT3Launcher).
+
+System support: Windows 7 SP1, Windows 8.1, Windows 10 Version 1607+, Windows 11 Version 22000+ (The support situation will change over time, please refer to [.NET 5 - Supported OS versions](https://github.com/dotnet/core/blob/master/release-notes/5.0/5.0-supported-os.md))
+
+## Features achieved
 + Multi-version game management
     - Supports Platinum and Complete Edition.
     - Support multiple game installations.
@@ -50,19 +27,36 @@ System support: Windows 7 SP1, Windows 8.1, Windows 10 1607+ (The support situat
 + Multi-language support
     - Simplified Chinese and English.
 
-### Features to be implemented:
+## Features to be implemented
 + Custom music management
 
-### Features in the plan:
+## Features in the plan
 + Mods management
 + Game repair wizard for `RollerCoaster Tycoon® 3 Platinum`
 + Game settings
 + `Reshade` plugin settings
 + Translation in more languages
 
-# License
+## Installation
+1. Go to the [latest release on the Releases page](https://github.com/RF103T/RCT3LauncherV2/releases/latest).
+2. Download the latest `.zip` file in `Assets`. the standard version without any suffix. The `with_environment` version comes with .NET5 environment. The ones with the suffix `with_environment_update` are overwriting upgrade file, please read the **Note** item in **Release Notes** carefully before using, or use launcher to update.
+3. According to the version you selected in the previous step, it is divided into the following steps:
+   
+   (1). If you downloaded standard version. Please check whether the .NET5 environment is installed first. If not, please [install .NET5](https://dotnet.microsoft.com/download/dotnet/5.0/runtime). Then, unzip the downloaded compressed file to any empty folder.
+   
+   (2). If you downloaded `with_environment` versio. Directly unzip the downloaded compressed file to any empty folder.
+   
+   (3). (**Not Recommended**) If you downloaded `with_environment_update` overwriting upgrade file. Please confirm whether the version before the upgrade meets requirements of the overwriting upgrade file, and then check whether there are special instructions in the **Note** item in **Release Notes**, and finally it will be downloaded the compressed file is unzip and overwritten to launcher installation directory.
+   
+4. Run `RCT3Launcher.exe` file。
 
+## Dependencies and References
++ [haf/DotNetZip.Semverd](https://github.com/haf/DotNetZip.Semverd)
++ [xoofx/markdig](https://github.com/xoofx/markdig)
++ [dotnet/runtime](https://github.com/dotnet/runtime)
++ [microsoft/XamlBehaviorsWpf](https://github.com/Microsoft/XamlBehaviorsWpf)
++ [secana/PeNet](https://github.com/secana/PeNet)
++ [aybe/Windows-API-Code-Pack-1.1](https://github.com/aybe/Windows-API-Code-Pack-1.1)
+
+## License
 GNU General Public License v3.0
-
-[English](https://raw.githubusercontent.com/RF103T/RCT3LauncherV2/main/LICENSE_en)
-[简体中文](https://raw.githubusercontent.com/RF103T/RCT3LauncherV2/main/LICENSE_zh)
