@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,14 @@ namespace RCT3Launcher
 
 		public static string GetGameSaveTypeFullPath(GameSaveType type)
 		{
+			return saveTypeFullPath[type];
+		}
+
+		public static string GetGameSaveTypeSafeFullPath(GameSaveType type)
+		{
+			DirectoryInfo dirInfo = new DirectoryInfo(saveTypeFullPath[type]);
+			if (!dirInfo.Exists)
+				dirInfo.Create();
 			return saveTypeFullPath[type];
 		}
 

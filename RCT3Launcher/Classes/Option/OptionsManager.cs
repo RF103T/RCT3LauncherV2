@@ -24,18 +24,8 @@ namespace RCT3Launcher.Option
 		/// <summary>
 		/// 获取设置管理器的单例。
 		/// </summary>
-		public static OptionsManager Instance
-		{
-			get
-			{
-				return instance;
-			}
-		}
+		public static OptionsManager Instance => instance;
 		private static readonly OptionsManager instance = new OptionsManager();
-
-		static OptionsManager()
-		{
-		}
 
 		/// <summary>
 		/// 指示设置是否已经初始化。
@@ -47,10 +37,7 @@ namespace RCT3Launcher.Option
 				if (isOptionsInitialized != value)
 					isOptionsInitialized = value;
 			}
-			get
-			{
-				return isOptionsInitialized;
-			}
+			get => isOptionsInitialized;
 		}
 		private bool isOptionsInitialized;
 
@@ -109,8 +96,8 @@ namespace RCT3Launcher.Option
 		public TOption GetOptionObject<TOption>(OptionType optionType)
 		{
 			IOption option = optionMap[optionType];
-			if (option is TOption)
-				return (TOption)option;
+			if (option is TOption tOption)
+				return tOption;
 			throw new InvalidCastException();
 		}
 
@@ -135,8 +122,7 @@ namespace RCT3Launcher.Option
 		{
 			IOption option = optionMap[optionType];
 			XmlElement rootNode = optionsXmlDocument.DocumentElement;
-			XmlElement optionNode = rootNode.SelectSingleNode(optionsXmlXPathRoot + option.OptionName) as XmlElement;
-			if (optionNode != null)
+			if (rootNode.SelectSingleNode(optionsXmlXPathRoot + option.OptionName) is XmlElement optionNode)
 			{
 				option.XmlElementToOptionValue(optionNode);
 				return true;

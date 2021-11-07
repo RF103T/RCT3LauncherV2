@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -173,7 +174,11 @@ namespace RCT3Launcher.ViewModels
 							};
 							if (dialog.ShowDialog().Value)
 							{
-								using ZipFile zip = new ZipFile();
+								using ZipFile zip = new ZipFile()
+								{
+									AlternateEncoding = Encoding.UTF8,
+									AlternateEncodingUsage = ZipOption.Always
+								};
 								foreach (GameSave save in waitForExportSaves)
 									zip.AddFile(save.SaveFileInfo.FullName, save.SaveType.ToString());
 								zip.Save(dialog.FileName);
@@ -257,19 +262,25 @@ namespace RCT3Launcher.ViewModels
 			GameSaves = new ObservableCollection<GameSave>(res);
 		}
 
+		/// <summary>
+		/// 导入存档文件。
+		/// </summary>
+		/// <param name="fileNames">要导入的文件，可以为存档文件或者启动器导出的zip文件。</param>
+		/// <param name="importPath">导入路径，只有导入存档文件的时候需要指定，导入启动器zip文件时不需要。</param>
 		private async void ImportSaveFiles(string[] fileNames, string importPath)
 		{
 			await Task.Run(() =>
 			{
 				DirectoryInfo tempDirectory = Directory.CreateDirectory("TEMP");
-				List<FileInfo> waitForImportFiles = new List<FileInfo>();
-				List<string> importPaths = new List<string>();
+				Dictionary<string, FileInfo> waitForImportFiles = new Dictionary<string, FileInfo>();
+				Dictionary<string, string> importPaths = new Dictionary<string, string>();
 				if (importPath != null)
 				{
 					foreach (string name in fileNames)
 					{
-						waitForImportFiles.Add(new FileInfo(name));
-						importPaths.Add(importPath);
+						FileInfo file = new FileInfo(name);
+						waitForImportFiles.Add(file.Name, file);
+						importPaths.Add(file.Name, importPath);
 					}
 				}
 				else
@@ -284,36 +295,31 @@ namespace RCT3Launcher.ViewModels
 						foreach (FileInfo file in files)
 						{
 							if (file.FullName.Contains(@"\Park"))
-								importPaths.Add(GameSaveTypeHelper.GetGameSaveTypeFullPath(GameSaveType.Park));
+								importPaths.Add(file.Name, GameSaveTypeHelper.GetGameSaveTypeFullPath(GameSaveType.Park));
 							else if (file.FullName.Contains(@"\Scenario"))
-								importPaths.Add(GameSaveTypeHelper.GetGameSaveTypeFullPath(GameSaveType.Scenario));
+								importPaths.Add(file.Name, GameSaveTypeHelper.GetGameSaveTypeFullPath(GameSaveType.Scenario));
 							else if (file.FullName.Contains(@"\Start_New_Scenario"))
-								importPaths.Add(GameSaveTypeHelper.GetGameSaveTypeFullPath(GameSaveType.Start_New_Scenario));
+								importPaths.Add(file.Name, GameSaveTypeHelper.GetGameSaveTypeFullPath(GameSaveType.Start_New_Scenario));
 							else
 								continue;
-							waitForImportFiles.Add(file);
+							waitForImportFiles.Add(file.Name, file);
 						}
 					}
 				}
 				foreach (GameSave save in GameSaves)
 				{
-					for (int i = 0; i < waitForImportFiles.Count; i++)
+					if (waitForImportFiles.TryGetValue(save.SaveFileInfo.Name, out FileInfo temp))
 					{
-						if (save.SaveFileInfo.Name == waitForImportFiles[i].Name)
-						{
-							FileInfo temp = waitForImportFiles[i];
-							string pathTemp = importPaths[i];
-							waitForImportFiles.RemoveAt(i);
-							importPaths.RemoveAt(i);
-							temp = temp.CopyTo(@"TEMP\" + temp.Name.Replace(".dat", "_import.dat"), true);
-							waitForImportFiles.Add(temp);
-							importPaths.Add(pathTemp);
-							i--;
-						}
+						string pathTemp = importPaths[temp.Name];
+						waitForImportFiles.Remove(temp.Name);
+						importPaths.Remove(temp.Name);
+						temp = temp.CopyTo(@"TEMP\" + temp.Name.Replace(".dat", "_import.dat"), true);
+						waitForImportFiles.Add(temp.Name, temp);
+						importPaths.Add(temp.Name, pathTemp);
 					}
 				}
-				for (int i = 0; i < waitForImportFiles.Count; i++)
-					waitForImportFiles[i].MoveTo(importPaths[i] + @"\" + waitForImportFiles[i].Name, false);
+				foreach (KeyValuePair<string, FileInfo> pair in waitForImportFiles)
+					pair.Value.MoveTo(importPaths[pair.Key] + @"\" + pair.Value.Name, false);
 				tempDirectory.Delete(true);
 			});
 		}

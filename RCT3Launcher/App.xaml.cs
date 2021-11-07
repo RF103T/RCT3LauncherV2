@@ -24,5 +24,10 @@ namespace RCT3Launcher
 		{
 			saveFileWather = new SaveFileWatcher();
 		}
+
+		protected override void OnExit(ExitEventArgs e)
+		{
+			saveFileWather?.Dispose();
+		}
 	}
 }

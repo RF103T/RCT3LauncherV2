@@ -11,7 +11,7 @@
 	<StackPanel Orientation="Vertical">
 		<TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="" Foreground="{StaticResource Theme.Primary.Text}"
 			       FontSize="13" FontWeight="Bold" MaxWidth="280"/>
-		<RCT3LauncherControls:SwitchComboBox x:Name="switchComboBox" Height="40" MinWidth="230" Margin="30,50,30,0"
+		<RCT3LauncherControls:SwitchComboBox x:Name="switchComboBox" Height="40" MinWidth="230" Margin="30,30,30,0"
 											 HorizontalAlignment="Stretch" Foreground="{StaticResource Theme.Primary.Text}" NegativeForeground="{StaticResource Theme.Secondary.Text}"
 											 FontSize="12" FontWeight="Bold"/>
 	</StackPanel>

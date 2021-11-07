@@ -116,7 +116,7 @@ namespace RCT3Launcher.Option
 		}
 
 		/// <summary>
-		/// 设置值改变后引发的默认操作。
+		/// 设置值改变后引发的操作。
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>

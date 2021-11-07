@@ -16,13 +16,7 @@ namespace RCT3Launcher.ViewModels
 {
 	class SettingsViewModel : ViewModelBase
 	{
-		public int LanguageSetting
-		{
-			get
-			{
-				return (int)OptionsManager.Instance.GetOptionObject<LanguageOption>(OptionType.Language).Value;
-			}
-		}
+		public int LanguageSetting => (int)OptionsManager.Instance.GetOptionObject<LanguageOption>(OptionType.Language).Value;
 
 		private GameInstallationsOption gameInstallationsOption = null;
 		public ObservableCollection<GameInstallation> GameInstallationItems
@@ -45,13 +39,7 @@ namespace RCT3Launcher.ViewModels
 			}
 		}
 
-		public List<DrawingImage> GameInstallationItemIcons
-		{
-			get
-			{
-				return GameInstallationIconHelper.DarkIconDrawingImages;
-			}
-		}
+		public List<DrawingImage> GameInstallationItemIcons => GameInstallationIconHelper.DarkIconDrawingImages;
 
 		private CommandBase<GameInstallation> deleteGamePathCommand;
 		public CommandBase<GameInstallation> DeleteGamePathCommand

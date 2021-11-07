@@ -16,19 +16,19 @@ namespace RCT3Launcher.FileSystemWatchers
 
 		private readonly Dictionary<GameSaveType, FileSystemWatcher> watchers = new Dictionary<GameSaveType, FileSystemWatcher>()
 		{
-			{GameSaveType.Park,new FileSystemWatcher(GameSaveTypeHelper.GetGameSaveTypeFullPath(GameSaveType.Park))
+			{GameSaveType.Park,new FileSystemWatcher(GameSaveTypeHelper.GetGameSaveTypeSafeFullPath(GameSaveType.Park))
 			{
 				Filter = "*.dat",
 				NotifyFilter = NotifyFilters.FileName | NotifyFilters.Size,
 				EnableRaisingEvents = true
 			}},
-			{GameSaveType.Scenario,new FileSystemWatcher(GameSaveTypeHelper.GetGameSaveTypeFullPath(GameSaveType.Scenario))
+			{GameSaveType.Scenario,new FileSystemWatcher(GameSaveTypeHelper.GetGameSaveTypeSafeFullPath(GameSaveType.Scenario))
 			{
 				Filter = "*.dat",
 				NotifyFilter = NotifyFilters.FileName | NotifyFilters.Size,
 				EnableRaisingEvents = true
 			}},
-			{GameSaveType.Start_New_Scenario,new FileSystemWatcher(GameSaveTypeHelper.GetGameSaveTypeFullPath(GameSaveType.Start_New_Scenario))
+			{GameSaveType.Start_New_Scenario,new FileSystemWatcher(GameSaveTypeHelper.GetGameSaveTypeSafeFullPath(GameSaveType.Start_New_Scenario))
 			{
 				Filter = "*.dat",
 				NotifyFilter = NotifyFilters.FileName | NotifyFilters.Size,
@@ -47,11 +47,6 @@ namespace RCT3Launcher.FileSystemWatchers
 				pair.Value.Renamed += OnRenamed;
 			}
 			fileChangedTimer = new Timer(OnTimerOver, null, Timeout.Infinite, Timeout.Infinite);
-		}
-
-		~SaveFileWatcher()
-		{
-			Dispose();
 		}
 
 		private void OnChanged(object source, FileSystemEventArgs e)
