@@ -338,3 +338,6 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+/RCT3Launcher.Updater.backup
+/RCT3Launcher.Controls.backup
+/RCT3Launcher.backup
