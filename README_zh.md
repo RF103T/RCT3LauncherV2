@@ -8,10 +8,6 @@
 
 ---
 
-<h3 align="center" >📢 此存储库正在迁移到<a href="https://github.com/dotnet/wpf">.NET6</a>。 📢</h1>
-
----
-
 ## 📚简介
 
 ![](https://github.com/RF103T/Resources/blob/main/RCT3LauncherV2/Images/MainWindow_Chinese.png)
@@ -20,7 +16,7 @@
 
 此项目是对[RCT3Launcher](https://github.com/RF103T/RCT3Launcher)的重制。
 
-系统支持：Windows 7 SP1、Windows 8.1、Windows 10 Version 1607+、Windows 11 Version 22000+ （支持情况会随时间变化，请参考[.NET 5.0支持的操作系统版本](https://github.com/dotnet/core/blob/master/release-notes/5.0/5.0-supported-os.md)）
+系统支持：Windows 7 SP1、Windows 8.1、Windows 10 Version 1607+、Windows 11 Version 22000+ （支持情况会随时间变化，请参考[.NET 6.0支持的操作系统版本](https://github.com/dotnet/core/blob/main/release-notes/6.0/supported-os.md)）
 
 ## 🎈已经实现的功能
 + 多版本游戏管理

@@ -8,10 +8,6 @@
 
 ---
 
-<h3 align="center" >📢 This repository is currently being migrated to <a href="https://github.com/dotnet/wpf">.NET6</a>. 📢</h1>
-
----
-
 ## 📚Overview
 
 ![](https://github.com/RF103T/Resources/blob/main/RCT3LauncherV2/Images/MainWindow_English.png)
@@ -20,7 +16,7 @@ A third-party game launcher `RollerCoaster Tycoon® 3 Complete Edition` and `Rol
 
 It is a remake of [RCT3Launcher](https://github.com/RF103T/RCT3Launcher).
 
-System support: Windows 7 SP1, Windows 8.1, Windows 10 Version 1607+, Windows 11 Version 22000+ (The support situation will change over time, please refer to [.NET 5 - Supported OS versions](https://github.com/dotnet/core/blob/master/release-notes/5.0/5.0-supported-os.md))
+System support: Windows 7 SP1, Windows 8.1, Windows 10 Version 1607+, Windows 11 Version 22000+ (The support situation will change over time, please refer to [.NET 6 - Supported OS versions](https://github.com/dotnet/core/blob/main/release-notes/6.0/supported-os.md))
 
 ## 🎈Features achieved
 + Multi-version game management
