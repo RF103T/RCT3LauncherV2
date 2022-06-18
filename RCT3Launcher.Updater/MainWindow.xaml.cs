@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Net;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
@@ -7,136 +6,180 @@ using System.Windows;
 using System.Windows.Media.Animation;
 using System.IO.Compression;
 using System.Diagnostics;
+using System.Net.Http;
 
 namespace RCT3Launcher.Updater
 {
-	/// <summary>
-	/// Interaction logic for MainWindow.xaml
-	/// </summary>
-	public partial class MainWindow : Window
-	{
-		private WebClient webClient = new WebClient();
+    /// <summary>
+    /// 更新主界面
+    /// 简单实现Launcher的更新工作
+    /// </summary>
+    public partial class MainWindow : Window
+    {
+        private static readonly HttpClient httpClient = new HttpClient();
 
-		private Storyboard progressBarIncreaseStoryboard = new Storyboard();
-		private DoubleAnimation progressBarIncreaseAnimation = new DoubleAnimation(0, TimeSpan.FromSeconds(0.8));
+        private Storyboard progressBarIncreaseStoryboard = new Storyboard();
+        private DoubleAnimation progressBarIncreaseAnimation = new DoubleAnimation(0, TimeSpan.FromMilliseconds(50));
 
-		private bool isCancelUpdate = false;
+        private bool isCancelUpdate = false;
 
-		public MainWindow()
-		{
-			InitializeComponent();
-			grid.MouseLeftButtonDown += (sender, e) => DragMove();
+        private const int DownloadBufferLen = 8192;
 
-			Storyboard.SetTarget(progressBarIncreaseAnimation, progressBar);
-			Storyboard.SetTargetProperty(progressBarIncreaseAnimation, new PropertyPath("Value"));
-			progressBarIncreaseStoryboard.Children.Add(progressBarIncreaseAnimation);
-		}
+        static MainWindow()
+        {
+            httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.122 Safari/537.36 SE 2.X MetaSr 1.0");
+        }
 
-		private void Window_Loaded(object sender, RoutedEventArgs e)
-		{
-			DownloadFiles();
-		}
+        public MainWindow()
+        {
+            InitializeComponent();
+            grid.MouseLeftButtonDown += (sender, e) => DragMove();
 
-		private void WindowsCloseButton_Click(object sender, RoutedEventArgs e)
-		{
-			if (MessageBox.Show(App.Current.Resources["Window_Closing_MessageBox_Text"].ToString(), App.Current.Resources["Window_Closing_MessageBox_Title"].ToString(), MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
-			{
-				if (webClient.IsBusy)
-				{
-					webClient.CancelAsync();
-					isCancelUpdate = true;
-					infoTextBox.Text = App.Current.Resources["Download_Canceling_Text"].ToString();
-					windowCloseButton.IsEnabled = false;
-					progressBarIncreaseStoryboard.Stop();
-					progressBar.IsIndeterminate = true;
-				}
-				else
-					CloseApplication();
-			}
-		}
+            Storyboard.SetTarget(progressBarIncreaseAnimation, progressBar);
+            Storyboard.SetTargetProperty(progressBarIncreaseAnimation, new PropertyPath("Value"));
+            progressBarIncreaseStoryboard.Children.Add(progressBarIncreaseAnimation);
+        }
 
-		private void CloseApplication()
-		{
-			webClient.Dispose();
-			FileInfo del = new FileInfo(@"temp");
-			if (del.Exists)
-				del.Delete();
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            await DownloadFiles();
+            await UpdateFiles();
+        }
 
-			Process process = new Process();
-			process.StartInfo.FileName = "RCT3Launcher.exe";
-			process.Start();
+        private void WindowsCloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show(App.Current.Resources["Window_Closing_MessageBox_Text"].ToString(), App.Current.Resources["Window_Closing_MessageBox_Title"].ToString(), MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
+                CloseApplication();
+        }
 
-			App.Current.Shutdown();
-		}
+        private void CloseApplication()
+        {
+            isCancelUpdate = true;
+            httpClient.CancelPendingRequests();
+            httpClient.Dispose();
 
-		private async void DownloadFiles()
-		{
-			webClient.DownloadProgressChanged += WebClient_DownloadProgressChanged;
-			webClient.DownloadFileCompleted += WebClient_DownloadFileCompleted;
+            FileInfo del = new FileInfo(@"temp");
+            if (del.Exists)
+                del.Delete();
 
-			try
-			{
-				await webClient.DownloadFileTaskAsync(App.downloadUrl, @"temp");
-			}
-			catch (TaskCanceledException)
-			{
+            if (!isCancelUpdate)
+            {
+                if (File.Exists("RCT3Launcher.exe"))
+                {
+                    ProcessStartInfo startInfo = new ProcessStartInfo()
+                    {
+                        FileName = "RCT3Launcher.exe"
+                    };
+                    Process.Start(startInfo);
+                }
+            }
 
-			}
-		}
+            App.Current.Shutdown();
+        }
 
-		private async void UpdateFiles()
-		{
-			progressBar.Value = 100;
-			windowCloseButton.IsEnabled = false;
-			infoTextBox.Text = App.Current.Resources["Updating_Text"].ToString();
-			await Task.Run(() =>
-			{
-				using (ZipArchive zipFile = ZipFile.OpenRead("temp"))
-					zipFile.ExtractToDirectory(@"tempfiles", true);
+        /// <summary>
+        /// 下载更新文件
+        /// </summary>
+        private async Task DownloadFiles()
+        {
+            UpdateProgressBar(0);
 
-				if (App.launcherProcess != null)
-				{
-					App.launcherProcess.Kill();
-					App.launcherProcess.Dispose();
-					Thread.Sleep(1000);
-				}
+            await Task.Run(async () =>
+            {
+                try
+                {
+                    HttpResponseMessage response = await httpClient.GetAsync(App.downloadUrl);
 
-				DirectoryInfo tempFilesDir = new DirectoryInfo(@"tempfiles");
-				foreach (FileInfo file in tempFilesDir.GetFiles())
-				{
-					try
-					{
-						file.CopyTo(file.Name, true);
-					}
-					catch (Exception)
-					{
+                    response.EnsureSuccessStatusCode();
 
-					}
-				}
-				tempFilesDir.Delete(true);
+                    long contentByteLen = response.Content.Headers.ContentLength.Value;
+                    long currReadByteLen = 0;
+                    using Stream download = await response.Content.ReadAsStreamAsync();
 
-				App.Current.Dispatcher.Invoke(() => infoTextBox.Text = App.Current.Resources["Updated_Text"].ToString());
-				Thread.Sleep(2000);
-				App.Current.Dispatcher.Invoke(() => CloseApplication());
-			});
-		}
+                    byte[] buffer = new byte[DownloadBufferLen];
+                    using FileStream fileStream = File.Create(@"temp", DownloadBufferLen);
+                    while (download.Position != download.Length)
+                    {
+                        int readByteLen = await download.ReadAsync(buffer, 0, DownloadBufferLen);
+                        await fileStream.WriteAsync(buffer, 0, readByteLen);
 
-		private void WebClient_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
-		{
-			if (!isCancelUpdate)
-			{
-				App.Current.Dispatcher.Invoke(() => progressBarIncreaseStoryboard.Pause());
-				(progressBarIncreaseStoryboard.Children[0] as DoubleAnimation).To = e.ProgressPercentage;
-				App.Current.Dispatcher.Invoke(() => progressBarIncreaseStoryboard.Begin());
-			}
-		}
+                        currReadByteLen += readByteLen;
+                        UpdateProgressBar((int)(currReadByteLen * 100 / contentByteLen));
+                    }
+                }
+                catch (HttpRequestException)
+                {
+                    if (MessageBox.Show(App.Current.Resources["Connect_Timeout_Error"].ToString(), App.Current.Resources["Window_Error_MessageBox_Title"].ToString(), MessageBoxButton.OK, MessageBoxImage.Error) == MessageBoxResult.Yes)
+                        CloseApplication();
+                }
+            });
 
-		private void WebClient_DownloadFileCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
-		{
-			if (e.Cancelled || isCancelUpdate)
-				CloseApplication();
-			else
-				UpdateFiles();
-		}
-	}
+            UpdateProgressBar(100);
+        }
+
+        /// <summary>
+        /// 更新启动器文件
+        /// </summary>
+        private async Task UpdateFiles()
+        {
+            // 更新界面基础状态
+            UpdateProgressBar(0);
+            windowCloseButton.IsEnabled = false;
+            infoTextBox.Text = App.Current.Resources["Updating_Text"].ToString();
+
+            await Task.Run(() =>
+            {
+                using ZipArchive zipFile = ZipFile.OpenRead("temp");
+                zipFile.ExtractToDirectory(@"tempfiles", true);
+                UpdateProgressBar(40);
+
+                if (App.launcherProcess != null)
+                {
+                    App.launcherProcess.Kill();
+                    App.launcherProcess.Dispose();
+                }
+
+                DirectoryInfo tempFilesDir = new DirectoryInfo(@"tempfiles");
+                FileInfo[] fileInfos = tempFilesDir.GetFiles();
+
+                int fileCount = fileInfos.Length;
+                int currFileCount = 0;
+                foreach (FileInfo file in fileInfos)
+                {
+                    try
+                    {
+                        file.CopyTo(file.Name, true);
+                        currFileCount++;
+                        UpdateProgressBar(40 + (60 * currFileCount / fileCount));
+                    }
+                    catch (IOException)
+                    {
+                        if (MessageBox.Show(App.Current.Resources["Copy_File_Error"].ToString(), App.Current.Resources["Window_Error_MessageBox_Title"].ToString(), MessageBoxButton.OK, MessageBoxImage.Error) == MessageBoxResult.Yes)
+                            CloseApplication();
+                    }
+                }
+                tempFilesDir.Delete(true);
+                zipFile.Dispose();
+                UpdateProgressBar(100);
+
+                App.Current.Dispatcher.Invoke(() => infoTextBox.Text = App.Current.Resources["Updated_Text"].ToString());
+                Thread.Sleep(1000);
+                App.Current.Dispatcher.Invoke(() => CloseApplication());
+            });
+        }
+
+        /// <summary>
+        /// 更新进度条
+        /// </summary>
+        /// <param name="percent">进度条进度，范围[0，100]</param>
+        private void UpdateProgressBar(int percent)
+        {
+            App.Current.Dispatcher.Invoke(() =>
+            {
+                progressBarIncreaseStoryboard.Pause();
+                (progressBarIncreaseStoryboard.Children[0] as DoubleAnimation).To = percent;
+                progressBarIncreaseStoryboard.Begin();
+            });
+        }
+    }
 }

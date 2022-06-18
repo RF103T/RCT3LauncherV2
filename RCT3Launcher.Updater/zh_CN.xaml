@@ -7,4 +7,7 @@
 	<s:String x:Key="Updated_Text">更新完成</s:String>
 	<s:String x:Key="Window_Closing_MessageBox_Title">提示</s:String>
 	<s:String x:Key="Window_Closing_MessageBox_Text">关闭这个窗口会使更新停止，确定吗？</s:String>
+    <s:String x:Key="Window_Error_MessageBox_Title">错误</s:String>
+    <s:String x:Key="Connect_Timeout_Error">下载更新时出现问题。</s:String>
+    <s:String x:Key="Copy_File_Error">解压缩文件时出现问题。</s:String>
 </ResourceDictionary>

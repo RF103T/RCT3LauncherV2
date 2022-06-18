@@ -2,16 +2,7 @@
   "profiles": {
     "RCT3Launcher.Updater": {
       "commandName": "Project",
-      "commandLineArgs": "23800 zh_CN v0.1.1-alpha"
-    },
-    "Remote": {
-      "commandName": "Executable",
-      "executablePath": "\\\\DESKTOP-PL2JUBJ\\Users\\Home\\Desktop\\组合\\RCT3Launcher.Updater.exe",
-      "commandLineArgs": "5896 zh_CN v0.1.1-alpha",
-      "workingDirectory": "\\\\DESKTOP-PL2JUBJ\\Users\\Home\\Desktop\\组合",
-      "remoteDebugEnabled": true,
-      "remoteDebugMachine": "DESKTOP-PL2JUBJ",
-      "authenticationMode": "None"
+      "commandLineArgs": "23800 zh_CN v0.2.0-alpha"
     }
   }
 }

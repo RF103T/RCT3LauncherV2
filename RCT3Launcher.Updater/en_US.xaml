@@ -7,4 +7,7 @@
 	<s:String x:Key="Updated_Text">Update completed</s:String>
 	<s:String x:Key="Window_Closing_MessageBox_Title">Information</s:String>
 	<s:String x:Key="Window_Closing_MessageBox_Text">Closing this window will stop the update, are you sure?</s:String>
+    <s:String x:Key="Window_Error_MessageBox_Title">Error</s:String>
+    <s:String x:Key="Connect_Timeout_Error">There was a problem downloading the update.</s:String>
+    <s:String x:Key="Copy_File_Error">There was a problem unzipping the file.</s:String>
 </ResourceDictionary>
