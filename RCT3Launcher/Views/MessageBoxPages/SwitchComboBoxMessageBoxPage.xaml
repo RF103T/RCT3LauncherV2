@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:RCT3Launcher.Views.MessageBoxPages"
 	  xmlns:page ="clr-namespace:RCT3Launcher.Classes.MessageBox"
-	  xmlns:RCT3LauncherControls="clr-namespace:RCT3Launcher.Controls;assembly=RCT3Launcher.Controls"
+	  xmlns:RCT3LauncherControls="clr-namespace:RCT3Launcher.Controls.Controls;assembly=RCT3Launcher.Controls"
       mc:Ignorable="d" 
       d:DesignHeight="260" d:DesignWidth="420">
 	<StackPanel Orientation="Vertical">

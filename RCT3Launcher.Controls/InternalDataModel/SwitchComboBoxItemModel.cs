@@ -17,7 +17,7 @@ namespace RCT3Launcher.Controls.InternalDataModel
 				if (id != value)
 				{
 					id = value;
-					PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ID"));
+					PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ID)));
 				}
 			}
 		}
@@ -31,7 +31,7 @@ namespace RCT3Launcher.Controls.InternalDataModel
 				if (content != value)
 				{
 					content = value;
-					PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Content"));
+					PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Content)));
 				}
 			}
 		}

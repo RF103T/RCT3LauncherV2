@@ -8,7 +8,7 @@
 	  xmlns:ControlExtensions="clr-namespace:RCT3Launcher.ControlExtensions"
 	  xmlns:Converters="clr-namespace:RCT3Launcher.Views.ViewHelpers.Converters"
 	  xmlns:ValidationRules="clr-namespace:RCT3Launcher.Views.ViewHelpers.ValidationRules"
-	  xmlns:RCT3LauncherControls="clr-namespace:RCT3Launcher.Controls;assembly=RCT3Launcher.Controls"
+	  xmlns:RCT3LauncherControls="clr-namespace:RCT3Launcher.Controls.Controls;assembly=RCT3Launcher.Controls"
 	  xmlns:RCT3LauncherSwitchComboBoxItem="clr-namespace:RCT3Launcher.Controls.InternalDataModel;assembly=RCT3Launcher.Controls"
       xmlns:Behaviors="http://schemas.microsoft.com/xaml/behaviors"
 	  mc:Ignorable="d" 

@@ -12,7 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace RCT3Launcher.Controls
+namespace RCT3Launcher.Controls.Controls
 {
 	public partial class SwitchBox : UserControl
 	{
