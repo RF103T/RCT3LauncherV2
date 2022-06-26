@@ -25,9 +25,11 @@ System support: Windows 7 SP1, Windows 8.1, Windows 10 Version 1607+, Windows 11
 + Save management function
     - Get save list and basic information.
     - Save(s) import, export, rename and delete.
-+ Launcher update
++ Update in launcher
 + Multi-language support
-    - Simplified Chinese and English.
+    - Simplified Chinese
+    - English
+    - More language using easy-to-understand multi-language configurations...
 
 ## 🌈Features to be implemented
 + Custom music management
@@ -39,14 +41,20 @@ System support: Windows 7 SP1, Windows 8.1, Windows 10 Version 1607+, Windows 11
 + `Reshade` plugin settings
 + Translation in more languages
 
+## 🚧Runtime Requirements
+| Launcher Version | .NET Runtime Version |
+| ---------------- | -------------------- |
+| <= 0.2.x         | 5                    |
+| > 0.2.x          | 6                    |
+
 ## 🕹️Installation
 1. Go to the [latest release on the Releases page](https://github.com/RF103T/RCT3LauncherV2/releases/latest).
-2. Download the latest `.zip` file in `Assets`. the standard version without any suffix. The `with_environment` version comes with .NET5 environment. The ones with the suffix `with_environment_update` are overwriting upgrade file, please read the **Note** item in **Release Notes** carefully before using, or use launcher to update.
+2. Download the latest `.zip` file in `Assets`. the standard version without any suffix. The `with_environment` version comes with .NET6 environment. The ones with the suffix `with_environment_update` are overwriting upgrade file, please read the **Note** item in **Release Notes** carefully before using, or use launcher to update.
 3. According to the version you selected in the previous step, it is divided into the following steps:
    
-   (1). If you downloaded standard version. Please check whether the .NET5 environment is installed first. If not, please [install .NET5](https://dotnet.microsoft.com/download/dotnet/5.0/runtime). Then, unzip the downloaded compressed file to any empty folder.
+   (1). If you downloaded standard version. Please check whether the .NET6 environment is installed first. If not, please [install .NET6](https://dotnet.microsoft.com/download/dotnet/6.0/runtime). Then, unzip the downloaded compressed file to any empty folder.
    
-   (2). If you downloaded `with_environment` versio. Directly unzip the downloaded compressed file to any empty folder.
+   (2). If you downloaded `with_environment` version. Directly unzip the downloaded compressed file to any empty folder.
    
    (3). ⚠️ **Not Recommended!** ⚠️ If you downloaded `with_environment_update` overwriting upgrade file. Please confirm whether the version before the upgrade meets requirements of the overwriting upgrade file, and then check whether there are special instructions in the **Note** item in **Release Notes**, and finally it will be downloaded the compressed file is unzip and overwritten to launcher installation directory.
    
